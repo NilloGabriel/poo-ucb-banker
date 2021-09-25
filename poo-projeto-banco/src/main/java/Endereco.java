@@ -38,9 +38,9 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return this.getCep() + ", "
-                + this.getEstado() + ", "
-                + this.getCidade() + '\n'
-                + this.getEndereco();
+        return    "CEP: "     + this.getCep() + '\n'
+                + "Estado: "  + this.getEstado() + '\n'
+                + "Cidade: "  + this.getCidade() + '\n'
+                + "Endereço " + this.getEndereco();
     }
 }
