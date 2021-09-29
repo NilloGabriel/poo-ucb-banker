@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Login {
     private static String usuario;
-    private static String password;
-    private static boolean logStatus;
+    private String password;
+    private boolean logStatus;
 
-    private static Scanner scanner;
-    private static String scannerUsuario;
-    private static String scannerSenha;
+    private Scanner scanner;
+    private String scannerUsuario;
+    private String scannerSenha;
 
     public Login(String usuario, String password, boolean logStatus) {
         this.usuario = usuario;
