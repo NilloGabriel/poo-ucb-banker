@@ -1,3 +1,5 @@
+package model;
+
 public class Contato {
     private int operadora;
     private int ddd;
