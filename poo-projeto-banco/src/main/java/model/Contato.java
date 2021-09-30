@@ -2,12 +2,9 @@ package model;
 
 public class Contato {
     private int operadora;
-    private int ddd;
     private String numero;
-    
-    public Contato(int operadora, int ddd, String numero) {
+    public Contato(int operadora, String numero) {
         this.operadora = operadora;
-        this.ddd = ddd;
         this.numero = numero;
     }
 
@@ -17,14 +14,6 @@ public class Contato {
 
     public void setOperadora(int operadora) {
         this.operadora = operadora;
-    }
-
-    public int getDdd() {
-        return ddd;
-    }
-
-    public void setDdd(int ddd) {
-        this.ddd = ddd;
     }
 
     public String getNumero() {
@@ -49,7 +38,7 @@ public class Contato {
     @Override
     public String toString() {
         return "Operadora: " + this.retornarOperadora() +
-                "Numero: " + this.ddd + this.numero;
+                "Numero: " + this.numero + '\n';
     }
 }
 

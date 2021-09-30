@@ -11,7 +11,6 @@ public class Main {
     private static Scanner scanner;
 
     public static void main(String[] args) {
-
         Login login = new Login();
         login.setUsuario(userLogin);
         login.setPassword(userPassword);
