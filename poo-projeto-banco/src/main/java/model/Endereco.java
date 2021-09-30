@@ -50,6 +50,6 @@ public class Endereco {
         return    "CEP: "     + this.getCep() + '\n'
                 + "Estado: "  + this.getEstado() + '\n'
                 + "Cidade: "  + this.getCidade() + '\n'
-                + "Endereço: " + this.getEndereco();
+                + "Endereço: " + this.getEndereco() + '\n';
     }
 }

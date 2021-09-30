@@ -12,11 +12,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Login login = new Login(userLogin, userPassword, logStatus);
+        Login login = new Login();
+        login.setUsuario(userLogin);
+        login.setPassword(userPassword);
+        login.setLogStatus(logStatus);
 
         do {
             if(!login.isLogStatus()) {
-                Login.loginUsuario(login);
+                login.loginUsuario();
             } else if (login.isLogStatus()) {
                 try {
                     do {
