@@ -26,18 +26,26 @@ public class Contato {
 
     public String retornarOperadora(){
         switch(this.operadora){
-            case 1: return " 1. Vivo";
-            case 2: return "2. Claro";
-            case 3: return "3. Oi";
-            case 4: return "4. Tim";
-            case 5: return "5. Nextel";
+            case 1: return "Vivo";
+            case 2: return "Claro";
+            case 3: return "Oi";
+            case 4: return "Tim";
+            case 5: return "Nextel";
         }
         return "Erro";
     }
 
+    public void menuOperadoras(){
+        System.out.println("1 - Vivo");
+        System.out.println("2 - Claro");
+        System.out.println("3 - Oi");
+        System.out.println("4 - Tim");
+        System.out.println("5 - Nextel");
+    }
+
     @Override
     public String toString() {
-        return "Operadora: " + this.retornarOperadora() +
+        return "Operadora: " + this.retornarOperadora() + '\n' +
                 "Numero: " + this.numero + '\n';
     }
 }
