@@ -7,10 +7,6 @@ public class Login {
     private String password;
     private boolean logStatus;
 
-    private Scanner scanner;
-    private String scannerUsuario;
-    private String scannerSenha;
-
     public Login(String usuario, String password, boolean logStatus) {
         this.usuario = usuario;
         this.password = password;
@@ -41,33 +37,27 @@ public class Login {
         this.logStatus = logStatus;
     }
 
-    public static void inputData() {
-        scanner = new Scanner(System.in);
-
-        System.out.println("Usuário:");
-        scannerUsuario = scanner.nextLine();
-
-        System.out.println("Senha:");
-        scannerSenha = scanner.nextLine();
-    }
-
-    public static void loginUsuario(Login login) {
-        inputData();
-
-        do {
-            if(!logStatusUsuario(login, scannerUsuario, scannerSenha)) {
+    public void loginUsuario() {
+        Scanner scanner = new Scanner(System.in);
+        String scannerUsuario;
+        String scannerSenha;
+        do{
+            System.out.println("Usuário:");
+            scannerUsuario = scanner.nextLine();
+            System.out.println("Senha:");
+            scannerSenha = scanner.nextLine();
+            if(!logStatusUsuario(scannerUsuario, scannerSenha)) {
                 System.out.println("\n Usuário ou senha incorretos !!! \n");
-                inputData();
             } else {
-                System.out.println("Usuário " + "\"" + login.getUsuario() + "\"" + " logado");
+                System.out.println("Usuário " + "\"" + getUsuario() + "\"" + " logado");
                 break;
             }
         } while(true);
     }
 
-    public static boolean logStatusUsuario(Login login, String usuario, String password) {
-        if(usuario.equals(login.getUsuario()) && password.equals(login.getPassword())) {
-            login.setLogStatus(true);
+    public boolean logStatusUsuario(String user, String password) {
+        if(user.equals(this.getUsuario()) && password.equals(this.getPassword())) {
+            setLogStatus(true);
             return true;
         }
         return false;

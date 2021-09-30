@@ -16,7 +16,7 @@ public class Main {
 
         do {
             if(!login.isLogStatus()) {
-                Login.loginUsuario(login);
+                login.loginUsuario();
             } else if (login.isLogStatus()) {
                 try {
                     do {
