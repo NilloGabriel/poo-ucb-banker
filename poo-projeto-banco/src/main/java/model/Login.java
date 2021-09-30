@@ -7,6 +7,10 @@ public class Login {
     private String password;
     private boolean logStatus;
 
+    public Login() {
+        this.logStatus = false;
+    }
+
     public String getUsuario() {
         return usuario;
     }
