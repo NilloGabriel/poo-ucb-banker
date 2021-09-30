@@ -7,12 +7,6 @@ public class Login {
     private String password;
     private boolean logStatus;
 
-    public Login(String usuario, String password, boolean logStatus) {
-        this.usuario = usuario;
-        this.password = password;
-        this.logStatus = logStatus;
-    }
-
     public String getUsuario() {
         return usuario;
     }
