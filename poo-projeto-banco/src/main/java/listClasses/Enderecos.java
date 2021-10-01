@@ -1,4 +1,6 @@
-package model;
+package listClasses;
+
+import model.Endereco;
 
 import java.util.ArrayList;
 import java.util.List;
