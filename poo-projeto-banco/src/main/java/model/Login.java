@@ -40,14 +40,19 @@ public class Login {
         String scannerUsuario;
         String scannerSenha;
         do{
-            System.out.println("Usuário:");
+            System.out.println("\tFAÇA O SEU LOGIN:");
+            System.out.printf("\t ___________________________________________\n");
+            System.out.printf("\t|                  USUARIO                  |\n");
+            System.out.printf("\t ___________________________________________\n");
             scannerUsuario = scanner.nextLine();
-            System.out.println("Senha:");
+            System.out.printf("\t ___________________________________________\n");
+            System.out.printf("\t|                   SENHA                   |\n");
+            System.out.printf("\t ___________________________________________\n");
             scannerSenha = scanner.nextLine();
             if(!logStatusUsuario(scannerUsuario, scannerSenha)) {
-                System.out.println("\n Usuário ou senha incorretos !!! \n");
+                System.out.println("\t\n Usuário ou senha incorretos !!! \n");
             } else {
-                System.out.println("Usuário " + "\"" + getUsuario() + "\"" + " logado");
+                System.out.println("\t\nUsuário " + "\"" + getUsuario() + "\"" + " logado.\n");
                 break;
             }
         } while(true);
