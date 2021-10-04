@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class Enderecos{
     private static final List<Endereco>enderecos = new ArrayList<>();
 
-    public static List<Endereco> getEndereco() {
+    public List<Endereco> getEndereco() {
         return enderecos;
     }
 
-    public static boolean add(Endereco a) {
+    public boolean add(Endereco a) {
         for(Endereco e : enderecos){
             if(e.getCep().equals(a.getCep())){
                 System.out.println("Erro! Endereço ja cadastrado");
@@ -26,7 +26,7 @@ public class Enderecos{
         return true;
     }
 
-    public static boolean delete(String cep) {
+    public boolean delete(String cep) {
         for(Endereco e : enderecos){
             if(e.getCep().equals(cep)){
                 enderecos.remove(e);
@@ -37,12 +37,12 @@ public class Enderecos{
         return false;
     }
 
-    public static void read() {
+    public void read() {
         System.out.println("\n\n **Endereços cadastrados na sua conta** \n");
         enderecos.stream().peek(System.out::println).collect(Collectors.toList());
     }
 
-    public static boolean update(String cep) {
+    public boolean update(String cep) {
         Scanner scannerString = new Scanner(System.in);
         Scanner scanner = new Scanner(System.in);
         String novosDados;
@@ -87,7 +87,7 @@ public class Enderecos{
     }
 
 
-    private static void menuUpdate(){
+    private void menuUpdate(){
         System.out.println("Deseja corrir qual dado? ");
         System.out.println("1 - Estado");
         System.out.println("2 - Cidade");
