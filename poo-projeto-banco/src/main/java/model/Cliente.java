@@ -4,8 +4,9 @@ import listClasses.Contatos;
 import listClasses.Enderecos;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
-public class Cliente {
+public class Cliente extends Login{
     private String nome;
     private LocalDate dataNascimento;
     private boolean comprovanteResidencia;
@@ -14,24 +15,12 @@ public class Cliente {
     private Double rendaMensal;
     private Contatos contatos;
     private Enderecos enderecos;
-    private Login login;
     private Poupanca poupanca;
     private Corrente corrente;
     private String email;
 
-    public Cliente(String nome, LocalDate dataNascimento, boolean comprovanteResidencia, String cpf, String rg, Double rendaMensal, Contatos contatos, Enderecos enderecos, Login login, Poupanca poupanca, Corrente corrente, String email) {
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.comprovanteResidencia = comprovanteResidencia;
-        this.cpf = cpf;
-        this.rg = rg;
-        this.rendaMensal = rendaMensal;
-        this.contatos = contatos;
-        this.enderecos = enderecos;
-        this.login = login;
-        this.poupanca = poupanca;
-        this.corrente = corrente;
-        this.email = email;
+    public Cliente(String usuario, String password) {
+        super(usuario, password);
     }
 
     public String getNome() {
@@ -98,14 +87,6 @@ public class Cliente {
         this.enderecos = enderecos;
     }
 
-    public Login getLogin() {
-        return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
     public Poupanca getPoupanca() {
         return poupanca;
     }
@@ -132,5 +113,16 @@ public class Cliente {
 
     public boolean abrirConta() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + this.nome + '\n' +
+                "Cpf: " + this.cpf + '\n' +
+                "Rg: " + this.rg + '\n' +
+                "Renda mensal: " + this.rendaMensal + '\n' +
+                "Contatos: " + this.contatos + '\n' +
+                "Endereços: " + this.enderecos + '\n' +
+                "Email: " + this.email;
     }
 }
