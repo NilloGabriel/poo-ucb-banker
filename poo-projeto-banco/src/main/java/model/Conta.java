@@ -100,27 +100,47 @@ public abstract class Conta extends Agencia{
         this.status = status;
     }
 
-    public boolean pagarMensalidade() {
-        return true;
+    //public boolean pagarMensalidade() { return true; }
+
+    public void sacar(Double valor) {
+        if(valor <= 0) {
+            System.out.println("\t\nNão pode ser efetuados saques com valor igual ou inferior a 0.\n");
+            return;
+        }
+
+        if(valor <= this.saldo) {
+            this.saldo = this.saldo - valor;
+            System.out.println("\tSaque de R$" + valor + " efetuado com sucesso!" + "\nSaldo atual: R$" + getSaldo() + '\n');
+        } else {
+            System.out.println("\t\nSaldo insuficiente");
+        }
     }
 
-    public String sacar(Double valor) {
-        return "";
+    public void depositar(Double valor) {
+        if(valor <= 0) {
+            System.out.println("\t\nNão pode ser efetuados depósitos com valor igual ou inferior a 0.\n");
+            return;
+        }
+
+        this.saldo = this.saldo + valor;
+        System.out.println("\t\nDeposito de R$" + valor + " efetuado com sucesso!" + "\tSaldo atual: R$" + getSaldo() + '\n');
     }
 
-    public String depositar(Double valor) {
-        return "";
+    public void transferir(Double valor) {
+        if(valor <= 0) {
+            System.out.println("\t\nNão pode ser efetuadas transferências com valor igual ou inferior a 0.\n");
+            return;
+        }
+
+        if(valor <= getSaldo()) {
+            this.saldo = this.saldo - valor;
+            System.out.println("\t\nTransferência realizada com sucesso!" + "\nSaldo atual: R$:" + getSaldo() + '\n');
+        } else {
+            System.out.println("\t\nSaldo insuficiente.");
+        }
     }
 
-    public String transferir(int conta, Double valor) {
-        return "";
-    }
+    //public void fazerCompra() {}
 
-    public void fazerCompra() {
-
-    }
-
-    public boolean fecharConta() {
-        return true;
-    }
+    //public boolean fecharConta() {return true;}
 }
