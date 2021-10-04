@@ -32,21 +32,31 @@ public class Contato {
             case 4: return "Tim";
             case 5: return "Nextel";
         }
-        return "Erro";
+        return "\t\nOperadora Invalida!!!";
     }
 
     public void menuOperadoras(){
-        System.out.println("1 - Vivo");
-        System.out.println("2 - Claro");
-        System.out.println("3 - Oi");
-        System.out.println("4 - Tim");
-        System.out.println("5 - Nextel");
+        System.out.println("\tESCOLHA A OPERADORA:");
+        System.out.printf("\t __________________________________________\n");
+        System.out.printf("\t|   OPÇÃO    |          OPERADORA          |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     1      |            VIVO             |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     2      |            CLARO            |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     3      |             OI              |\n");
+        System.out.printf("\t|____________|_____________________________|\n");
+        System.out.printf("\t|     4      |             TIM             |\n");
+        System.out.printf("\t|____________|_____________________________|\n");
+        System.out.printf("\t|     5      |            NEXTEL           |\n");
+        System.out.printf("\t|____________|_____________________________|\n");
+        System.out.println();
     }
 
     @Override
     public String toString() {
-        return "Operadora: " + this.retornarOperadora() + '\n' +
-                "Numero: " + this.numero + '\n';
+        return "\tOperadora: " + this.retornarOperadora() + '\n' +
+                "\tNumero: " + this.numero + '\n';
     }
 }
 

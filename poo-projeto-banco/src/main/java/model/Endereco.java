@@ -47,9 +47,9 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return    "CEP: "     + this.getCep() + '\n'
-                + "Estado: "  + this.getEstado() + '\n'
-                + "Cidade: "  + this.getCidade() + '\n'
-                + "Endereço: " + this.getEndereco() + '\n';
+        return    "\t\nCEP: "     + this.getCep() + '\n'
+                + "\tEstado: "  + this.getEstado() + '\n'
+                + "\tCidade: "  + this.getCidade() + '\n'
+                + "\tEndereço: " + this.getEndereco() + '\n';
     }
 }

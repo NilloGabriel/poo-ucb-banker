@@ -126,7 +126,7 @@ public class Cartao {
                         this.limiteUsado += valor;
                         return true;
                     }
-                    System.out.println("Limite esgotado");
+                    System.out.println("\t\nLimite esgotado !!!\n");
                     return false;
             }
         }
@@ -166,12 +166,12 @@ public class Cartao {
 
     @Override
     public String toString() {
-        return    "Tipo: " + '\n'
-                + "Limite Total: " + this.limiteTotal + '\n'
-                + "Limite Usado: " + this.limiteUsado + '\n'
-                + "Número: " + this.numero + '\n'
-                + "Titular: " + this.titular + '\n'
-                + "Data de Validade: " + this.validade + '\n'
-                + "Número de Segurança: " + this.cvc + '\n';
+        return    "\t\nTipo: " + '\n'
+                + "\tLimite Total: " + this.limiteTotal + '\n'
+                + "\tLimite Usado: " + this.limiteUsado + '\n'
+                + "\tNúmero: " + this.numero + '\n'
+                + "\tTitular: " + this.titular + '\n'
+                + "\tData de Validade: " + this.validade + '\n'
+                + "\tNúmero de Segurança: " + this.cvc + '\n';
     }
 }

@@ -26,7 +26,7 @@ public class Main {
                         mainMenu();
                     } while (login.isLogStatus());
                 } catch (InputMismatchException e) {
-                    System.out.println("\n Operação Inválida !!! \n");
+                    System.out.println("\t\n Operação Inválida !!! \n");
                 }
             }
         } while (true);
@@ -69,7 +69,9 @@ public class Main {
         System.out.printf("\t|____________|_____________________________|\n");
         System.out.printf("\t|     5      |            SALDO            |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     6      |            LOGOUT           |\n");
+        System.out.printf("\t|     6      |           CLIENTES          |\n");
+        System.out.printf("\t|____________|_____________________________|\n");
+        System.out.printf("\t|     7      |            LOGOUT           |\n");
         System.out.printf("\t|____________|_____________________________|\n");
         scanner = new Scanner(System.in);
         op = scanner.nextInt();
@@ -115,12 +117,20 @@ public class Main {
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 break;
             case 6:
+                scanner = new Scanner(System.in);
+                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                System.out.println();
+                System.out.println("                                 CLIENTES                              \n");
+                System.out.println();
+                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                break;
+            case 7:
                 login.setLogStatus(false);
-                System.out.println("\tUsuário deslogou !!!\n");
+                System.out.println("\t\nUsuário deslogou !!!\n");
                 System.exit(0);
                 break;
             default:
-                System.out.println("\tOpcao Invalida!!!");
+                System.out.println("\t\nOpcao Invalida!!!");
         }
     }
 }
