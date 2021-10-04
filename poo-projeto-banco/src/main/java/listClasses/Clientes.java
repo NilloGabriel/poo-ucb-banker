@@ -71,7 +71,7 @@ public class Clientes {
                         System.out.println("Digite o Email Correto:");
                         novosDados = scannerString.nextLine();
                         c.setEmail(novosDados);
-                    case 4:
+                    case 5:
                         System.out.println("Digite o Nome Correto:");
                         novosDados = scannerString.nextLine();
                         c.setNome(novosDados);
