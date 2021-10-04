@@ -4,27 +4,36 @@ import listClasses.Transacoes;
 
 import java.util.Date;
 
-public abstract class Conta {
+public abstract class Conta extends Agencia{
     private int numeroConta;
     private boolean situacao;
-    private Agencia agencia;
     private Date dataCriacao;
     private Double saldo;
     private int numeroBanco;
     private Cartao cartao;
     private Transacoes transacoes;
+    private double ganhoMensal;
     private boolean status;
 
-    public Conta(int numeroConta, boolean situacao, Agencia agencia, Date dataCriacao, Double saldo, int numeroBanco, Cartao cartao, Transacoes transacoes, boolean status) {
+    public Conta(double ganhoMensal, int numeroAgencia, Endereco enderecoAgencia, int numeroConta, boolean situacao, Date dataCriacao, Double saldo, int numeroBanco, Cartao cartao, Transacoes transacoes, boolean status) {
+        super(numeroAgencia, enderecoAgencia);
         this.numeroConta = numeroConta;
         this.situacao = situacao;
-        this.agencia = agencia;
         this.dataCriacao = dataCriacao;
         this.saldo = saldo;
         this.numeroBanco = numeroBanco;
         this.cartao = cartao;
         this.transacoes = transacoes;
         this.status = status;
+        this.ganhoMensal = ganhoMensal;
+    }
+
+    public double getGanhoMensal() {
+        return ganhoMensal;
+    }
+
+    public void setGanhoMensal(float ganhoMensal) {
+        this.ganhoMensal = ganhoMensal;
     }
 
     public int getNumeroConta() {
@@ -41,14 +50,6 @@ public abstract class Conta {
 
     public void setSituacao(boolean situacao) {
         this.situacao = situacao;
-    }
-
-    public Agencia getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(Agencia agencia) {
-        this.agencia = agencia;
     }
 
     public Date getDataCriacao() {

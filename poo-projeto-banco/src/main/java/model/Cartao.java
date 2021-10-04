@@ -1,28 +1,48 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Cartao {
     private boolean debito;
     private boolean credito;
     private double limiteTotal;
+    private double limiteUsado;
     private String numero;
     private String titular;
-    private Date validade;
+    private LocalDate validade;
     private int cvc;
     private double limiteAtual;
     private int senha;
+    private boolean situacao;
 
-    public Cartao(boolean debito, boolean credito, double limiteTotal, String numero, String titular, Date validade, int cvc, double limiteAtual, int senha) {
-        this.debito = debito;
+    public Cartao(boolean credito, double limiteTotal, String numero, String titular, int cvc, double limiteAtual, int senha) {
+        this.debito = true;
         this.credito = credito;
         this.limiteTotal = limiteTotal;
         this.numero = numero;
         this.titular = titular;
-        this.validade = validade;
+        setValidade();
         this.cvc = cvc;
         this.limiteAtual = limiteAtual;
         this.senha = senha;
+        this.situacao = true;
+        this.limiteUsado = 0f;
+    }
+
+    public double getLimiteUsado() {
+        return limiteUsado;
+    }
+
+    public void setLimiteUsado(double limiteUsado) {
+        this.limiteUsado = limiteUsado;
+    }
+
+    public boolean isSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(boolean situacao) {
+        this.situacao = situacao;
     }
 
     public boolean isDebito() {
@@ -65,12 +85,12 @@ public class Cartao {
         this.titular = titular;
     }
 
-    public Date getValidade() {
+    public LocalDate getValidade() {
         return validade;
     }
 
-    public void setValidade(Date validade) {
-        this.validade = validade;
+    public void setValidade() {
+        this.validade = calcularValidade();
     }
 
     public int getCvc() {
@@ -97,12 +117,40 @@ public class Cartao {
         this.senha = senha;
     }
 
-    public void utilizarCreditoOuDebito() {
+    public boolean verificarCartao(){
+        LocalDate hoje = LocalDate.now();
+        if(hoje == this.validade)
+            return false;
+        return true;
+    }
 
+    public boolean utilizarCreditoOuDebito(int op, float valor) {//se for op=1 debito se op=2 credito
+        this.situacao = verificarCartao();
+        if(this.situacao == true){
+            switch (op) {
+                case 1:
+                    return true; //valor sera cobrado e checado na conta
+                case 2:
+                    if (valor + this.limiteUsado <= this.limiteAtual) {
+                        this.limiteUsado += valor;
+                        return true;
+                    }
+                    System.out.println("Limite esgotado");
+                    return false;
+            }
+        }
+        return false;
     }
 
     public void renovarCartao() {
+        this.situacao = verificarCartao();
+        if(this.situacao == false)
+            calcularValidade();
+    }
 
+    private LocalDate calcularValidade(){
+        LocalDate hoje = LocalDate.now();
+        return hoje.plusYears(4);
     }
 
     @Override

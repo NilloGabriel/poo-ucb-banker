@@ -2,9 +2,9 @@ package model;
 
 public class Agencia {
     private int numeroAgencia;
-    private String enderecoAgencia;
+    private Endereco enderecoAgencia;
 
-    public Agencia(int numeroAgencia, String enderecoAgencia) {
+    public Agencia(int numeroAgencia, Endereco enderecoAgencia) {
         this.numeroAgencia = numeroAgencia;
         this.enderecoAgencia = enderecoAgencia;
     }
@@ -17,11 +17,11 @@ public class Agencia {
         this.numeroAgencia = numeroAgencia;
     }
 
-    public String getEnderecoAgencia() {
+    public Endereco getEnderecoAgencia() {
         return enderecoAgencia;
     }
 
-    public void setEnderecoAgencia(String enderecoAgencia) {
+    public void setEnderecoAgencia(Endereco enderecoAgencia) {
         this.enderecoAgencia = enderecoAgencia;
     }
 }
