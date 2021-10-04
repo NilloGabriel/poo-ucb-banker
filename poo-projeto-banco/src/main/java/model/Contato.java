@@ -35,7 +35,7 @@ public class Contato {
         return "Erro";
     }
 
-    public void menuOperadoras(){
+    public static void menuOperadoras(){
         System.out.println("1 - Vivo");
         System.out.println("2 - Claro");
         System.out.println("3 - Oi");

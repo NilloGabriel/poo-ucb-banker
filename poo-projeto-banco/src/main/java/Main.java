@@ -1,5 +1,9 @@
-import model.Login;
+import listClasses.Clientes;
+import listClasses.Contatos;
+import listClasses.Enderecos;
+import model.*;
 
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,26 +13,40 @@ public class Main {
     private static boolean logStatus = false;
     private static int op;
     private static Scanner scanner;
+    private static Clientes clientes;
 
     public static void main(String[] args) {
-        Login login = new Login();
-        login.setUsuario(userLogin);
-        login.setPassword(userPassword);
-        login.setLogStatus(logStatus);
-
-        do {
-            if(!login.isLogStatus()) {
-                welcome();
-                login.loginUsuario();
-            } else if (login.isLogStatus()) {
-                try {
-                    do {
-                        mainMenu();
-                    } while (login.isLogStatus());
-                } catch (InputMismatchException e) {
-                    System.out.println("\n Operação Inválida !!! \n");
-                }
+        int op;
+        Login login = new Login(userLogin, userPassword);
+        Scanner scannerInt = new Scanner(System.in);
+        do{
+            welcome();
+            menuLogin();
+            op = scannerInt.nextInt();
+            switch (op){
+                case 1:
+                    if(!login.isLogStatus()) {
+                        login.loginUsuario();
+                    } else if (login.isLogStatus()) {
+                        try {
+                            do {
+                                mainMenu();
+                            } while (login.isLogStatus());
+                        } catch (InputMismatchException e) {
+                            System.out.println("\n Operação Inválida !!! \n");
+                        }
+                    }
+                    break;
+                case 2:
+                    cadastro();
+                    mainMenu();
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Opção invalida");
             }
+
         } while (true);
     }
 
@@ -53,7 +71,7 @@ public class Main {
     }
 
     public static void mainMenu() {
-        Login login = new Login();
+//        Login login = new Login();
 
         System.out.println("\tESCOLHA A FUNCAO QUE DESEJA ENTRAR:");
         System.out.printf("\t __________________________________________\n");
@@ -115,7 +133,7 @@ public class Main {
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 break;
             case 6:
-                login.setLogStatus(false);
+//                login.setLogStatus(false);
                 System.out.println("\tUsuário deslogou !!!\n");
                 System.exit(0);
                 break;
@@ -123,4 +141,91 @@ public class Main {
                 System.out.println("\tOpcao Invalida!!!");
         }
     }
+
+
+    public static void menuLogin(){
+        System.out.printf("\t __________________________________________\n");
+        System.out.printf("\t|                  LOGIN                   |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     1      |            CLIENTE          |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     2      |           CADASTRAR         |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     3      |              ADM            |\n");
+        System.out.printf("\t|____________|_____________________________|\n");
+
+    }
+
+    public static void cadastro(){
+        Enderecos enderecos = new Enderecos();
+        Contatos contatos = new Contatos();
+        String usuario, password;
+        String cep,estado, cidade, endereco;
+        String entradaString;
+        Double entradaDouble;
+        int operadora;
+        Scanner scannerString = new Scanner(System.in);
+        Scanner scannerDouble = new Scanner(System.in);
+        Scanner scannerInt = new Scanner(System.in);
+        System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+        System.out.println();
+        System.out.println("                          CADASTRANDO CLIENTE                     \n");
+        System.out.println();
+        System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+        System.out.println("");
+
+        System.out.println("Digite seu usuario: ");
+        usuario = scannerString.nextLine();
+
+        System.out.println("Digite sua senha: ");
+        password = scannerString.nextLine();
+
+        Cliente cliente = new Cliente(usuario,password);
+
+        System.out.println("Digite seu nome: ");
+        entradaString = scannerString.nextLine();
+        cliente.setNome(entradaString);
+
+        System.out.println("Digite seu cpf: ");
+        entradaString = scannerString.nextLine();
+        cliente.setCpf(entradaString);
+
+        System.out.println("Digite seu rg: ");
+        entradaString = scannerString.nextLine();
+        cliente.setRg(entradaString);
+
+        System.out.println("Digite sua renda mensal: ");
+        entradaDouble = scannerDouble.nextDouble();
+        cliente.setRendaMensal(entradaDouble);
+
+        System.out.println("Digite seu email");
+        entradaString = scannerString.nextLine();
+        cliente.setEmail(entradaString);
+
+        System.out.println("Digite seu cep:");
+        cep = scannerString.nextLine();
+        System.out.println("Digite a sigla do seu estado");
+        System.out.println("ex: SP");
+        estado = scannerString.nextLine();
+        System.out.println("Digite o nome da sua cidade: ");
+        cidade = scannerString.nextLine();
+        System.out.println("Digite seu endereço: ");
+        endereco = scannerString.nextLine();
+        Endereco endereco1 = new Endereco(cep, estado, cidade, endereco);
+        enderecos.add(endereco1);
+        cliente.setEnderecos(enderecos);
+
+        System.out.println("Digite seu numero:");
+        entradaString = scannerString.nextLine();
+        System.out.println("Digite sua operadora");
+        Contato.menuOperadoras();
+        operadora = scannerInt.nextInt();
+        Contato contato = new Contato(operadora, entradaString);
+        contatos.add(contato);
+        cliente.setContatos(contatos);
+        Clientes.add(cliente);
+        Clientes.read();
+    }
+
 }
+

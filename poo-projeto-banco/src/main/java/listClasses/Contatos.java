@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class Contatos{
     private static final List<Contato>contatos = new ArrayList<>();
 
-    public static List<Contato> getContatos() {
+    public List<Contato> getContatos() {
         return contatos;
     }
 
-    public static boolean add(Contato a) {
+    public boolean add(Contato a) {
         for(Contato c : contatos){
             if(c.getNumero().equals(a.getNumero())){
                 System.out.println("Erro! Contato ja cadastrado");
@@ -26,7 +26,7 @@ public class Contatos{
         return true;
     }
 
-    public static boolean delete(String numero, int ddd) {
+    public boolean delete(String numero, int ddd) {
         for(Contato c : contatos){
             if(c.getNumero().equals(numero)){
                 contatos.remove(c);
@@ -38,12 +38,12 @@ public class Contatos{
         return false;
     }
 
-    public static void read() {
+    public void read() {
         System.out.println("\n\n **Contatos cadastrados na sua conta** \n");
         contatos.stream().peek(System.out::println).collect(Collectors.toList());
     }
 
-    public static boolean update(String numero) {
+    public boolean update(String numero) {
         Scanner scanner = new Scanner(System.in);
         int novosDados;
         for(Contato c : contatos){
