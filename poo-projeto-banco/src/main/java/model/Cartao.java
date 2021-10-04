@@ -1,29 +1,28 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public class Cartao {
     private boolean debito;
     private boolean credito;
     private double limiteTotal;
     private double limiteUsado;
-    private String numero;
+    private StringBuilder numero;
     private String titular;
     private LocalDate validade;
     private int cvc;
-    private double limiteAtual;
     private int senha;
     private boolean situacao;
 
-    public Cartao(boolean credito, double limiteTotal, String numero, String titular, int cvc, double limiteAtual, int senha) {
+    public Cartao(boolean credito, double limiteTotal, String titular, double ganhoMensal, int senha) {
         this.debito = true;
         this.credito = credito;
         this.limiteTotal = limiteTotal;
-        this.numero = numero;
+        setNumero();
         this.titular = titular;
         setValidade();
-        this.cvc = cvc;
-        this.limiteAtual = limiteAtual;
+        setCvc();
         this.senha = senha;
         this.situacao = true;
         this.limiteUsado = 0f;
@@ -69,12 +68,12 @@ public class Cartao {
         this.limiteTotal = limiteTotal;
     }
 
-    public String getNumero() {
+    public StringBuilder getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setNumero() {
+        this.numero = gerarNumeroCartao();
     }
 
     public String getTitular() {
@@ -97,16 +96,8 @@ public class Cartao {
         return cvc;
     }
 
-    public void setCvc(int cvc) {
-        this.cvc = cvc;
-    }
-
-    public double getLimiteAtual() {
-        return limiteAtual;
-    }
-
-    public void setLimiteAtual(double limiteAtual) {
-        this.limiteAtual = limiteAtual;
+    public void setCvc() {
+        this.cvc = gerarCvc();
     }
 
     public int getSenha() {
@@ -131,7 +122,7 @@ public class Cartao {
                 case 1:
                     return true; //valor sera cobrado e checado na conta
                 case 2:
-                    if (valor + this.limiteUsado <= this.limiteAtual) {
+                    if (valor + this.limiteUsado <= this.limiteTotal) {
                         this.limiteUsado += valor;
                         return true;
                     }
@@ -153,11 +144,31 @@ public class Cartao {
         return hoje.plusYears(4);
     }
 
+    private StringBuilder gerarNumeroCartao(){
+        Integer digito;
+        StringBuilder numero = new StringBuilder();
+        Random random = new Random();
+        for(int i=0;i>= 16; i++){
+            digito = random.nextInt(9);
+            numero.append(Integer.toString(digito));
+            if(i==4 || i==8 || i==12)
+                numero.append('.');
+        }
+        return  numero;
+    }
+
+    private int gerarCvc(){
+        int cvc;
+        Random random = new Random();
+        cvc = random.nextInt(999);
+        return cvc;
+    }
+
     @Override
     public String toString() {
         return    "Tipo: " + '\n'
                 + "Limite Total: " + this.limiteTotal + '\n'
-                + "Limite Atual: " + this.limiteAtual + '\n'
+                + "Limite Usado: " + this.limiteUsado + '\n'
                 + "Número: " + this.numero + '\n'
                 + "Titular: " + this.titular + '\n'
                 + "Data de Validade: " + this.validade + '\n'
