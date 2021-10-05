@@ -1,6 +1,7 @@
 package listClasses;
 
 import model.Cliente;
+import model.Login;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,25 @@ public class Clientes {
     public static List<Cliente> getClientes() {
         return clientes;
     }
+
+    public static Cliente search(String cpf){
+        for(Cliente c : clientes) {
+            if(c.getCpf().equals(cpf)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static Cliente search(Login usuario){
+        for(Cliente c : clientes) {
+            if((c.getUsuario().equals(usuario.getUsuario())) && (c.getPassword().equals(usuario.getPassword()))) {
+                return c;
+            }
+        }
+        return null;
+    }
+
 
     public static boolean add(Cliente a) {
         for(Cliente c : clientes) {
