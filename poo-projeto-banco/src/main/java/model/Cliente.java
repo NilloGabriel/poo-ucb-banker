@@ -23,6 +23,10 @@ public class Cliente extends Login{
         super(usuario, password);
     }
 
+    public Cliente() {
+
+    }
+
     public String getNome() {
         return nome;
     }

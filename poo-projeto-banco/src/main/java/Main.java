@@ -8,8 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    private static String userLogin = "1234";
-    private static String userPassword = "admin";
+
     private static boolean logStatus = false;
     private static int op;
     private static Scanner scanner;
@@ -17,23 +16,35 @@ public class Main {
 
     public static void main(String[] args) {
         int op;
-        Login login = new Login(userLogin, userPassword);
+        Login login = new Login();
+        String userLogin;
+        String userPassword;
         Scanner scannerInt = new Scanner(System.in);
+        Cliente cliente;
         do{
             welcome();
             menuLogin();
             op = scannerInt.nextInt();
             switch (op){
                 case 1:
-                    if(!login.isLogStatus()) {
-                        login.loginUsuario();
-                    } else if (login.isLogStatus()) {
-                        try {
-                            do {
-                                mainMenu();
-                            } while (login.isLogStatus());
-                        } catch (InputMismatchException e) {
-                            System.out.println("\n Operação Inválida !!! \n");
+                    System.out.println("Digite o seu usuario: ");
+                    userLogin = scanner.nextLine();
+                    System.out.println("Digite a sua senha: ");
+                    userPassword = scanner.nextLine();
+                    login.setUsuario(userLogin);
+                    login.setPassword(userPassword);
+                    cliente = Clientes.search(login);
+                    if(cliente != null){
+                        if(!login.isLogStatus()) {
+                         login.loginUsuario();
+                        } else if (login.isLogStatus()) {
+                            try {
+                                do {
+                                    mainMenu();
+                                } while (login.isLogStatus());
+                            } catch (InputMismatchException e) {
+                                System.out.println("\n Operação Inválida !!! \n");
+                            }
                         }
                     }
                     break;
