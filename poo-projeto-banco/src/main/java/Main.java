@@ -27,23 +27,28 @@ public class Main {
             op = scannerInt.nextInt();
             switch (op){
                 case 1:
-                    System.out.println("Digite o seu usuario: ");
+                    System.out.println("\tFAÇA O SEU LOGIN:");
+                    System.out.printf("\t ___________________________________________\n");
+                    System.out.printf("\t|                  USUARIO                  |\n");
+                    System.out.printf("\t ___________________________________________\n");
                     userLogin = scanner.nextLine();
-                    System.out.println("Digite a sua senha: ");
+                    System.out.printf("\t ___________________________________________\n");
+                    System.out.printf("\t|                   SENHA                   |\n");
+                    System.out.printf("\t ___________________________________________\n");
                     userPassword = scanner.nextLine();
                     login.setUsuario(userLogin);
                     login.setPassword(userPassword);
                     cliente = Clientes.search(login);
                     if(cliente != null){
                         if(!login.isLogStatus()) {
-                         login.loginUsuario();
+                            login.loginUsuario();
                         } else if (login.isLogStatus()) {
                             try {
                                 do {
                                     mainMenu();
                                 } while (login.isLogStatus());
                             } catch (InputMismatchException e) {
-                                System.out.println("\n Operação Inválida !!! \n");
+                                System.out.println("\t\n Operação Inválida !!! \n");
                             }
                         }
                     }
@@ -90,9 +95,9 @@ public class Main {
         System.out.printf("\t|------------|-----------------------------|\n");
         System.out.printf("\t|     1      |            CONTA            |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     2      |           CREDITAR          |\n");
+        System.out.printf("\t|     2      |            SACAR            |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     3      |           DEBITAR           |\n");
+        System.out.printf("\t|     3      |          DEPOSITAR          |\n");
         System.out.printf("\t|____________|_____________________________|\n");
         System.out.printf("\t|     4      |          TRANSFERIR         |\n");
         System.out.printf("\t|____________|_____________________________|\n");
@@ -110,22 +115,25 @@ public class Main {
                 System.out.println("                                CONTA                                  \n");
                 System.out.println();
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                menuTipoContaAmbos();
                 break;
             case 2:
                 scanner = new Scanner(System.in);
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 System.out.println();
-                System.out.println("                                CREDITO                                \n");
+                System.out.println("                                SAQUE                                \n");
                 System.out.println();
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                menuTipoConta();
                 break;
             case 3:
                 scanner = new Scanner(System.in);
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 System.out.println();
-                System.out.println("                                DEBITO                                 \n");
+                System.out.println("                                DEPOSITO                                 \n");
                 System.out.println();
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                menuTipoConta();
                 break;
             case 4:
                 scanner = new Scanner(System.in);
@@ -134,6 +142,7 @@ public class Main {
                 System.out.println("                             TRANSFERENCIA                             \n");
                 System.out.println();
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                menuTipoConta();
                 break;
             case 5:
                 scanner = new Scanner(System.in);
@@ -142,6 +151,7 @@ public class Main {
                 System.out.println("                                 SALDO                                 \n");
                 System.out.println();
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                menuTipoContaAmbos();
                 break;
             case 6:
 //                login.setLogStatus(false);
@@ -164,7 +174,34 @@ public class Main {
         System.out.printf("\t|------------|-----------------------------|\n");
         System.out.printf("\t|     3      |              ADM            |\n");
         System.out.printf("\t|____________|_____________________________|\n");
+    }
 
+    public static void menuTipoContaAmbos() {
+        System.out.println();
+        System.out.println("\tESCOLHA O TIPO DE CONTA PARA REALIZAR A FUNCAO INFORMADA:");
+        System.out.printf("\t __________________________________________\n");
+        System.out.printf("\t|   OPÇÃO    |             TIPO            |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     1      |           CORRENTE          |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     2      |           POUPANCA          |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     3      |             AMBOS           |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.println();
+    }
+
+    public static void menuTipoConta() {
+        System.out.println();
+        System.out.println("\tESCOLHA O TIPO DE CONTA PARA REALIZAR A FUNCAO INFORMADA:");
+        System.out.printf("\t __________________________________________\n");
+        System.out.printf("\t|   OPÇÃO    |             TIPO            |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     1      |           CORRENTE          |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     2      |           POUPANCA          |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.println();
     }
 
     public static void cadastro(){
