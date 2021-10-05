@@ -2,12 +2,14 @@ package model;
 
 import listClasses.Transacoes;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Random;
 
 public abstract class Conta extends Agencia{
     private int numeroConta;
     private boolean situacao;
-    private Date dataCriacao;
+    private LocalDate dataCriacao;
     private Double saldo;
     private int numeroBanco;
     private Cartao cartao;
@@ -15,16 +17,15 @@ public abstract class Conta extends Agencia{
     private double ganhoMensal;
     private boolean status;
 
-    public Conta(double ganhoMensal, int numeroAgencia, Endereco enderecoAgencia, int numeroConta, boolean situacao, Date dataCriacao, Double saldo, int numeroBanco, Cartao cartao, Transacoes transacoes, boolean status) {
+    public Conta(double ganhoMensal, int numeroAgencia, Endereco enderecoAgencia, boolean situacao, Double saldo, int numeroBanco, Transacoes transacoes) {
         super(numeroAgencia, enderecoAgencia);
-        this.numeroConta = numeroConta;
+        gerarNumerodaConta();
         this.situacao = situacao;
-        this.dataCriacao = dataCriacao;
+        setDataCriacao();
         this.saldo = saldo;
         this.numeroBanco = numeroBanco;
-        this.cartao = cartao;
         this.transacoes = transacoes;
-        this.status = status;
+        this.status = true;
         this.ganhoMensal = ganhoMensal;
     }
 
@@ -40,8 +41,8 @@ public abstract class Conta extends Agencia{
         return numeroConta;
     }
 
-    public void setNumeroConta(int numeroConta) {
-        this.numeroConta = numeroConta;
+    public void setNumeroConta() {
+        this.numeroConta = gerarNumerodaConta();
     }
 
     public boolean isSituacao() {
@@ -52,12 +53,13 @@ public abstract class Conta extends Agencia{
         this.situacao = situacao;
     }
 
-    public Date getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
-        this.dataCriacao = dataCriacao;
+    public void setDataCriacao() {
+        LocalDate hoje = LocalDate.now();
+        this.dataCriacao = hoje;
     }
 
     public Double getSaldo() {
@@ -138,6 +140,11 @@ public abstract class Conta extends Agencia{
         } else {
             System.out.println("\t\nSaldo insuficiente.");
         }
+    }
+
+    private int gerarNumerodaConta(){
+        Random random = new Random();
+        return random.nextInt(99999999);
     }
 
     //public void fazerCompra() {}
