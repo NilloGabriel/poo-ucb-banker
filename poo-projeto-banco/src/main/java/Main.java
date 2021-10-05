@@ -8,7 +8,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-
+    private static String userLogin;
+    private static String userPassword;
     private static boolean logStatus = false;
     private static int op;
     private static Scanner scanner;
@@ -16,9 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         int op;
-        Login login = new Login();
-        String userLogin;
-        String userPassword;
+        Login login = new Login(userLogin, userPassword, logStatus);
         Scanner scannerInt = new Scanner(System.in);
         Cliente cliente;
         do{
@@ -27,19 +26,10 @@ public class Main {
             op = scannerInt.nextInt();
             switch (op){
                 case 1:
-                    System.out.println("\tFAÇA O SEU LOGIN:");
-                    System.out.printf("\t ___________________________________________\n");
-                    System.out.printf("\t|                  USUARIO                  |\n");
-                    System.out.printf("\t ___________________________________________\n");
-                    userLogin = scanner.nextLine();
-                    System.out.printf("\t ___________________________________________\n");
-                    System.out.printf("\t|                   SENHA                   |\n");
-                    System.out.printf("\t ___________________________________________\n");
-                    userPassword = scanner.nextLine();
                     login.setUsuario(userLogin);
                     login.setPassword(userPassword);
                     cliente = Clientes.search(login);
-                    if(cliente != null){
+                    if(cliente != null) {
                         if(!login.isLogStatus()) {
                             login.loginUsuario();
                         } else if (login.isLogStatus()) {
@@ -51,11 +41,13 @@ public class Main {
                                 System.out.println("\t\n Operação Inválida !!! \n");
                             }
                         }
+                    } else {
+                        System.out.println("\t\nNenhum cliente cadastrado !!!");
+                        cadastro();
                     }
                     break;
                 case 2:
                     cadastro();
-                    mainMenu();
                     break;
                 case 3:
                     break;
@@ -228,7 +220,7 @@ public class Main {
         System.out.println("Digite sua senha: ");
         password = scannerString.nextLine();
 
-        Cliente cliente = new Cliente(usuario,password);
+        Cliente cliente = new Cliente(usuario,password, logStatus);
 
         System.out.println("Digite seu nome: ");
         entradaString = scannerString.nextLine();
@@ -263,28 +255,28 @@ public class Main {
         enderecos.add(endereco1);
         cliente.setEnderecos(enderecos);
 
-        System.out.println("Digite seu numero:");
-        entradaString = scannerString.nextLine();
-        System.out.println("Digite sua operadora");
-        Contato.menuOperadoras();
-        operadora = scannerInt.nextInt();
-        Contato contato = new Contato(operadora, entradaString);
-        contatos.add(contato);
-        cliente.setContatos(contatos);
-
-        System.out.printf("\t __________________________________________\n");
-        System.out.printf("\t|   OPÇÃO    |           FUNÇÕES           |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     1      |         ABRIR CONTA         |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     2      |           LOGOUT            |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        op = scanner.nextInt();
-        switch (op){
-            case 1:
-
-
-        }
+//        System.out.println("Digite seu numero:");
+//        entradaString = scannerString.nextLine();
+//        System.out.println("Digite sua operadora");
+//        Contato.menuOperadoras();
+//        operadora = scannerInt.nextInt();
+//        Contato contato = new Contato(operadora, entradaString);
+//        contatos.add(contato);
+//        cliente.setContatos(contatos);
+//
+//        System.out.printf("\t __________________________________________\n");
+//        System.out.printf("\t|   OPÇÃO    |           FUNÇÕES           |\n");
+//        System.out.printf("\t|------------|-----------------------------|\n");
+//        System.out.printf("\t|     1      |         ABRIR CONTA         |\n");
+//        System.out.printf("\t|------------|-----------------------------|\n");
+//        System.out.printf("\t|     2      |           LOGOUT            |\n");
+//        System.out.printf("\t|------------|-----------------------------|\n");
+//        op = scanner.nextInt();
+//        switch (op){
+//            case 1:
+//
+//
+//        }
 
         Clientes.add(cliente);
     }

@@ -2,6 +2,7 @@ package listClasses;
 
 import model.Cliente;
 import model.Login;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class Clientes {
         return null;
     }
 
+    @NotNull
     public static Cliente search(Login usuario){
         for(Cliente c : clientes) {
             if((c.getUsuario().equals(usuario.getUsuario())) && (c.getPassword().equals(usuario.getPassword()))) {

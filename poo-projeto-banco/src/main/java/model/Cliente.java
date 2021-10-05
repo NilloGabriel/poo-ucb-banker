@@ -19,12 +19,8 @@ public class Cliente extends Login{
     private Corrente corrente;
     private String email;
 
-    public Cliente(String usuario, String password) {
-        super(usuario, password);
-    }
-
-    public Cliente() {
-
+    public Cliente(String usuario, String password, boolean logStatus) {
+        super(usuario, password, logStatus);
     }
 
     public String getNome() {

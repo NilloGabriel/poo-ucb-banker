@@ -6,14 +6,17 @@ public class Login {
     private static String usuario;
     private String password;
     private boolean logStatus;
+    private String scannerUsuario;
+    private String scannerSenha;
 
-    public Login(String usuario, String password) {
-        this.logStatus = true;
-        setUsuario(usuario);
+    public Login(String usuario, String password, boolean logStatus) {
+        this.usuario = usuario;
         this.password = password;
+        this.logStatus = logStatus;
     }
 
     public Login() {
+
     }
 
     public String getUsuario() {
@@ -40,31 +43,36 @@ public class Login {
         this.logStatus = logStatus;
     }
 
-    public void loginUsuario() {
+    public void inputData() {
         Scanner scanner = new Scanner(System.in);
-        String scannerUsuario;
-        String scannerSenha;
-        do{
-            System.out.println("\tFAÇA O SEU LOGIN:");
-            System.out.printf("\t ___________________________________________\n");
-            System.out.printf("\t|                  USUARIO                  |\n");
-            System.out.printf("\t ___________________________________________\n");
-            scannerUsuario = scanner.nextLine();
-            System.out.printf("\t ___________________________________________\n");
-            System.out.printf("\t|                   SENHA                   |\n");
-            System.out.printf("\t ___________________________________________\n");
-            scannerSenha = scanner.nextLine();
+
+        System.out.println("\tFAÇA O SEU LOGIN:");
+        System.out.printf("\t ___________________________________________\n");
+        System.out.printf("\t|                  USUARIO                  |\n");
+        System.out.printf("\t ___________________________________________\n");
+        scannerUsuario = scanner.nextLine();
+        System.out.printf("\t ___________________________________________\n");
+        System.out.printf("\t|                   SENHA                   |\n");
+        System.out.printf("\t ___________________________________________\n");
+        scannerSenha = scanner.nextLine();
+    }
+
+    public void loginUsuario() {
+        inputData();
+
+        do {
             if(!logStatusUsuario(scannerUsuario, scannerSenha)) {
                 System.out.println("\t\n Usuário ou senha incorretos !!! \n");
+                inputData();
             } else {
-                System.out.println("\t\nUsuário " + "\"" + getUsuario() + "\"" + " logado.\n");
+                System.out.println("\t\nUsuário " + "\"" + getUsuario() + "\"" + " logado\n");
                 break;
             }
         } while(true);
     }
 
-    public boolean logStatusUsuario(String user, String password) {
-        if(user.equals(this.getUsuario()) && password.equals(this.getPassword())) {
+    public boolean logStatusUsuario(String usuario, String password) {
+        if(usuario.equals(this.getUsuario()) && password.equals(this.getPassword())) {
             setLogStatus(true);
             return true;
         }
