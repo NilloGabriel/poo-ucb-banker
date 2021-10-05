@@ -271,8 +271,27 @@ public class Main {
         Contato contato = new Contato(operadora, entradaString);
         contatos.add(contato);
         cliente.setContatos(contatos);
+
+        System.out.printf("\t __________________________________________\n");
+        System.out.printf("\t|   OPÇÃO    |           FUNÇÕES           |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     1      |         ABRIR CONTA         |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     2      |           LOGOUT            |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        op = scanner.nextInt();
+        switch (op){
+            case 1:
+
+
+        }
+
         Clientes.add(cliente);
-        Clientes.read();
+    }
+
+    public static void cadastrarConta(Cliente c){
+
+
     }
 
 }
