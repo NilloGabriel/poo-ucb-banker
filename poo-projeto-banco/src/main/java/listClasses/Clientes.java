@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Clientes {
-    private static final List<Cliente>clientes = new ArrayList<>();
+    /*private static final List<Cliente>clientes = new ArrayList<>();
 
     public static List<Cliente> getClientes() {
         return clientes;
@@ -24,16 +24,6 @@ public class Clientes {
         return null;
     }
 
-    public static Cliente search(Login usuario){
-        for(Cliente c : clientes) {
-            if((c.getUsuario().equals(usuario.getUsuario())) && (c.getPassword().equals(usuario.getPassword()))) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-
     public static boolean add(Cliente a) {
         for(Cliente c : clientes) {
             if(c.getCpf().equals(a.getCpf())) {
@@ -44,6 +34,15 @@ public class Clientes {
         clientes.add(a);
         System.out.println("Cliente cadastrado com sucesso!");
         return true;
+    }
+
+    public static Cliente searchLogin(Login usuario){
+        for(Cliente c : clientes) {
+            if((c.getUsuario().equals(usuario.getUsuario())) && (c.getPassword().equals(usuario.getPassword()))) {
+                return c;
+            }
+        }
+        return null;
     }
 
     public static boolean delete(String cpf) {
@@ -120,5 +119,38 @@ public class Clientes {
         System.out.println("3 - RG");
         System.out.println("4 - Email");
         System.out.println("10 - todos");
+    }*/
+
+    public static List<Cliente> clientes = new ArrayList<>();
+
+    public static boolean addClientes(Cliente cliente) {
+        return clientes.add(cliente);
     }
+
+    public static List<Cliente> getClientes() {
+        System.out.println("USUARIO | SENHA");
+        System.out.println();
+        for (Cliente c : clientes) {
+            System.out.println(c.getUsuario() + " | ");
+            System.out.println(c.getSenha());
+            System.out.println();
+        }
+        return clientes;
+    }
+
+//    private int searchLoginSenha(Cliente cliente) {
+//        return clientes.indexOf(cliente);
+//    }
+//
+//    public static Cliente searchLoginSenha(String usu, String sen) {
+//        Cliente clienteEncontrado = null;
+//        for(int i = 0; i < clientes.size(); i++) {
+//            Cliente cliente = clientes.get(i);
+//            if (cliente.getUsuario().equals(usu) && cliente.getSenha().equals(sen)) {
+//                clienteEncontrado = cliente;
+//                break;
+//            }
+//        }
+//        return clienteEncontrado;
+//    }
 }

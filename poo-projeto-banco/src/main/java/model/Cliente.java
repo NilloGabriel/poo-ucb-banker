@@ -1,5 +1,6 @@
 package model;
 
+import listClasses.Clientes;
 import listClasses.Contatos;
 import listClasses.Enderecos;
 
@@ -18,13 +19,13 @@ public class Cliente extends Login{
     private Poupanca poupanca;
     private Corrente corrente;
     private String email;
+    private String usuario;
+    private String senha;
 
-    public Cliente(String usuario, String password) {
-        super(usuario, password);
-    }
-
-    public Cliente() {
-
+    public Cliente(String usuario, String senha) {
+        this.usuario = usuario;
+        this.senha = senha;
+        //Clientes.addClientes(this);
     }
 
     public String getNome() {
@@ -113,6 +114,22 @@ public class Cliente extends Login{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public boolean abrirConta() {

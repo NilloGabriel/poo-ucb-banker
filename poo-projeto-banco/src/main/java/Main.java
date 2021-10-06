@@ -1,61 +1,31 @@
 import listClasses.Clientes;
-import listClasses.Contatos;
-import listClasses.Enderecos;
 import model.*;
 
-import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
-    private static boolean logStatus = false;
+    private static String userLogin = "";
+    private static String userPassword = "";
     private static int op;
-    private static Scanner scanner;
-    private static Clientes clientes;
 
     public static void main(String[] args) {
         int op;
-        Login login = new Login();
-        String userLogin;
-        String userPassword;
         Scanner scannerInt = new Scanner(System.in);
-        Cliente cliente;
-        do{
+         do{
             welcome();
             menuLogin();
             op = scannerInt.nextInt();
             switch (op){
                 case 1:
-                    System.out.println("\tFAÇA O SEU LOGIN:");
-                    System.out.printf("\t ___________________________________________\n");
-                    System.out.printf("\t|                  USUARIO                  |\n");
-                    System.out.printf("\t ___________________________________________\n");
-                    userLogin = scanner.nextLine();
-                    System.out.printf("\t ___________________________________________\n");
-                    System.out.printf("\t|                   SENHA                   |\n");
-                    System.out.printf("\t ___________________________________________\n");
-                    userPassword = scanner.nextLine();
-                    login.setUsuario(userLogin);
-                    login.setPassword(userPassword);
-                    cliente = Clientes.search(login);
-                    if(cliente != null){
-                        if(!login.isLogStatus()) {
-                            login.loginUsuario();
-                        } else if (login.isLogStatus()) {
-                            try {
-                                do {
-                                    mainMenu();
-                                } while (login.isLogStatus());
-                            } catch (InputMismatchException e) {
-                                System.out.println("\t\n Operação Inválida !!! \n");
-                            }
-                        }
-                    }
+
+                        Login.loginUsuario();
+
                     break;
                 case 2:
                     cadastro();
-                    mainMenu();
+                    readClientes();
                     break;
                 case 3:
                     break;
@@ -105,11 +75,10 @@ public class Main {
         System.out.printf("\t|____________|_____________________________|\n");
         System.out.printf("\t|     6      |            LOGOUT           |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         op = scanner.nextInt();
         switch(op) {
             case 1:
-                scanner = new Scanner(System.in);
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 System.out.println();
                 System.out.println("                                CONTA                                  \n");
@@ -118,7 +87,6 @@ public class Main {
                 menuTipoContaAmbos();
                 break;
             case 2:
-                scanner = new Scanner(System.in);
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 System.out.println();
                 System.out.println("                                SAQUE                                \n");
@@ -127,7 +95,6 @@ public class Main {
                 menuTipoConta();
                 break;
             case 3:
-                scanner = new Scanner(System.in);
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 System.out.println();
                 System.out.println("                                DEPOSITO                                 \n");
@@ -136,7 +103,6 @@ public class Main {
                 menuTipoConta();
                 break;
             case 4:
-                scanner = new Scanner(System.in);
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 System.out.println();
                 System.out.println("                             TRANSFERENCIA                             \n");
@@ -145,7 +111,6 @@ public class Main {
                 menuTipoConta();
                 break;
             case 5:
-                scanner = new Scanner(System.in);
                 System.out.println(" //////////////////////////////////////////////////////////////////////\n");
                 System.out.println();
                 System.out.println("                                 SALDO                                 \n");
@@ -205,7 +170,7 @@ public class Main {
     }
 
     public static void cadastro(){
-        Enderecos enderecos = new Enderecos();
+        /*Enderecos enderecos = new Enderecos();
         Contatos contatos = new Contatos();
         String usuario, password;
         String cep,estado, cidade, endereco;
@@ -228,7 +193,7 @@ public class Main {
         System.out.println("Digite sua senha: ");
         password = scannerString.nextLine();
 
-        Cliente cliente = new Cliente(usuario,password);
+        Cliente cliente = new Cliente(usuario, password, logStatus);
 
         System.out.println("Digite seu nome: ");
         entradaString = scannerString.nextLine();
@@ -286,13 +251,28 @@ public class Main {
 
         }
 
-        Clientes.add(cliente);
+        Clientes.add(cliente);*/
+        Scanner sc = new Scanner(System.in);
+
+        Cliente cliente = new Cliente(userLogin, userPassword);
+        System.out.println("Informe o Usuário: ");
+        String usuarioInput = sc.next();
+        cliente.setUsuario(usuarioInput);
+
+        System.out.println("Informe a senha: ");
+        String senhaInput = sc.next();
+        cliente.setSenha(senhaInput);
+
+        Clientes.addClientes(cliente);
+    }
+
+    public static void readClientes() {
+        Clientes.getClientes();
     }
 
     public static void cadastrarConta(Cliente c){
 
 
     }
-
 }
 
