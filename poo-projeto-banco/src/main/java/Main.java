@@ -8,12 +8,10 @@ import java.util.Scanner;
 public class Main {
     private static String userLogin = "";
     private static String userPassword = "";
-    private static boolean logStatus = false;
     private static int op;
 
     public static void main(String[] args) {
         int op;
-        Cliente client = new Cliente();
         Scanner scannerInt = new Scanner(System.in);
          do{
             welcome();
@@ -21,26 +19,9 @@ public class Main {
             op = scannerInt.nextInt();
             switch (op){
                 case 1:
-                    client.setUsuario(userLogin);
-                    client.setPassword(userPassword);
-                    Cliente clienteEncontrado = Clientes.searchLoginSenha(userLogin, userPassword);
-                    if(clienteEncontrado != null) {
-                        if(!client.isLogStatus()) {
-                            client.loginUsuario();
-                        } else if (client.isLogStatus()) {
-                            try {
-                                do {
-                                    mainMenu();
-                                } while (client.isLogStatus());
-                            } catch (InputMismatchException e) {
-                                System.out.println("\t\n Operação Inválida !!! \n");
-                            }
-                        }
-                    } else {
-                        System.out.println("\t\nNenhum cliente cadastrado !!!\n");
-                        cadastro();
-                        readClientes();
-                    }
+
+                        Login.loginUsuario();
+
                     break;
                 case 2:
                     cadastro();
@@ -273,14 +254,14 @@ public class Main {
         Clientes.add(cliente);*/
         Scanner sc = new Scanner(System.in);
 
-        Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente(userLogin, userPassword);
         System.out.println("Informe o Usuário: ");
         String usuarioInput = sc.next();
         cliente.setUsuario(usuarioInput);
 
         System.out.println("Informe a senha: ");
         String senhaInput = sc.next();
-        cliente.setPassword(senhaInput);
+        cliente.setSenha(senhaInput);
 
         Clientes.addClientes(cliente);
     }

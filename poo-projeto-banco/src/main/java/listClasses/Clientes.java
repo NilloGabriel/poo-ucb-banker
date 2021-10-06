@@ -121,7 +121,7 @@ public class Clientes {
         System.out.println("10 - todos");
     }*/
 
-    public static final List<Cliente> clientes = new ArrayList<>();
+    public static List<Cliente> clientes = new ArrayList<>();
 
     public static boolean addClientes(Cliente cliente) {
         return clientes.add(cliente);
@@ -132,21 +132,25 @@ public class Clientes {
         System.out.println();
         for (Cliente c : clientes) {
             System.out.println(c.getUsuario() + " | ");
-            System.out.println(c.getPassword());
+            System.out.println(c.getSenha());
             System.out.println();
         }
         return clientes;
     }
 
-    public static Cliente searchLoginSenha(String usu, String sen) {
-        Cliente clienteEncontrado = null;
-        for(int i = 0; i < clientes.size(); i++) {
-            Cliente cliente = clientes.get(i);
-            if (cliente.getUsuario().equals(usu) && cliente.getPassword().equals(sen)) {
-                clienteEncontrado = cliente;
-                break;
-            }
-        }
-        return clienteEncontrado;
-    }
+//    private int searchLoginSenha(Cliente cliente) {
+//        return clientes.indexOf(cliente);
+//    }
+//
+//    public static Cliente searchLoginSenha(String usu, String sen) {
+//        Cliente clienteEncontrado = null;
+//        for(int i = 0; i < clientes.size(); i++) {
+//            Cliente cliente = clientes.get(i);
+//            if (cliente.getUsuario().equals(usu) && cliente.getSenha().equals(sen)) {
+//                clienteEncontrado = cliente;
+//                break;
+//            }
+//        }
+//        return clienteEncontrado;
+//    }
 }
