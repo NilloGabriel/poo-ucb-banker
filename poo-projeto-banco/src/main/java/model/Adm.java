@@ -1,9 +1,8 @@
 package model;
 
 public class Adm extends Login{
-    public Adm(String usuario, String password) {
-        super(usuario, password);
-        setUsuario("Admin");
-        setPassword("12345");
+    public Adm() {
+        setUsuario("adm");
+        setPassword("12345@");
     }
 }

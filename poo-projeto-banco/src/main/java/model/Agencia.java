@@ -9,6 +9,9 @@ public class Agencia {
         this.enderecoAgencia = enderecoAgencia;
     }
 
+    public Agencia(int numeroAgencia) {
+    }
+
     public int getNumeroAgencia() {
         return numeroAgencia;
     }

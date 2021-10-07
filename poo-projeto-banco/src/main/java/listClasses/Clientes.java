@@ -24,16 +24,6 @@ public class Clientes {
         return null;
     }
 
-    public static Cliente search(Login usuario){
-        for(Cliente c : clientes) {
-            if((c.getUsuario().equals(usuario.getUsuario())) && (c.getPassword().equals(usuario.getPassword()))) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-
     public static boolean add(Cliente a) {
         for(Cliente c : clientes) {
             if(c.getCpf().equals(a.getCpf())) {
@@ -44,6 +34,17 @@ public class Clientes {
         clientes.add(a);
         System.out.println("Cliente cadastrado com sucesso!");
         return true;
+    }
+
+    public static Cliente search(Login usuario){
+        String usuario1 = usuario.getUsuario();
+        String password = usuario.getPassword();
+        for(Cliente c : clientes) {
+            if(c.getPassword().equals(password) && c.getUsuario().equals(usuario1)) {
+                    return c;
+            }
+        }
+        return null;
     }
 
     public static boolean delete(String cpf) {
@@ -121,4 +122,5 @@ public class Clientes {
         System.out.println("4 - Email");
         System.out.println("10 - todos");
     }
+
 }

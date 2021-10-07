@@ -1,9 +1,10 @@
 import listClasses.Clientes;
 import listClasses.Contatos;
 import listClasses.Enderecos;
+import menu.MenuGenerico;
+import menu.Menus;
 import model.*;
 
-import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -19,38 +20,37 @@ public class Main {
         Login login = new Login();
         String userLogin;
         String userPassword;
+        Adm adm = new Adm();
         Scanner scannerInt = new Scanner(System.in);
+        Scanner scannerString = new Scanner(System.in);
         Cliente cliente;
+        Menus.welcome();
         do{
-            welcome();
-            menuLogin();
+            Menus.menuLogin();
             op = scannerInt.nextInt();
             switch (op){
                 case 1:
-                    System.out.println("Digite o seu usuario: ");
-                    userLogin = scanner.nextLine();
-                    System.out.println("Digite a sua senha: ");
-                    userPassword = scanner.nextLine();
-                    login.setUsuario(userLogin);
-                    login.setPassword(userPassword);
-                    cliente = Clientes.search(login);
+                    cliente = Clientes.search(login.loginUsuario());
+                    System.out.println(cliente);
                     if(cliente != null){
-                        if(!login.isLogStatus()) {
-                         login.loginUsuario();
-                        } else if (login.isLogStatus()) {
+                         cliente.setLogStatus(true);
+//                        DESCOMENTAR APOS TIRAR DUVIDA COM A PROFESSORA!!
+//                        if(cliente.getCorrente() == null && cliente.getPoupanca() == null){
+//                            cadastrarConta(cliente);
+//                        }
                             try {
                                 do {
-                                    mainMenu();
+                                    mainMenu(cliente);
                                 } while (login.isLogStatus());
                             } catch (InputMismatchException e) {
                                 System.out.println("\n Operação Inválida !!! \n");
                             }
-                        }
+                    }else{
+                        System.out.println("Usuario ou senha incorretos");
                     }
                     break;
                 case 2:
                     cadastro();
-                    mainMenu();
                     break;
                 case 3:
                     break;
@@ -61,87 +61,39 @@ public class Main {
         } while (true);
     }
 
-    public static void welcome() {
-        System.out.println();
-        System.out.printf("\t ___________________________________________\n");
-        System.out.printf("\t|  _______________________________________  |\n");
-        System.out.printf("\t| |                                       | |\n");
-        System.out.printf("\t| |                                       | |\n");
-        System.out.printf("\t| |                                       | |\n");
-        System.out.printf("\t| |                  POO                  | |\n");
-        System.out.printf("\t| |                                       | |\n");
-        System.out.printf("\t| |                 BANKER                | |\n");
-        System.out.printf("\t| |                                       | |\n");
-        System.out.printf("\t| |            GABRIEL D'NILLO            | |\n");
-        System.out.printf("\t| |            MATEUS  COLARES            | |\n");
-        System.out.printf("\t| |                                       | |\n");
-        System.out.printf("\t| |                                       | |\n");
-        System.out.printf("\t| |_______________________________________| |\n");
-        System.out.printf("\t|___________________________________________|\n");
-        System.out.println();
-    }
-
-    public static void mainMenu() {
+    public static void mainMenu(Cliente c) {
+        System.out.println(c.getCorrente());
 //        Login login = new Login();
-
-        System.out.println("\tESCOLHA A FUNCAO QUE DESEJA ENTRAR:");
-        System.out.printf("\t __________________________________________\n");
-        System.out.printf("\t|   OPÇÃO    |           FUNÇÕES           |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     1      |            CONTA            |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     2      |           CREDITAR          |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     3      |           DEBITAR           |\n");
-        System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     4      |          TRANSFERIR         |\n");
-        System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     5      |            SALDO            |\n");
-        System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     6      |            LOGOUT           |\n");
-        System.out.printf("\t|____________|_____________________________|\n");
         scanner = new Scanner(System.in);
+        Scanner scanner3 = new Scanner(System.in);
+        Menus.menuMainMenu();
         op = scanner.nextInt();
         switch(op) {
             case 1:
-                scanner = new Scanner(System.in);
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
-                System.out.println();
-                System.out.println("                                CONTA                                  \n");
-                System.out.println();
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                MenuGenerico.infos("INFORMAÇÕES DA CONTA");
+                Menus.menuTipos();
+                int op2 = scanner3.nextInt();
+                switch (op2){
+                    case 1:
+                        System.out.println(c.getNome());
+                        System.out.println(c.getCorrente());
+                }
                 break;
             case 2:
                 scanner = new Scanner(System.in);
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
-                System.out.println();
-                System.out.println("                                CREDITO                                \n");
-                System.out.println();
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                MenuGenerico.infos("INFORMAÇÕES DO CARTÃO");
                 break;
             case 3:
                 scanner = new Scanner(System.in);
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
-                System.out.println();
-                System.out.println("                                DEBITO                                 \n");
-                System.out.println();
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                MenuGenerico.infos("DEPOSITAR");
                 break;
             case 4:
                 scanner = new Scanner(System.in);
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
-                System.out.println();
-                System.out.println("                             TRANSFERENCIA                             \n");
-                System.out.println();
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                MenuGenerico.infos("TRANSFERIR");
                 break;
             case 5:
                 scanner = new Scanner(System.in);
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
-                System.out.println();
-                System.out.println("                                 SALDO                                 \n");
-                System.out.println();
-                System.out.println(" //////////////////////////////////////////////////////////////////////\n");
+                MenuGenerico.infos("SALDO");
                 break;
             case 6:
 //                login.setLogStatus(false);
@@ -154,18 +106,7 @@ public class Main {
     }
 
 
-    public static void menuLogin(){
-        System.out.printf("\t __________________________________________\n");
-        System.out.printf("\t|                  LOGIN                   |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     1      |            CLIENTE          |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     2      |           CADASTRAR         |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     3      |              ADM            |\n");
-        System.out.printf("\t|____________|_____________________________|\n");
 
-    }
 
     public static void cadastro(){
         Enderecos enderecos = new Enderecos();
@@ -173,23 +114,18 @@ public class Main {
         String usuario, password;
         String cep,estado, cidade, endereco;
         String entradaString;
-        Double entradaDouble;
         int operadora;
         Scanner scannerString = new Scanner(System.in);
-        Scanner scannerDouble = new Scanner(System.in);
+        Scanner scannerString2 = new Scanner(System.in);
         Scanner scannerInt = new Scanner(System.in);
-        System.out.println(" //////////////////////////////////////////////////////////////////////\n");
-        System.out.println();
-        System.out.println("                          CADASTRANDO CLIENTE                     \n");
-        System.out.println();
-        System.out.println(" //////////////////////////////////////////////////////////////////////\n");
-        System.out.println("");
+
+        MenuGenerico.infos("CADASTRANDO CLIENTE");
 
         System.out.println("Digite seu usuario: ");
         usuario = scannerString.nextLine();
 
         System.out.println("Digite sua senha: ");
-        password = scannerString.nextLine();
+        password = scannerString2.nextLine();
 
         Cliente cliente = new Cliente(usuario,password);
 
@@ -204,10 +140,6 @@ public class Main {
         System.out.println("Digite seu rg: ");
         entradaString = scannerString.nextLine();
         cliente.setRg(entradaString);
-
-        System.out.println("Digite sua renda mensal: ");
-        entradaDouble = scannerDouble.nextDouble();
-        cliente.setRendaMensal(entradaDouble);
 
         System.out.println("Digite seu email");
         entradaString = scannerString.nextLine();
@@ -234,27 +166,42 @@ public class Main {
         Contato contato = new Contato(operadora, entradaString);
         contatos.add(contato);
         cliente.setContatos(contatos);
-
-        System.out.printf("\t __________________________________________\n");
-        System.out.printf("\t|   OPÇÃO    |           FUNÇÕES           |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     1      |         ABRIR CONTA         |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     2      |           LOGOUT            |\n");
-        System.out.printf("\t|------------|-----------------------------|\n");
-        op = scanner.nextInt();
-        switch (op){
-            case 1:
-
-
-        }
-
-        Clientes.add(cliente);
+        cadastrarConta(cliente);
     }
 
     public static void cadastrarConta(Cliente c){
-
-
+        Scanner scanner3 = new Scanner(System.in);
+        MenuGenerico.infos("ABRINDO CONTA");
+        Menus.menuTipos();
+        System.out.printf("\t|     10     |            TODAS            |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+        op = scanner3.nextInt();
+        Double ganhoMensal;
+        Scanner scannerDouble = new Scanner(System.in);
+        switch (op){
+            case 1:
+                System.out.println("Digite o seu ganho mensal:");
+                ganhoMensal = scannerDouble.nextDouble();
+                Corrente corrente = new Corrente(ganhoMensal, 5);
+                c.setCorrente(corrente);
+                Clientes.add(c);
+                break;
+            case 2:
+                System.out.println("Digite o seu ganho mensal:");
+                ganhoMensal = scannerDouble.nextDouble();
+                Poupanca poupanca = new Poupanca(ganhoMensal, 5);
+                c.setPoupanca(poupanca);
+                Clientes.add(c);
+                break;
+            case 3:
+                System.out.println("Digite o seu ganho mensal:");
+                ganhoMensal = scannerDouble.nextDouble();
+                Corrente corrente2 = new Corrente(ganhoMensal, 5);
+                Poupanca poupanca2 = new Poupanca(ganhoMensal, 5);
+                c.setCorrente(corrente2);
+                c.setPoupanca(poupanca2);
+                Clientes.add(c);
+        }
     }
 
 }

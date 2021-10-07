@@ -1,5 +1,6 @@
 package model;
 
+import listClasses.Clientes;
 import listClasses.Contatos;
 import listClasses.Enderecos;
 
@@ -12,19 +13,14 @@ public class Cliente extends Login{
     private boolean comprovanteResidencia;
     private String cpf;
     private String rg;
-    private Double rendaMensal;
     private Contatos contatos;
     private Enderecos enderecos;
     private Poupanca poupanca;
     private Corrente corrente;
     private String email;
 
-    public Cliente(String usuario, String password) {
-        super(usuario, password);
-    }
-
-    public Cliente() {
-
+    public Cliente(String usuario, String senha) {
+        super(usuario, senha);
     }
 
     public String getNome() {
@@ -67,14 +63,6 @@ public class Cliente extends Login{
         this.rg = rg;
     }
 
-    public Double getRendaMensal() {
-        return rendaMensal;
-    }
-
-    public void setRendaMensal(Double rendaMensal) {
-        this.rendaMensal = rendaMensal;
-    }
-
     public Contatos getContatos() {
         return contatos;
     }
@@ -114,7 +102,6 @@ public class Cliente extends Login{
     public void setEmail(String email) {
         this.email = email;
     }
-
     public boolean abrirConta() {
         return true;
     }
@@ -124,7 +111,6 @@ public class Cliente extends Login{
         return "Nome: " + this.nome + '\n' +
                 "Cpf: " + this.cpf + '\n' +
                 "Rg: " + this.rg + '\n' +
-                "Renda mensal: " + this.rendaMensal + '\n' +
                 "Contatos: " + this.contatos + '\n' +
                 "Endereços: " + this.enderecos + '\n' +
                 "Email: " + this.email;
