@@ -13,7 +13,7 @@ public class Poupanca extends Conta{
         setSaldo(30.80);
     }
 
-    public void sacarContaPoupanca() {
+    /*public void sacarContaPoupanca() {
         String numConta;
         Double valor = 0.0;
 
@@ -51,7 +51,7 @@ public class Poupanca extends Conta{
         }
 
         System.out.println("\t\nConta não existe.\n");
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -67,7 +67,7 @@ public class Poupanca extends Conta{
         System.out.println("\t\nInforme o número da conta para saque: ");
         numConta = scanner.nextInt();
 
-        if(numConta == super.getNumeroConta()) {
+        if(String.valueOf(numConta).equals(super.getNumeroConta())) {
             System.out.println("\t\nInforme o valor a ser sacado: ");
             valor = scanner.nextDouble();
 
@@ -87,7 +87,7 @@ public class Poupanca extends Conta{
         System.out.println("\t\nInforme o número da conta para deposito: ");
         numConta = scanner.nextInt();
 
-        if(numConta == super.getNumeroConta()) {
+        if(String.valueOf(numConta).equals(super.getNumeroConta())) {
             System.out.println("\t\nInforme o valor a ser depositado: ");
             valor = scanner.nextDouble();
 
