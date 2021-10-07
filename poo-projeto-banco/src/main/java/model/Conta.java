@@ -7,24 +7,22 @@ import java.util.Date;
 import java.util.Random;
 
 public abstract class Conta extends Agencia{
-    private int numeroConta;
+    private StringBuilder numeroConta;
     private boolean situacao;
     private LocalDate dataCriacao;
     private Double saldo;
     private int numeroBanco;
     private Cartao cartao;
-    private Transacoes transacoes;
+    //apaguei transacoes
     private double ganhoMensal;
     private boolean status;
 
-    public Conta(double ganhoMensal, int numeroAgencia, Endereco enderecoAgencia, boolean situacao, Double saldo, int numeroBanco, Transacoes transacoes) {
-        super(numeroAgencia, enderecoAgencia);
+    public Conta(double ganhoMensal, int numeroAgencia) {
+        super(numeroAgencia);
         gerarNumerodaConta();
-        this.situacao = situacao;
+        this.situacao = true;
         setDataCriacao();
-        this.saldo = saldo;
-        this.numeroBanco = numeroBanco;
-        this.transacoes = transacoes;
+        this.numeroBanco = 0007;
         this.status = true;
         this.ganhoMensal = ganhoMensal;
     }
@@ -37,7 +35,7 @@ public abstract class Conta extends Agencia{
         this.ganhoMensal = ganhoMensal;
     }
 
-    public int getNumeroConta() {
+    public StringBuilder getNumeroConta() {
         return numeroConta;
     }
 
@@ -84,14 +82,6 @@ public abstract class Conta extends Agencia{
 
     public void setCartao(Cartao cartao) {
         this.cartao = cartao;
-    }
-
-    public Transacoes getTransacoes() {
-        return transacoes;
-    }
-
-    public void setTransacoes(Transacoes transacoes) {
-        this.transacoes = transacoes;
     }
 
     public boolean isStatus() {
@@ -142,12 +132,28 @@ public abstract class Conta extends Agencia{
         }
     }
 
-    private int gerarNumerodaConta(){
+    private StringBuilder gerarNumerodaConta(){
+        Integer digito;
+        StringBuilder numero = new StringBuilder();
         Random random = new Random();
-        return random.nextInt(99999999);
+        for(int i=0;i>= 8; i++){
+            digito = random.nextInt(9);
+            numero.append(Integer.toString(digito));
+        }
+        return  numero;
     }
 
     //public void fazerCompra() {}
 
     //public boolean fecharConta() {return true;}
+
+
+    @Override
+    public String toString() {
+        return  "NumeroBanco=" + this.numeroBanco + + '\n' +
+                "Numero da Conta=" + this.numeroConta + '\n' +
+                "Data de Criacao=" + this.dataCriacao + '\n' +
+                "Saldo=" + saldo + '\n' +
+                "Ganho Mensal=" + ganhoMensal + '\n' ;
+    }
 }
