@@ -13,19 +13,14 @@ public class Cliente extends Login{
     private boolean comprovanteResidencia;
     private String cpf;
     private String rg;
-    private Double rendaMensal;
     private Contatos contatos;
     private Enderecos enderecos;
     private Poupanca poupanca;
     private Corrente corrente;
     private String email;
-    private String usuario;
-    private String senha;
 
     public Cliente(String usuario, String senha) {
-        this.usuario = usuario;
-        this.senha = senha;
-        //Clientes.addClientes(this);
+        super(usuario, senha);
     }
 
     public String getNome() {
@@ -68,14 +63,6 @@ public class Cliente extends Login{
         this.rg = rg;
     }
 
-    public Double getRendaMensal() {
-        return rendaMensal;
-    }
-
-    public void setRendaMensal(Double rendaMensal) {
-        this.rendaMensal = rendaMensal;
-    }
-
     public Contatos getContatos() {
         return contatos;
     }
@@ -115,23 +102,6 @@ public class Cliente extends Login{
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public boolean abrirConta() {
         return true;
     }
@@ -141,7 +111,6 @@ public class Cliente extends Login{
         return "Nome: " + this.nome + '\n' +
                 "Cpf: " + this.cpf + '\n' +
                 "Rg: " + this.rg + '\n' +
-                "Renda mensal: " + this.rendaMensal + '\n' +
                 "Contatos: " + this.contatos + '\n' +
                 "Endereços: " + this.enderecos + '\n' +
                 "Email: " + this.email;
