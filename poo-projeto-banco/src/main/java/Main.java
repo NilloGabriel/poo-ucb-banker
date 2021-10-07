@@ -9,7 +9,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-
     private static boolean logStatus = false;
     private static int op;
     private static Scanner scanner;
@@ -63,7 +62,6 @@ public class Main {
 
     public static void mainMenu(Cliente c) {
         System.out.println(c.getCorrente());
-//        Login login = new Login();
         scanner = new Scanner(System.in);
         Scanner scanner3 = new Scanner(System.in);
         Menus.menuMainMenu();
@@ -104,9 +102,6 @@ public class Main {
                 System.out.println("\tOpcao Invalida!!!");
         }
     }
-
-
-
 
     public static void cadastro(){
         Enderecos enderecos = new Enderecos();
@@ -203,6 +198,6 @@ public class Main {
                 Clientes.add(c);
         }
     }
-
 }
+
 
