@@ -1,6 +1,7 @@
 package listClasses;
 
 import model.Cliente;
+import model.Corrente;
 import model.Login;
 
 import java.util.ArrayList;
@@ -112,6 +113,21 @@ public class Clientes {
             }
         }
         return false;
+    }
+
+    private static void update(Cliente c, int i){//Update para os atributos da conta, i indica a conta corrente ou poupança
+        for(Cliente cli: clientes) {
+            if (cli == c) {
+                switch (i) {
+                    case 1: //Corrente
+                        cli.setCorrente(c.getCorrente());
+                        return;
+                    case 2: //Poupança
+                        cli.setPoupanca(c.getPoupanca());
+                        return;
+                }
+            }
+        }
     }
 
     private static void menuUpdate(){

@@ -64,18 +64,30 @@ public class Main {
         System.out.println(c.getCorrente());
         scanner = new Scanner(System.in);
         Scanner scanner3 = new Scanner(System.in);
+        Corrente corrente;
+        Poupanca poupanca;
+        if(c.getPoupanca() == null || c.getCorrente() == null) {
+            if(c.getCorrente() != null)
+                corrente = c.getCorrente();
+            else
+                poupanca = c.getPoupanca();
+        }else{
+            Menus.menuTipos();
+            op = scanner.nextInt();
+            switch (op) {
+                case 1:corrente = c.getCorrente();break;
+                case 2: poupanca = c.getPoupanca();break;
+                default:
+                    System.out.println("Opção invalida");
+            }
+        }
         Menus.menuMainMenu();
         op = scanner.nextInt();
-        switch(op) {
+        switch(op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
-                Menus.menuTipos();
-                int op2 = scanner3.nextInt();
-                switch (op2){
-                    case 1:
-                        System.out.println(c.getNome());
-                        System.out.println(c.getCorrente());
-                }
+                System.out.println(c.getNome());
+                System.out.println();
                 break;
             case 2:
                 scanner = new Scanner(System.in);
