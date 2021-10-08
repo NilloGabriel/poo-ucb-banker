@@ -57,11 +57,13 @@ public class Menus {
         System.out.printf("\t|------------|-----------------------------|\n");
         System.out.printf("\t|     3      |          DEPOSITAR          |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     4      |          TRANSFERIR         |\n");
+        System.out.printf("\t|     4      |            SACAR            |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     5      |            SALDO            |\n");
+        System.out.printf("\t|     5      |          TRANSFERIR         |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     6      |            LOGOUT           |\n");
+        System.out.printf("\t|     6      |            SALDO            |\n");
+        System.out.printf("\t|____________|_____________________________|\n");
+        System.out.printf("\t|     7      |            LOGOUT           |\n");
         System.out.printf("\t|____________|_____________________________|\n");
 
     }
