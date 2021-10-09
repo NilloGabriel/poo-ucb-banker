@@ -150,7 +150,7 @@ public abstract class Conta extends Agencia{
 
     @Override
     public String toString() {
-        return  "NumeroBanco=" + this.numeroBanco + + '\n' +
+        return  "NumeroBanco=" + this.numeroBanco + '\n' +
                 "Numero da Conta=" + this.numeroConta + '\n' +
                 "Data de Criacao=" + this.dataCriacao + '\n' +
                 "Saldo=" + saldo + '\n' +
