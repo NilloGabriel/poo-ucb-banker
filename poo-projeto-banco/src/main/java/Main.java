@@ -63,13 +63,19 @@ public class Main {
     }
 
     public static void mainMenu(Cliente c) {
-        if(c.getCorrente() != null) {
+        if(c.getPoupanca() != null && c.getCorrente() != null) {
             System.out.println("\nDADOS DA CONTA CORRENTE\n");
             System.out.println(c.getCorrente());
-        } else if (c.getPoupanca() != null) {
-            System.out.println("\nDADOS DA CONTA POUPANCA\n");
+            System.out.println("DADOS DA CONTA POUPANCA\n");
+            System.out.println(c.getPoupanca());
+        } else if (c.getCorrente() != null) {
+            System.out.println("\nDADOS DA CONTA CORRENTE\n");
+            System.out.println(c.getCorrente());
+        } else {
+            System.out.println("DADOS DA CONTA POUPANCA\n");
             System.out.println(c.getPoupanca());
         }
+        
         scanner = new Scanner(System.in);
 
         System.out.println("\t\nDESEJA OPERAR EM QUAL TIPO DE CONTA?\n");
