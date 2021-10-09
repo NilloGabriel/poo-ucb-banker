@@ -96,16 +96,60 @@ public class Main {
             case 3:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("DEPOSITAR");
+                Menus.menuTipos();
+                op = scanner.nextInt();
+
+                switch(op) {
+                    case 1:
+                        if(c.getCorrente() == null)
+                            System.out.println("\t\nCliente não possui conta corrente.");
+                        else
+                            c.getCorrente().depositarContaCorrente();
+                        break;
+                    case 2:
+                        if(c.getPoupanca() == null)
+                            System.out.println("\t\nCliente não possui conta poupança.");
+                        else
+                            c.getPoupanca().depositarContaPoupanca();
+                        break;
+                    default:
+                        System.out.println("\t\nOpção Inválida!!!");
+                }
                 break;
             case 4:
                 scanner = new Scanner(System.in);
-                MenuGenerico.infos("TRANSFERIR");
-                break;
+                MenuGenerico.infos("SACAR");
+                Menus.menuTipos();
+                op = scanner.nextInt();
+
+                switch(op) {
+                    case 1:
+                        if(c.getCorrente() == null)
+                            System.out.println("\t\nCliente não possui conta corrente.");
+                        else
+                            c.getCorrente().sacarContaCorrente();
+                        break;
+                    case 2:
+                        if(c.getPoupanca() == null)
+                            System.out.println("\t\nCliente não possui conta poupança.");
+                        else
+                            c.getPoupanca().sacarContaPoupanca();
+                        break;
+                    default:
+                        System.out.println("\t\nOpção Inválida!!!");
+                }
             case 5:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("TRANSFERIR");
+                Menus.menuTipos();
+                op = scanner.nextInt();
+
+                break;
+            case 6:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SALDO");
                 break;
-            case 6:
+            case 7:
 //                login.setLogStatus(false);
                 System.out.println("\tUsuário deslogou !!!\n");
                 System.exit(0);
