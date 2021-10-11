@@ -6,6 +6,8 @@ import menu.Menus;
 import model.*;
 
 import java.util.InputMismatchException;
+import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -33,15 +35,15 @@ public class Main {
                     System.out.println("DADOS DA CONTA\n");
                     System.out.println(cliente);
                     if(cliente != null){
-                        cliente.setLogStatus(true);
-    //                       DESCOMENTAR APOS TIRAR DUVIDA COM A PROFESSORA!!
-    //                       if(cliente.getCorrente() == null && cliente.getPoupanca() == null){
-    //                           cadastrarConta(cliente);
-    //                       }
                         try {
+                            cliente.setLogStatus(true);
+                            int tipoConta = verificarConta(cliente);//Tipo conta: 1- corrente, 2- poupanca, 3-as duas
                             do {
-                                mainMenu(cliente);
-                            } while (login.isLogStatus());
+                                mainMenu(cliente, tipoConta);
+                                System.out.println("oi");
+                            } while (cliente.isLogStatus() != false);
+                            Clientes.update(cliente, tipoConta);
+                            System.out.println("saiu");
                         } catch (InputMismatchException e) {
                             System.out.println("\n Operação Inválida !!! \n");
                         }
@@ -51,7 +53,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    cadastro();
+                    cadastroCliente();
                     break;
                 case 3:
                     break;
@@ -62,7 +64,7 @@ public class Main {
         } while (true);
     }
 
-    public static void mainMenu(Cliente c) {
+    public static void mainMenu(Cliente c, int tipoConta) {
         if(c.getPoupanca() != null && c.getCorrente() != null) {
             System.out.println("\nDADOS DA CONTA CORRENTE\n");
             System.out.println(c.getCorrente());
@@ -74,91 +76,127 @@ public class Main {
         } else {
             System.out.println("DADOS DA CONTA POUPANCA\n");
             System.out.println(c.getPoupanca());
-        }
-        
+        };
+  
         scanner = new Scanner(System.in);
-
-        System.out.println("\t\nDESEJA OPERAR EM QUAL TIPO DE CONTA?\n");
-        Menus.menuTipos();
+        Scanner scanner3 = new Scanner(System.in);
+        Menus.menuMainMenu();
         op = scanner.nextInt();
-
-        switch(op) {
+  
+        switch (tipoConta) {
             case 1:
-                if(c.getCorrente() == null)
-                    System.out.println("\t\nCliente não possui conta corrente.");
-                else if(c.getCorrente() != null){
-                    Menus.menuMainMenu();
-                    op = scanner.nextInt();
-                    switch(op) {//ARRUMAR ESSA PARTE
-                        case 1:
-                            MenuGenerico.infos("INFORMAÇÕES DA CONTA");
-                            System.out.println(c.getNome());
-                            System.out.println();
-                            break;
-                        case 2:
-                            MenuGenerico.infos("INFORMAÇÕES DO CARTÃO");
-                            break;
-                        case 3:
-                            MenuGenerico.infos("DEPOSITAR");
-                            c.getCorrente().depositarContaCorrente();
-                            break;
-                        case 4:
-                            MenuGenerico.infos("SACAR");
-                            c.getCorrente().sacarContaCorrente();
-                        case 5:
-                            MenuGenerico.infos("TRANSFERIR");
-                            break;
-                        case 6:
-                            MenuGenerico.infos("SALDO");
-                            break;
-                        case 7:
-                            System.out.println("\tUsuário deslogou !!!\n");
-                            System.exit(0);
-                            break;
-                        default:
-                            System.out.println("\tOpcao Invalida!!!");
-                    }
-                }
+                switchmainMenuCorrente(c, op);
+                break;
             case 2:
-                if(c.getPoupanca() == null)
-                    System.out.println("\t\nCliente não possui conta poupança.");
-                else if (c.getPoupanca() != null){
-                    Menus.menuMainMenu();
-                    op = scanner.nextInt();
-                    switch(op) {//ARRUMAR ESSA PARTE
-                        case 1:
-                            MenuGenerico.infos("INFORMAÇÕES DA CONTA");
-                            System.out.println(c.getNome());
-                            System.out.println();
-                            break;
-                        case 2:
-                            MenuGenerico.infos("INFORMAÇÕES DO CARTÃO");
-                            break;
-                        case 3:
-                            MenuGenerico.infos("DEPOSITAR");
-                            c.getPoupanca().depositarContaPoupanca();
-                            break;
-                        case 4:
-                            MenuGenerico.infos("SACAR");
-                            c.getPoupanca().sacarContaPoupanca();
-                        case 5:
-                            MenuGenerico.infos("TRANSFERIR");
-                            break;
-                        case 6:
-                            MenuGenerico.infos("SALDO");
-                            break;
-                        case 7:
-                            System.out.println("\tUsuário deslogou !!!\n");
-                            System.exit(0);
-                            break;
-                        default:
-                            System.out.println("\tOpcao Invalida!!!");
-                    }
-                }
+                switchmainMenuPoupanca(c, op);
+                break;
+            case 3:
+                Menus.menuTipos();
+                op = scanner3.nextInt();
+                if(op == 1)
+                    switchmainMenuCorrente(c, op);
+                else
+                    switchmainMenuPoupanca(c, op);
+                break;
+            default:
+                System.out.println("\tOpcao Invalida!!!");
         }
     }
 
-    public static void cadastro(){
+    public static void switchmainMenuCorrente(Cliente c, int op){
+        Double valor;
+        switch (op) {//ARRUMAR ESSA PARTE
+            case 1:
+                MenuGenerico.infos("INFORMAÇÕES DA CONTA");
+                System.out.println(c.getNome());
+                System.out.println(c.getCorrente());
+                break;
+            case 2:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("INFORMAÇÕES DO CARTÃO");
+                System.out.println(c.getCorrente().getCartao());
+                break;
+            case 3:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("DEPOSITAR");
+                Menus.menuTipos();
+                op = scanner.nextInt();
+                c.getCorrente().depositarContaCorrente();
+                break;
+            case 4:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("SACAR");
+                c.getCorrente().sacarContaCorrente();
+            case 5:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("TRANSFERIR");
+                Menus.menuTipos();
+                valor = scanner.nextDouble();
+                c.getCorrente().transferir(valor);
+                break;
+            case 6:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("SALDO");
+                System.out.println(c.getCorrente().getSaldo());
+                break;
+            case 7:
+                System.out.println("\tUsuário deslogou !!!\n");
+                c.setLogStatus(false);
+                break;
+            default:
+                System.out.println("\tOpcao Invalida!!!");
+        }
+    }
+
+    public static void switchmainMenuPoupanca(Cliente c, int op){
+        Double valor;
+        switch (op) {//ARRUMAR ESSA PARTE
+            case 1:
+                MenuGenerico.infos("INFORMAÇÕES DA CONTA");
+                System.out.println(c.getNome());
+                System.out.println(c.getPoupanca());
+                break;
+            case 2:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("INFORMAÇÕES DO CARTÃO");
+                System.out.println(c.getPoupanca().getCartao());
+                break;
+            case 3:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("DEPOSITAR");
+                Menus.menuTipos();
+                op = scanner.nextInt();
+                c.getPoupanca().depositarContaPoupanca();
+                break;
+            case 4:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("SACAR");
+                Menus.menuTipos();
+                valor = scanner.nextDouble();
+                c.getPoupanca().sacarContaPoupanca();
+                break;
+            case 5:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("TRANSFERIR");
+                System.out.println("Qual valor deseja transferir");
+                valor = scanner.nextDouble();
+                c.getPoupanca().transferir(valor);
+                break;
+            case 6:
+                scanner = new Scanner(System.in);
+                MenuGenerico.infos("SALDO");
+                System.out.println("R$" + c.getPoupanca().getSaldo());
+                break;
+            case 7:
+                System.out.println("\tUsuário deslogou !!!\n");
+                c.setLogStatus(false);
+                break;
+            default:
+                System.out.println("\tOpcao Invalida!!!");
+        }
+    }
+
+    public static void cadastroCliente(){
         Enderecos enderecos = new Enderecos();
         Contatos contatos = new Contatos();
         String usuario, password;
@@ -234,14 +272,12 @@ public class Main {
                 ganhoMensal = scannerDouble.nextDouble();
                 Corrente corrente = new Corrente(ganhoMensal, 5);
                 c.setCorrente(corrente);
-                Clientes.add(c);
                 break;
             case 2:
                 System.out.println("Digite o seu ganho mensal:");
                 ganhoMensal = scannerDouble.nextDouble();
                 Poupanca poupanca = new Poupanca(ganhoMensal, 5);
                 c.setPoupanca(poupanca);
-                Clientes.add(c);
                 break;
             case 3:
                 System.out.println("Digite o seu ganho mensal:");
@@ -250,8 +286,51 @@ public class Main {
                 Poupanca poupanca2 = new Poupanca(ganhoMensal, 5);
                 c.setCorrente(corrente2);
                 c.setPoupanca(poupanca2);
-                Clientes.add(c);
         }
+        cadastrarCartao(c, op);
+    }
+
+    public static void cadastrarCartao(Cliente c, int op){
+        int senha;
+        Scanner scannerInt = new Scanner(System.in);
+        Cartao cartao;
+        switch (op){
+            case 1:
+                MenuGenerico.infos("CADASTRANDO CARTÃO");
+                System.out.println("Digite sua senha");
+                senha = scannerInt.nextInt();
+                cartao = new Cartao(c.getCorrente().getGanhoMensal(), c.getNome().toUpperCase(), senha);
+                c.getCorrente().setCartao(cartao);
+                MenuGenerico.infos("Cartão cadastrado");
+                System.out.println(c.getCorrente());
+                break;
+            case 2:
+                MenuGenerico.infos("CADASTRANDO CARTÃO");
+                System.out.println("Digite sua senha");
+                senha = scannerInt.nextInt();
+                cartao = new Cartao(c.getPoupanca().getGanhoMensal(), c.getNome().toUpperCase(), senha);
+                c.getPoupanca().setCartao(cartao);
+                MenuGenerico.infos("Cartão cadastrado");
+                break;
+            case 3:
+                MenuGenerico.infos("CADASTRANDO CARTÃO");
+                System.out.println("Digite sua senha");
+                senha = scannerInt.nextInt();
+                cartao = new Cartao(c.getCorrente().getGanhoMensal(), c.getNome().toUpperCase(), senha);
+                c.getCorrente().setCartao(cartao);
+                c.getPoupanca().setCartao(cartao);
+                MenuGenerico.infos("Cartão cadastrado");
+                break;
+        }
+        Clientes.add(c);
+    }
+
+    public static int verificarConta(Cliente c){
+        if(c.getCorrente() == null)
+            return 2;
+        if(c.getPoupanca() == null)
+            return 1;
+        return  3;
     }
 }
 

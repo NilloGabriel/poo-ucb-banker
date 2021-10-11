@@ -15,7 +15,7 @@ public class Cartao {
     private int senha;
     private boolean situacao;
 
-    public Cartao(boolean credito, double limiteTotal, String titular, double ganhoMensal, int senha) {
+    public Cartao(double limiteTotal, String titular, int senha) {
         this.debito = true;
         this.credito = credito;
         this.limiteTotal = limiteTotal;
@@ -166,8 +166,7 @@ public class Cartao {
 
     @Override
     public String toString() {
-        return    "Tipo: " + '\n'
-                + "Limite Total: " + this.limiteTotal + '\n'
+        return "Limite Total: " + this.limiteTotal + '\n'
                 + "Limite Usado: " + this.limiteUsado + '\n'
                 + "Número: " + this.numero + '\n'
                 + "Titular: " + this.titular + '\n'

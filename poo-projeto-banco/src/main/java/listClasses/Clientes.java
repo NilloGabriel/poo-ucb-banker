@@ -115,7 +115,7 @@ public class Clientes {
         return false;
     }
 
-    private static void update(Cliente c, int i){//Update para os atributos da conta, i indica a conta corrente ou poupança
+    public static void update(Cliente c, int i){//Update para os atributos da conta, i indica a conta corrente ou poupança
         for(Cliente cli: clientes) {
             if (cli == c) {
                 switch (i) {
@@ -125,6 +125,9 @@ public class Clientes {
                     case 2: //Poupança
                         cli.setPoupanca(c.getPoupanca());
                         return;
+                    case 3:
+                        cli.setPoupanca(c.getPoupanca());
+                        cli.setCorrente(c.getCorrente());
                 }
             }
         }
