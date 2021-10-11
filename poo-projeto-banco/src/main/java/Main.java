@@ -41,6 +41,7 @@ public class Main {
                                 mainMenu(cliente, tipoConta);
                                 System.out.println("oi");
                             } while (cliente.isLogStatus() != false);
+                            Clientes.update(cliente, tipoConta);
                             System.out.println("saiu");
                         } catch (InputMismatchException e) {
                             System.out.println("\n Operação Inválida !!! \n");
@@ -87,11 +88,12 @@ public class Main {
     }
 
     public static void switchmainMenuCorrente(Cliente c, int op){
+        Double valor;
         switch (op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
                 System.out.println(c.getNome());
-                System.out.println(c);
+                System.out.println(c.getCorrente());
                 break;
             case 2:
                 scanner = new Scanner(System.in);
@@ -103,52 +105,18 @@ public class Main {
                 MenuGenerico.infos("DEPOSITAR");
                 Menus.menuTipos();
                 op = scanner.nextInt();
-
-                switch (op) {
-                    case 1:
-                        if (c.getCorrente() == null)
-                            System.out.println("\t\nCliente não possui conta corrente.");
-                        else
-                            c.getCorrente().depositarContaCorrente();
-                        break;
-                    case 2:
-                        if (c.getPoupanca() == null)
-                            System.out.println("\t\nCliente não possui conta poupança.");
-                        else
-                            c.getPoupanca().depositarContaPoupanca();
-                        break;
-                    default:
-                        System.out.println("\t\nOpção Inválida!!!");
-                }
+                c.getCorrente().depositarContaCorrente();
                 break;
             case 4:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SACAR");
-                Menus.menuTipos();
-                op = scanner.nextInt();
-
-                switch (op) {
-                    case 1:
-                        if (c.getCorrente() == null)
-                            System.out.println("\t\nCliente não possui conta corrente.");
-                        else
-                            c.getCorrente().sacarContaCorrente();
-                        break;
-                    case 2:
-                        if (c.getPoupanca() == null)
-                            System.out.println("\t\nCliente não possui conta poupança.");
-                        else
-                            c.getPoupanca().sacarContaPoupanca();
-                        break;
-                    default:
-                        System.out.println("\t\nOpção Inválida!!!");
-                }
+                c.getCorrente().sacarContaCorrente();
             case 5:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
                 Menus.menuTipos();
-                op = scanner.nextInt();
-
+                valor = scanner.nextDouble();
+                c.getCorrente().transferir(valor);
                 break;
             case 6:
                 scanner = new Scanner(System.in);
@@ -165,11 +133,12 @@ public class Main {
     }
 
     public static void switchmainMenuPoupanca(Cliente c, int op){
+        Double valor;
         switch (op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
                 System.out.println(c.getNome());
-                System.out.println(c);
+                System.out.println(c.getPoupanca());
                 break;
             case 2:
                 scanner = new Scanner(System.in);
@@ -181,52 +150,20 @@ public class Main {
                 MenuGenerico.infos("DEPOSITAR");
                 Menus.menuTipos();
                 op = scanner.nextInt();
-
-                switch (op) {
-                    case 1:
-                        if (c.getPoupanca() == null)
-                            System.out.println("\t\nCliente não possui conta Poupança.");
-                        else
-                            c.getPoupanca().depositarContaPoupanca();
-                        break;
-                    case 2:
-                        if (c.getPoupanca() == null)
-                            System.out.println("\t\nCliente não possui conta poupança.");
-                        else
-                            c.getPoupanca().depositarContaPoupanca();
-                        break;
-                    default:
-                        System.out.println("\t\nOpção Inválida!!!");
-                }
+                c.getPoupanca().depositarContaPoupanca();
                 break;
             case 4:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SACAR");
                 Menus.menuTipos();
-                op = scanner.nextInt();
-
-                switch (op) {
-                    case 1:
-                        if (c.getPoupanca() == null)
-                            System.out.println("\t\nCliente não possui conta corrente.");
-                        else
-                            c.getPoupanca().sacarContaPoupanca();
-                        break;
-                    case 2:
-                        if (c.getPoupanca() == null)
-                            System.out.println("\t\nCliente não possui conta poupança.");
-                        else
-                            c.getPoupanca().sacarContaPoupanca();
-                        break;
-                    default:
-                        System.out.println("\t\nOpção Inválida!!!");
-                }
+                valor = scanner.nextDouble();
+                c.getPoupanca().sacarContaPoupanca();
             case 5:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
-                Menus.menuTipos();
-                op = scanner.nextInt();
-
+                System.out.println("Qual valor deseja transferir");
+                valor = scanner.nextDouble();
+                c.getPoupanca().transferir(valor);
                 break;
             case 6:
                 scanner = new Scanner(System.in);
