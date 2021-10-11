@@ -32,6 +32,7 @@ public class Main {
             switch (op){
                 case 1:
                     cliente = Clientes.search(login.loginUsuario());
+                    System.out.println("DADOS DA CONTA\n");
                     System.out.println(cliente);
                     if(cliente != null){
                         try {
@@ -47,7 +48,8 @@ public class Main {
                             System.out.println("\n Operação Inválida !!! \n");
                         }
                     }else{
-                        System.out.println("Usuario ou senha incorretos");
+                        System.out.println("\t\nNenhum usuário foi cadastrado... Cadastre-se primeiro:\n");
+                        cadastro();
                     }
                     break;
                 case 2:
@@ -63,11 +65,24 @@ public class Main {
     }
 
     public static void mainMenu(Cliente c, int tipoConta) {
-        System.out.println(c.getCorrente());
+        if(c.getPoupanca() != null && c.getCorrente() != null) {
+            System.out.println("\nDADOS DA CONTA CORRENTE\n");
+            System.out.println(c.getCorrente());
+            System.out.println("DADOS DA CONTA POUPANCA\n");
+            System.out.println(c.getPoupanca());
+        } else if (c.getCorrente() != null) {
+            System.out.println("\nDADOS DA CONTA CORRENTE\n");
+            System.out.println(c.getCorrente());
+        } else {
+            System.out.println("DADOS DA CONTA POUPANCA\n");
+            System.out.println(c.getPoupanca());
+        };
+  
         scanner = new Scanner(System.in);
         Scanner scanner3 = new Scanner(System.in);
         Menus.menuMainMenu();
         op = scanner.nextInt();
+  
         switch (tipoConta) {
             case 1:
                 switchmainMenuCorrente(c, op);
@@ -82,9 +97,10 @@ public class Main {
                     switchmainMenuCorrente(c, op);
                 else
                     switchmainMenuPoupanca(c, op);
-
+                break;
+            default:
+                System.out.println("\tOpcao Invalida!!!");
         }
-        System.out.println("oi");
     }
 
     public static void switchmainMenuCorrente(Cliente c, int op){
@@ -158,6 +174,7 @@ public class Main {
                 Menus.menuTipos();
                 valor = scanner.nextDouble();
                 c.getPoupanca().sacarContaPoupanca();
+                break;
             case 5:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
