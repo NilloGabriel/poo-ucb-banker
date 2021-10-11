@@ -17,7 +17,7 @@ public class Main {
     private static Clientes clientes;
 
     public static void main(String[] args) {
-        int op;//Tipo conta: 1- corrente, 2- poupanca, 3-as duas
+        int op;
         Login login = new Login();
         String userLogin;
         String userPassword;
@@ -36,7 +36,7 @@ public class Main {
                     if(cliente != null){
                         try {
                             cliente.setLogStatus(true);
-                            int tipoConta = verificarConta(cliente);
+                            int tipoConta = verificarConta(cliente);//Tipo conta: 1- corrente, 2- poupanca, 3-as duas
                             do {
                                 mainMenu(cliente, tipoConta);
                                 System.out.println("oi");
