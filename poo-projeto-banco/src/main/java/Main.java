@@ -49,7 +49,7 @@ public class Main {
                         }
                     }else{
                         System.out.println("\t\nNenhum usuário foi cadastrado... Cadastre-se primeiro:\n");
-                        cadastro();
+                        cadastroCliente();
                     }
                     break;
                 case 2:
