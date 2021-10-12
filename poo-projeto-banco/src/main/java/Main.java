@@ -286,6 +286,7 @@ public class Main {
                 Poupanca poupanca2 = new Poupanca(ganhoMensal, 5);
                 c.setCorrente(corrente2);
                 c.setPoupanca(poupanca2);
+                break;
         }
         cadastrarCartao(c, op);
     }

@@ -14,46 +14,6 @@ public class Corrente extends Conta{
         setSaldo(25.3);
     }
 
-    /*public void sacarContaCorrente() {
-        String numConta;
-        Double valor = 0.0;
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\t\nInforme o número da conta para saque: ");
-        numConta = scanner.nextLine();
-
-        if(numConta.equals(super.getNumeroConta())) {
-            System.out.println("\t\nInforme o valor a ser sacado: ");
-            valor = scanner.nextDouble();
-
-            sacar(valor);
-            return;
-        }
-
-        System.out.println("\t\nConta não existe.\n");
-    }
-
-    public void depositarContaCorrente() {
-        String numConta;
-        Double valor = 0.0;
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\t\nInforme o número da conta para deposito: ");
-        numConta = scanner.nextLine();
-
-        if(numConta.equals(super.getNumeroConta())) {
-            System.out.println("\t\nInforme o valor a ser depositado: ");
-            valor = scanner.nextDouble();
-
-            depositar(valor);
-            return;
-        }
-
-        System.out.println("\t\nConta não existe.\n");
-    }*/
-
     @Override
     public String toString() {
 

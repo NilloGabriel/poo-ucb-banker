@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Random;
 
 public abstract class Conta extends Agencia{
-    private StringBuilder numeroConta;
+    private String numeroConta;
     private boolean situacao;
     private LocalDate dataCriacao;
     private Double saldo;
@@ -35,7 +35,7 @@ public abstract class Conta extends Agencia{
         this.ganhoMensal = ganhoMensal;
     }
 
-    public StringBuilder getNumeroConta() {
+    public String getNumeroConta() {
         return numeroConta;
     }
 
@@ -132,15 +132,22 @@ public abstract class Conta extends Agencia{
         }
     }
 
-    private StringBuilder gerarNumerodaConta(){
-        Integer digito;
-        StringBuilder numero = new StringBuilder();
-        Random random = new Random();
-        for(int i=0;i>= 8; i++){
-            digito = random.nextInt(9);
-            numero.append(Integer.toString(digito));
+    private int randomNumber(int n) {
+        int randNum = (int) (Math.random() * n);
+
+        return randNum;
+    }
+
+    public String gerarNumerodaConta(){
+        int n = 9;
+
+        int num[] = new int[9];
+
+        for (int i = 0; i < 9; i++) {
+            num[i] = randomNumber(n);
         }
-        return  numero;
+
+        return this.numeroConta = "" + num[0] + num[1] + num[2] + num[3] + num[4] + num[5] + num[6] + num[7] + '-' + num[8];
     }
 
     //public void fazerCompra() {}
@@ -150,10 +157,10 @@ public abstract class Conta extends Agencia{
 
     @Override
     public String toString() {
-        return  "NumeroBanco=" + this.numeroBanco + '\n' +
-                "Numero da Conta=" + this.numeroConta + '\n' +
-                "Data de Criacao=" + this.dataCriacao + '\n' +
-                "Saldo=" + saldo + '\n' +
-                "Ganho Mensal=" + ganhoMensal + '\n' ;
+        return  "NumeroBanco = " + this.numeroBanco + '\n' +
+                "Numero da Conta = " + this.numeroConta + '\n' +
+                "Data de Criacao = " + this.dataCriacao + '\n' +
+                "Saldo = " + saldo + '\n' +
+                "Ganho Mensal = " + ganhoMensal + '\n' ;
     }
 }
