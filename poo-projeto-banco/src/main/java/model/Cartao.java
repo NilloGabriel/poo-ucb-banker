@@ -8,7 +8,7 @@ public class Cartao {
     private boolean credito;
     private double limiteTotal;
     private double limiteUsado;
-    private StringBuilder numero;
+    private String numero;
     private String titular;
     private LocalDate validade;
     private int cvc;
@@ -68,12 +68,12 @@ public class Cartao {
         this.limiteTotal = limiteTotal;
     }
 
-    public StringBuilder getNumero() {
+    public String getNumero() {
         return numero;
     }
 
     public void setNumero() {
-        this.numero = gerarNumeroCartao();
+        this.numero = gerarNumeroFormatado();
     }
 
     public String getTitular() {
@@ -144,17 +144,20 @@ public class Cartao {
         return hoje.plusYears(4);
     }
 
-    private StringBuilder gerarNumeroCartao(){
-        Integer digito;
-        StringBuilder numero = new StringBuilder();
-        Random random = new Random();
-        for(int i=0;i>= 16; i++){
-            digito = random.nextInt(9);
-            numero.append(Integer.toString(digito));
-            if(i==4 || i==8 || i==12)
-                numero.append('.');
+    private String gerarNumeroCartao(){
+        String number = "";
+        int num, num2, num3, num4;
+
+        for(int i = 0; i < 4; i++) {
+            num = (int) (Math.random() * 10);
+            number += num;
         }
-        return  numero;
+
+        return number;
+    }
+
+    private String gerarNumeroFormatado() {
+        return this.numero = gerarNumeroCartao() + " " + gerarNumeroCartao() + " " + gerarNumeroCartao() + " " + gerarNumeroCartao();
     }
 
     private int gerarCvc(){
