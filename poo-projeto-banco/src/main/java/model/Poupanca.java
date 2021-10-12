@@ -13,61 +13,21 @@ public class Poupanca extends Conta{
         setSaldo(30.80);
     }
 
-    /*public void sacarContaPoupanca() {
-        String numConta;
-        Double valor = 0.0;
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\t\nInforme o número da conta para saque: ");
-        numConta = scanner.nextLine();
-
-        if(numConta.equals(super.getNumeroConta())) {
-            System.out.println("\t\nInforme o valor a ser sacado: ");
-            valor = scanner.nextDouble();
-
-            sacar(valor);
-            return;
-        }
-
-        System.out.println("\t\nConta não existe.\n");
-    }
-
-    public void depositarContaPoupanca() {
-        String numConta;
-        Double valor = 0.0;
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\t\nInforme o número da conta para deposito: ");
-        numConta = scanner.nextLine();
-
-        if(numConta.equals(super.getNumeroConta())) {
-            System.out.println("\t\nInforme o valor a ser depositado: ");
-            valor = scanner.nextDouble();
-
-            depositar(valor);
-            return;
-        }
-
-        System.out.println("\t\nConta não existe.\n");
-    }*/
-
     @Override
     public String toString() {
         return super.toString();
     }
 
     public void sacarContaPoupanca() {
-        int numConta;
+        String numConta;
         Double valor = 0.0;
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\t\nInforme o número da conta para saque: ");
-        numConta = scanner.nextInt();
+        numConta = scanner.nextLine();
 
-        if(String.valueOf(numConta).equals(super.getNumeroConta())) {
+        if(numConta.equals(super.getNumeroConta())) {
             System.out.println("\t\nInforme o valor a ser sacado: ");
             valor = scanner.nextDouble();
 
@@ -79,15 +39,15 @@ public class Poupanca extends Conta{
     }
 
     public void depositarContaPoupanca() {
-        int numConta;
+        String numConta;
         Double valor = 0.0;
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\t\nInforme o número da conta para deposito: ");
-        numConta = scanner.nextInt();
+        numConta = scanner.nextLine();
 
-        if(String.valueOf(numConta).equals(super.getNumeroConta())) {
+        if(numConta.equals(super.getNumeroConta())) {
             System.out.println("\t\nInforme o valor a ser depositado: ");
             valor = scanner.nextDouble();
 
