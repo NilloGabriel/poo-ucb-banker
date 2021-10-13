@@ -124,12 +124,13 @@ public class Main {
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SACAR");
                 c.getCorrente().sacarContaCorrente();
+                break;
             case 5:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
                 Menus.menuTipos();
                 valor = scanner.nextDouble();
-                c.getCorrente().transferir(valor);
+                c.getCorrente().transferirContaCorrente(c.getCorrente());
                 break;
             case 6:
                 scanner = new Scanner(System.in);
@@ -177,7 +178,7 @@ public class Main {
                 MenuGenerico.infos("TRANSFERIR");
                 System.out.println("Qual valor deseja transferir");
                 valor = scanner.nextDouble();
-                c.getPoupanca().transferir(valor);
+                c.getPoupanca().transferirContaPoupanca(c.getPoupanca());
                 break;
             case 6:
                 scanner = new Scanner(System.in);
