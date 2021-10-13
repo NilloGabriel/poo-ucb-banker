@@ -122,6 +122,7 @@ public class Main {
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SACAR");
                 c.getCorrente().sacarContaCorrente();
+                break;
             case 5:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
