@@ -56,6 +56,7 @@ public class Login {
         System.out.printf("\t ___________________________________________\n");
         scannerSenha = scanner.nextLine();
         login.setPassword(scannerSenha);
+        System.out.println(login);
         return login;
     }
 
@@ -65,5 +66,10 @@ public class Login {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario: " + this.getUsuario() + "password: " + this.getPassword();
     }
 }
