@@ -1,10 +1,6 @@
 package model;
 
-import listClasses.Transacoes;
-
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Random;
 
 public abstract class Conta extends Agencia{
     private String numeroConta;
@@ -118,14 +114,15 @@ public abstract class Conta extends Agencia{
         System.out.println("\t\nDeposito de R$" + valor + " efetuado com sucesso!" + "\tSaldo atual: R$" + getSaldo() + '\n');
     }
 
-    public void transferir(Double valor) {
+    public void transferir(Double valor, Conta destino) {
         if(valor <= 0) {
             System.out.println("\t\nNão pode ser efetuadas transferências com valor igual ou inferior a 0.\n");
             return;
         }
 
         if(valor <= getSaldo()) {
-            this.saldo = this.saldo - valor;
+            this.sacar(valor);
+            destino.depositar(valor);
             System.out.println("\t\nTransferência realizada com sucesso!" + "\nSaldo atual: R$:" + getSaldo() + '\n');
         } else {
             System.out.println("\t\nSaldo insuficiente.");
