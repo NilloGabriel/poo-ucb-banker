@@ -98,7 +98,7 @@ public abstract class Conta extends Agencia{
 
         if(valor <= this.saldo) {
             this.saldo = this.saldo - valor;
-            System.out.println("\tSaque de R$" + valor + " efetuado com sucesso!" + "\nSaldo atual: R$" + getSaldo() + '\n');
+            System.out.println("\tSaque de R$" + valor + " efetuado com sucesso!" + "\n\tSaldo atual: R$" + getSaldo() + '\n');
         } else {
             System.out.println("\t\nSaldo insuficiente");
         }
@@ -111,7 +111,7 @@ public abstract class Conta extends Agencia{
         }
 
         this.saldo = this.saldo + valor;
-        System.out.println("\t\nDeposito de R$" + valor + " efetuado com sucesso!" + "\tSaldo atual: R$" + getSaldo() + '\n');
+        System.out.println("\t\nDeposito de R$" + valor + " efetuado com sucesso!" + "\t\nSaldo atual: R$" + getSaldo() + '\n');
     }
 
     public void transferir(Double valor, Conta destino) {
@@ -123,7 +123,7 @@ public abstract class Conta extends Agencia{
         if(valor <= getSaldo()) {
             this.sacar(valor);
             destino.depositar(valor);
-            System.out.println("\t\nTransferência realizada com sucesso!" + "\nSaldo atual: R$:" + getSaldo() + '\n');
+            System.out.println("\t\nTransferência realizada com sucesso!" + "\t\nSaldo atual: R$:" + getSaldo() + '\n');
         } else {
             System.out.println("\t\nSaldo insuficiente.");
         }
