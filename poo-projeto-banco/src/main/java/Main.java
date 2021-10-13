@@ -35,7 +35,6 @@ public class Main {
                             int tipoConta = verificarConta(cliente);//Tipo conta: 1- corrente, 2- poupanca, 3-as duas
                             do {
                                 mainMenu(cliente, tipoConta);
-                                System.out.println("oi");
                             } while (cliente.isLogStatus() != false);
                             Clientes.update(cliente, tipoConta);
                             System.out.println("saiu");
@@ -71,13 +70,12 @@ public class Main {
         } else {
             System.out.println("DADOS DA CONTA POUPANCA\n");
             System.out.println(c.getPoupanca());
-        };
-  
+        }
         scanner = new Scanner(System.in);
         Scanner scanner3 = new Scanner(System.in);
         Menus.menuMainMenu();
         op = scanner.nextInt();
-  
+        System.out.println(tipoConta);
         switch (tipoConta) {
             case 1:
                 switchmainMenuCorrente(c, op);
@@ -86,12 +84,16 @@ public class Main {
                 switchmainMenuPoupanca(c, op);
                 break;
             case 3:
-                Menus.menuTipos();
-                op = scanner3.nextInt();
-                if(op == 1)
-                    switchmainMenuCorrente(c, op);
-                else
-                    switchmainMenuPoupanca(c, op);
+                if (op == 0)
+                    c.setLogStatus(false);
+                else {
+                    Menus.menuTipos();
+                    int op = scanner3.nextInt();
+                    if (op == 1)
+                        switchmainMenuCorrente(c, op);
+                    else if (op == 2)
+                        switchmainMenuPoupanca(c, op);
+                }
                 break;
             default:
                 System.out.println("\tOpcao Invalida!!!");
@@ -134,7 +136,7 @@ public class Main {
                 MenuGenerico.infos("SALDO");
                 System.out.println(c.getCorrente().getSaldo());
                 break;
-            case 7:
+            case 0:
                 System.out.println("\tUsuário deslogou !!!\n");
                 c.setLogStatus(false);
                 break;
@@ -182,7 +184,7 @@ public class Main {
                 MenuGenerico.infos("SALDO");
                 System.out.println("R$" + c.getPoupanca().getSaldo());
                 break;
-            case 7:
+            case 0:
                 System.out.println("\tUsuário deslogou !!!\n");
                 c.setLogStatus(false);
                 break;

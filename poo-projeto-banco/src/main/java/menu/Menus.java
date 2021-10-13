@@ -26,7 +26,7 @@ public class Menus {
         System.out.printf("\t __________________________________________\n");
         System.out.printf("\t|                  LOGIN                   |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     1      |            CLIENTE          |\n");
+        System.out.printf("\t|     1      |             LOGIN           |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
         System.out.printf("\t|     2      |           CADASTRAR         |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
@@ -63,7 +63,7 @@ public class Menus {
         System.out.printf("\t|____________|_____________________________|\n");
         System.out.printf("\t|     6      |            SALDO            |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     7      |            LOGOUT           |\n");
+        System.out.printf("\t|     0      |            LOGOUT           |\n");
         System.out.printf("\t|____________|_____________________________|\n");
 
     }
