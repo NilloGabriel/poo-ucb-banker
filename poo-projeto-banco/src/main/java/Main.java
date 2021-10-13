@@ -6,18 +6,13 @@ import menu.Menus;
 import model.*;
 
 import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    private static boolean logStatus = false;
     private static int op;
     private static Scanner scanner;
-    private static Clientes clientes;
 
     public static void main(String[] args) {
-        int op;
         Login login = new Login();
         String userLogin;
         String userPassword;
