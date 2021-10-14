@@ -5,6 +5,7 @@ import listClasses.Transacoes;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Random;
+import java.util.Scanner;
 
 public abstract class Conta extends Agencia{
     private String numeroConta;
@@ -150,7 +151,34 @@ public abstract class Conta extends Agencia{
         return this.numeroConta = "" + num[0] + num[1] + num[2] + num[3] + num[4] + num[5] + num[6] + num[7] + '-' + num[8];
     }
 
-    //public void fazerCompra() {}
+    public void fazerCompra() {
+        Scanner scanner = new Scanner(System.in);
+        float valor;
+        int operacao;
+        cartao.verificarCartao();
+        System.out.println("Qual o valor da compra que ira ser realizada?");
+        valor = scanner.nextFloat();
+        System.out.println("Digite a operação de compra");
+        System.out.println("1 - Debito");
+        System.out.println("2 - Credito");
+        operacao = scanner.nextInt();
+        boolean situacao = cartao.utilizarCreditoOuDebito(operacao, valor);
+        if(situacao){
+            if(operacao == 1){
+                if(valor <= saldo)
+                    saldo -= valor;
+                else {
+                    System.out.println("Não foi possivel realizar a compra com o saldo atual");
+                    return;
+                }
+            }
+            System.out.println("Compra Realizada");
+            return;
+        }else {
+            System.out.println("Não foi possivel realizar a compra");
+        }
+    }
+
 
     //public boolean fecharConta() {return true;}
 
