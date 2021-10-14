@@ -122,11 +122,12 @@ public class Main {
             case 4:
                 MenuGenerico.infos("SACAR");
                 c.getCorrente().sacarContaCorrente();
+                break;
             case 5:
                 MenuGenerico.infos("TRANSFERIR");
                 Menus.menuTipos();
                 valor = scanner.nextDouble();
-                c.getCorrente().transferir(valor);
+                c.getCorrente().transferirContaCorrente(c.getCorrente());
                 break;
             case 6:
                 int senha;
@@ -182,7 +183,7 @@ public class Main {
                 MenuGenerico.infos("TRANSFERIR");
                 System.out.println("Qual valor deseja transferir");
                 valor = scanner.nextDouble();
-                c.getPoupanca().transferir(valor);
+                c.getPoupanca().transferirContaPoupanca(c.getPoupanca());
                 break;
             case 6:
                 int senha;
