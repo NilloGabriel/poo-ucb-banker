@@ -102,6 +102,7 @@ public class Main {
 
     public static void switchmainMenuCorrente(Cliente c, int op){
         Double valor;
+        scanner = new Scanner(System.in);
         switch (op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
@@ -109,30 +110,34 @@ public class Main {
                 System.out.println(c.getCorrente());
                 break;
             case 2:
-                scanner = new Scanner(System.in);
                 MenuGenerico.infos("INFORMAÇÕES DO CARTÃO");
                 System.out.println(c.getCorrente().getCartao());
                 break;
             case 3:
-                scanner = new Scanner(System.in);
                 MenuGenerico.infos("DEPOSITAR");
                 Menus.menuTipos();
                 op = scanner.nextInt();
                 c.getCorrente().depositarContaCorrente();
                 break;
             case 4:
-                scanner = new Scanner(System.in);
                 MenuGenerico.infos("SACAR");
                 c.getCorrente().sacarContaCorrente();
                 break;
             case 5:
-                scanner = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
                 Menus.menuTipos();
                 valor = scanner.nextDouble();
                 c.getCorrente().transferirContaCorrente(c.getCorrente());
                 break;
             case 6:
+                int senha;
+                System.out.println("Digite a senha do cartão:");
+                senha = scanner.nextInt();
+                if(c.getCorrente().getCartao().verificarSenha(senha))
+                    c.getCorrente().fazerCompra();
+                else
+                    System.out.println("Senha do cartão invalida");
+            case 7:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SALDO");
                 System.out.println(c.getCorrente().getSaldo());
@@ -181,6 +186,14 @@ public class Main {
                 c.getPoupanca().transferirContaPoupanca(c.getPoupanca());
                 break;
             case 6:
+                int senha;
+                System.out.println("Digite a senha do cartão:");
+                senha = scanner.nextInt();
+                if(c.getPoupanca().getCartao().verificarSenha(senha))
+                    c.getPoupanca().fazerCompra();
+                else
+                    System.out.println("Senha do cartão invalida");
+            case 7:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SALDO");
                 System.out.println("R$" + c.getPoupanca().getSaldo());

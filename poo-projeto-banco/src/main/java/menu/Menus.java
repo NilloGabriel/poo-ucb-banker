@@ -61,7 +61,9 @@ public class Menus {
         System.out.printf("\t|____________|_____________________________|\n");
         System.out.printf("\t|     5      |          TRANSFERIR         |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-        System.out.printf("\t|     6      |            SALDO            |\n");
+        System.out.printf("\t|     6      |        REALIZAR COMPRA      |\n");
+        System.out.printf("\t|____________|_____________________________|\n");
+        System.out.printf("\t|     7      |            SALDO            |\n");
         System.out.printf("\t|____________|_____________________________|\n");
         System.out.printf("\t|     0      |            LOGOUT           |\n");
         System.out.printf("\t|____________|_____________________________|\n");

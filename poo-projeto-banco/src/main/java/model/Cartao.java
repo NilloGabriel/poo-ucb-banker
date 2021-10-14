@@ -115,6 +115,13 @@ public class Cartao {
         return true;
     }
 
+    public boolean verificarSenha(int senha){
+        if (this.senha == senha)
+            return true;
+        else
+            return false;
+    }
+
     public boolean utilizarCreditoOuDebito(int op, float valor) {//se for op=1 debito se op=2 credito
         this.situacao = verificarCartao();
         if(this.situacao == true){
