@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public abstract class Conta extends Agencia{
     private String numeroConta;
