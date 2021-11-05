@@ -14,11 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
         Login login = new Login();
-        String userLogin;
-        String userPassword;
         Adm adm = new Adm();
         Scanner scannerInt = new Scanner(System.in);
-        Scanner scannerString = new Scanner(System.in);
         Cliente cliente;
         Menus.welcome();
         do{
@@ -42,8 +39,7 @@ public class Main {
                             System.out.println("\n Operação Inválida !!! \n");
                         }
                     }else{
-                        System.out.println("\t\nNenhum usuário foi cadastrado... Cadastre-se primeiro:\n");
-                        cadastroCliente();
+                        System.out.println("\t\nUsuário não existe... Cadastre-se primeiro!\n");
                     }
                     break;
                 case 2:
@@ -152,7 +148,6 @@ public class Main {
     }
 
     public static void switchmainMenuPoupanca(Cliente c, int op){
-        Double valor;
         switch (op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
@@ -168,21 +163,18 @@ public class Main {
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("DEPOSITAR");
                 Menus.menuTipos();
-                op = scanner.nextInt();
                 c.getPoupanca().depositarContaPoupanca();
                 break;
             case 4:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("SACAR");
                 Menus.menuTipos();
-                valor = scanner.nextDouble();
                 c.getPoupanca().sacarContaPoupanca();
                 break;
             case 5:
                 scanner = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
                 System.out.println("Qual valor deseja transferir");
-                valor = scanner.nextDouble();
                 c.getPoupanca().transferirContaPoupanca(c.getPoupanca());
                 break;
             case 6:
@@ -345,5 +337,3 @@ public class Main {
         return  3;
     }
 }
-
-

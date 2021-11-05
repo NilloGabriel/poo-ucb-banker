@@ -21,7 +21,6 @@ public class Menus {
         System.out.println();
     }
 
-
     public static void menuLogin(){
         System.out.printf("\t __________________________________________\n");
         System.out.printf("\t|                  LOGIN                   |\n");
@@ -67,7 +66,6 @@ public class Menus {
         System.out.printf("\t|____________|_____________________________|\n");
         System.out.printf("\t|     0      |            LOGOUT           |\n");
         System.out.printf("\t|____________|_____________________________|\n");
-
     }
 
     public static void menuTipos(){
@@ -78,7 +76,5 @@ public class Menus {
         System.out.printf("\t|------------|-----------------------------|\n");
         System.out.printf("\t|     2      |        CONTA POUPANÇA       |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
-
     }
 }
-

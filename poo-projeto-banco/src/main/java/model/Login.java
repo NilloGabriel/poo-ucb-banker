@@ -60,14 +60,6 @@ public class Login {
         return login;
     }
 
-    public boolean logStatusUsuario(String user, String password) {
-        if(user.equals(this.getUsuario()) && password.equals(this.getPassword())) {
-            setLogStatus(true);
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
         return "Usuario: " + this.getUsuario() + "password: " + this.getPassword();

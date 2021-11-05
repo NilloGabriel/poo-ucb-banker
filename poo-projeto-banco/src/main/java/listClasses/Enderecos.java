@@ -86,7 +86,6 @@ public class Enderecos{
         return false;
     }
 
-
     private void menuUpdate(){
         System.out.println("Deseja corrir qual dado? ");
         System.out.println("1 - Estado");

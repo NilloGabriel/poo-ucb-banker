@@ -8,5 +8,4 @@ public class MenuGenerico {
         System.out.println();
         System.out.println(" //////////////////////////////////////////////////////////////////////\n");
     }
-
 }
