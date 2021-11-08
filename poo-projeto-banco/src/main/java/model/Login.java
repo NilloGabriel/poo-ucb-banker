@@ -7,8 +7,13 @@ public class Login {
     private String password;
     private boolean logStatus;
 
+    public Login(String usuario, String password) {
+        this.logStatus = true;
+        setUsuario(usuario);
+        setPassword(password);
+    }
+
     public Login() {
-        this.logStatus = false;
     }
 
     public String getUsuario() {
@@ -35,29 +40,28 @@ public class Login {
         this.logStatus = logStatus;
     }
 
-    public void loginUsuario() {
+    public Login loginUsuario() {
         Scanner scanner = new Scanner(System.in);
+        Login login = new Login();
         String scannerUsuario;
         String scannerSenha;
-        do{
-            System.out.println("Usuário:");
-            scannerUsuario = scanner.nextLine();
-            System.out.println("Senha:");
-            scannerSenha = scanner.nextLine();
-            if(!logStatusUsuario(scannerUsuario, scannerSenha)) {
-                System.out.println("\n Usuário ou senha incorretos !!! \n");
-            } else {
-                System.out.println("Usuário " + "\"" + getUsuario() + "\"" + " logado");
-                break;
-            }
-        } while(true);
+        System.out.println("\tFAÇA O SEU LOGIN:");
+        System.out.printf("\t ___________________________________________\n");
+        System.out.printf("\t|                  USUARIO                  |\n");
+        System.out.printf("\t ___________________________________________\n");
+        scannerUsuario = scanner.nextLine();
+        login.setUsuario(scannerUsuario);
+        System.out.printf("\t ___________________________________________\n");
+        System.out.printf("\t|                   SENHA                   |\n");
+        System.out.printf("\t ___________________________________________\n");
+        scannerSenha = scanner.nextLine();
+        login.setPassword(scannerSenha);
+        System.out.println(login);
+        return login;
     }
 
-    public boolean logStatusUsuario(String user, String password) {
-        if(user.equals(this.getUsuario()) && password.equals(this.getPassword())) {
-            setLogStatus(true);
-            return true;
-        }
-        return false;
+    @Override
+    public String toString() {
+        return "Usuario: " + this.getUsuario() + "password: " + this.getPassword();
     }
 }

@@ -2,12 +2,9 @@ package model;
 
 public class Contato {
     private int operadora;
-    private int ddd;
     private String numero;
-    
-    public Contato(int operadora, int ddd, String numero) {
+    public Contato(int operadora, String numero) {
         this.operadora = operadora;
-        this.ddd = ddd;
         this.numero = numero;
     }
 
@@ -17,14 +14,6 @@ public class Contato {
 
     public void setOperadora(int operadora) {
         this.operadora = operadora;
-    }
-
-    public int getDdd() {
-        return ddd;
-    }
-
-    public void setDdd(int ddd) {
-        this.ddd = ddd;
     }
 
     public String getNumero() {
@@ -37,22 +26,26 @@ public class Contato {
 
     public String retornarOperadora(){
         switch(this.operadora){
-            case 1: return " 1. Vivo";
-            case 2: return "2. Claro";
-            case 3: return "3. Oi";
-            case 4: return "4. Tim";
-            case 5: return "5. Nextel";
+            case 1: return "Vivo";
+            case 2: return "Claro";
+            case 3: return "Oi";
+            case 4: return "Tim";
+            case 5: return "Nextel";
         }
         return "Erro";
     }
 
+    public static void menuOperadoras(){
+        System.out.println("1 - Vivo");
+        System.out.println("2 - Claro");
+        System.out.println("3 - Oi");
+        System.out.println("4 - Tim");
+        System.out.println("5 - Nextel");
+    }
+
     @Override
     public String toString() {
-        return "Operadora: " + this.retornarOperadora() +
-                "Numero: " + this.ddd + this.numero;
+        return "Operadora: " + this.retornarOperadora() + '\n' +
+                "Numero: " + this.numero + '\n';
     }
 }
-
-
-
-
