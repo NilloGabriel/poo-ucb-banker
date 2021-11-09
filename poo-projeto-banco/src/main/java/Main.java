@@ -153,6 +153,8 @@ public class Main {
     }
 
     public static void switchmainMenuPoupanca(Cliente c, int op){
+        Double valor;
+        scanner = new Scanner(System.in);
         switch (op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
@@ -160,21 +162,20 @@ public class Main {
                 System.out.println(c.getPoupanca());
                 break;
             case 2:
-                scanner = new Scanner(System.in);
                 MenuGenerico.infos("INFORMAÇÕES DO CARTÃO");
                 System.out.println(c.getPoupanca().getCartao());
                 break;
             case 3:
-                scanner = new Scanner(System.in);
                 MenuGenerico.infos("DEPOSITAR");
-                Menus.menuTipos();
-                c.getPoupanca().depositarContaPoupanca();
+                System.out.println("Digite o valor a ser depositado");
+                valor = scanner.nextDouble();
+                c.getPoupanca().depositar(valor);
                 break;
             case 4:
-                scanner = new Scanner(System.in);
                 MenuGenerico.infos("SACAR");
-                Menus.menuTipos();
-                c.getPoupanca().sacarContaPoupanca();
+                System.out.println("Digite o valor a ser sacado");
+                valor = scanner.nextDouble();
+                c.getPoupanca().sacar(valor);
                 break;
             case 5:
                 scanner = new Scanner(System.in);

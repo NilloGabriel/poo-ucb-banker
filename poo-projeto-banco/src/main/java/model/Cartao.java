@@ -170,7 +170,9 @@ public class Cartao {
     private int gerarCvc(){
         int cvc;
         Random random = new Random();
-        cvc = random.nextInt(999);
+        do {
+            cvc = random.nextInt(999);
+        }while(cvc < 100);
         return cvc;
     }
 
