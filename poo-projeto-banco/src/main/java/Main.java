@@ -79,7 +79,7 @@ public class Main {
             case 2:
                 switchmainMenuPoupanca(c, op);
                 break;
-            case 3:
+            case 10:
                 if (op == 0)
                     c.setLogStatus(false);
                 else {
@@ -99,6 +99,7 @@ public class Main {
     public static void switchmainMenuCorrente(Cliente c, int op){
         Double valor;
         scanner = new Scanner(System.in);
+        Scanner scanner2 = new Scanner(System.in);
         switch (op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
@@ -111,19 +112,23 @@ public class Main {
                 break;
             case 3:
                 MenuGenerico.infos("DEPOSITAR");
-                Menus.menuTipos();
-                op = scanner.nextInt();
-                c.getCorrente().depositarContaCorrente();
+                System.out.println("Digite o valor a ser depositado");
+                valor = scanner.nextDouble();
+                c.getCorrente().depositar(valor);
                 break;
             case 4:
                 MenuGenerico.infos("SACAR");
-                c.getCorrente().sacarContaCorrente();
+                System.out.println("Digite o valor a ser sacado");
+                valor = scanner.nextDouble();
+                c.getCorrente().sacar(valor);
                 break;
             case 5:
-                MenuGenerico.infos("TRANSFERIR");
-                Menus.menuTipos();
-                valor = scanner.nextDouble();
-                c.getCorrente().transferirContaCorrente(c.getCorrente());
+                MenuGenerico.infos("TRANSFERIR");// MANUTENÇÃO
+//                System.out.println("Digite a conta que recebera o deposito");
+//                String conta = scanner2.nextLine();
+//                System.out.println("Digite o valor a ser transferido");
+//                valor = scanner.nextDouble();
+//                c.getCorrente().transferir(valor, conta);
                 break;
             case 6:
                 int senha;
