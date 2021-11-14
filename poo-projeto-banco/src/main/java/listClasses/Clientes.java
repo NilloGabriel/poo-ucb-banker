@@ -38,8 +38,8 @@ public class Clientes {
     }
 
     public static Cliente search(Login usuario){
-        for(Cliente c : clientes) {
-            if(c.getPassword().equals(usuario.getPassword()) && c.getUsuario().equals(usuario.getPassword())) {
+        for(Cliente c : clientes) {;
+            if(c.getPassword().equals(usuario.getPassword()) && c.getUsuario().equals(usuario.getUsuario())) {
                 System.out.println(usuario.getUsuario());
                 System.out.println(usuario.getPassword());
                 return c;
