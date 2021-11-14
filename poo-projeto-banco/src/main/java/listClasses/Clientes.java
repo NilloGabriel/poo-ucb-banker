@@ -1,6 +1,7 @@
 package listClasses;
 
 import model.Cliente;
+import model.Conta;
 import model.Corrente;
 import model.Login;
 
