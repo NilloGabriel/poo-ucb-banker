@@ -14,7 +14,6 @@ public class Main {
 
     public static void main(String[] args) {
         Login login = new Login();
-        Adm adm = new Adm();
         Scanner scannerInt = new Scanner(System.in);
         Cliente cliente;
         Menus.welcome();
@@ -44,8 +43,6 @@ public class Main {
                     break;
                 case 2:
                     cadastroCliente();
-                    break;
-                case 3:
                     break;
                 default:
                     System.out.println("Opção invalida");
@@ -84,10 +81,10 @@ public class Main {
                     c.setLogStatus(false);
                 else {
                     Menus.menuTipos();
-                    int op = scanner3.nextInt();
-                    if (op == 1)
+                    int op2 = scanner3.nextInt();
+                    if (op2 == 1)
                         switchmainMenuCorrente(c, op);
-                    else if (op == 2)
+                    else if (op2 == 2)
                         switchmainMenuPoupanca(c, op);
                 }
                 break;
@@ -99,7 +96,6 @@ public class Main {
     public static void switchmainMenuCorrente(Cliente c, int op){
         Double valor;
         scanner = new Scanner(System.in);
-        Scanner scanner2 = new Scanner(System.in);
         switch (op) {//ARRUMAR ESSA PARTE
             case 1:
                 MenuGenerico.infos("INFORMAÇÕES DA CONTA");
@@ -123,12 +119,13 @@ public class Main {
                 c.getCorrente().sacar(valor);
                 break;
             case 5:
-                MenuGenerico.infos("TRANSFERIR");// MANUTENÇÃO
-//                System.out.println("Digite a conta que recebera o deposito");
-//                String conta = scanner2.nextLine();
-//                System.out.println("Digite o valor a ser transferido");
-//                valor = scanner.nextDouble();
-//                c.getCorrente().transferir(valor, conta);
+                Scanner scannerString = new Scanner(System.in);
+                MenuGenerico.infos("TRANSFERIR");
+                System.out.println("Qual valor deseja transferir");
+                valor = scanner.nextDouble();
+                System.out.println("Digite a conta que o dinheiro sera transferido");
+                String conta = scannerString.nextLine();
+                c.getCorrente().transferir(valor, conta);
                 break;
             case 6:
                 int senha;
@@ -178,10 +175,13 @@ public class Main {
                 c.getPoupanca().sacar(valor);
                 break;
             case 5:
-                scanner = new Scanner(System.in);
+                Scanner scannerString = new Scanner(System.in);
                 MenuGenerico.infos("TRANSFERIR");
                 System.out.println("Qual valor deseja transferir");
-                c.getPoupanca().transferirContaPoupanca(c.getPoupanca());
+                valor = scanner.nextDouble();
+                System.out.println("Digite a conta que o dinheiro sera transferido");
+                String conta = scannerString.nextLine();
+                c.getPoupanca().transferir(valor, conta);
                 break;
             case 6:
                 int senha;
@@ -288,7 +288,7 @@ public class Main {
                 Poupanca poupanca = new Poupanca(ganhoMensal, 5);
                 c.setPoupanca(poupanca);
                 break;
-            case 3:
+            case 10:
                 System.out.println("Digite o seu ganho mensal:");
                 ganhoMensal = scannerDouble.nextDouble();
                 Corrente corrente2 = new Corrente(ganhoMensal, 5);
@@ -312,7 +312,6 @@ public class Main {
                 cartao = new Cartao(c.getCorrente().getGanhoMensal(), c.getNome().toUpperCase(), senha);
                 c.getCorrente().setCartao(cartao);
                 MenuGenerico.infos("Cartão cadastrado");
-                System.out.println(c.getCorrente());
                 break;
             case 2:
                 MenuGenerico.infos("CADASTRANDO CARTÃO");
@@ -322,7 +321,7 @@ public class Main {
                 c.getPoupanca().setCartao(cartao);
                 MenuGenerico.infos("Cartão cadastrado");
                 break;
-            case 3:
+            case 10:
                 MenuGenerico.infos("CADASTRANDO CARTÃO");
                 System.out.println("Digite sua senha");
                 senha = scannerInt.nextInt();
@@ -340,6 +339,6 @@ public class Main {
             return 2;
         if(c.getPoupanca() == null)
             return 1;
-        return  3;
+        return  10;
     }
 }

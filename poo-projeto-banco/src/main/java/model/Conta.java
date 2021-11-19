@@ -15,7 +15,7 @@ public abstract class Conta extends Agencia{
     private boolean status;
 
     public Conta(double ganhoMensal, int numeroAgencia) {
-        super(numeroAgencia);
+        super();
         gerarNumerodaConta();
         this.situacao = true;
         setDataCriacao();
@@ -115,7 +115,7 @@ public abstract class Conta extends Agencia{
         System.out.println("\t\nDeposito de R$" + valor + " efetuado com sucesso!" + "\t\nSaldo atual: R$" + getSaldo() + '\n');
     }
 
-    public void transferir(Double valor, Conta destino) {
+    public void transferir(Double valor, String destino) {
         if(valor <= 0) {
             System.out.println("\t\nNão pode ser efetuadas transferências com valor igual ou inferior a 0.\n");
             return;
@@ -123,7 +123,6 @@ public abstract class Conta extends Agencia{
 
         if(valor <= getSaldo()) {
             this.sacar(valor);
-            destino.depositar(valor);
             System.out.println("\t\nTransferência realizada com sucesso!" + "\t\nSaldo atual: R$:" + getSaldo() + '\n');
         } else {
             System.out.println("\t\nSaldo insuficiente.");
@@ -175,8 +174,6 @@ public abstract class Conta extends Agencia{
             System.out.println("Não foi possivel realizar a compra");
         }
     }
-
-    //public boolean fecharConta() {return true;}
 
     @Override
     public String toString() {

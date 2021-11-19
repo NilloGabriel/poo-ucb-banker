@@ -12,10 +12,6 @@ import java.util.stream.Collectors;
 public class Enderecos{
     private static final List<Endereco>enderecos = new ArrayList<>();
 
-    public List<Endereco> getEndereco() {
-        return enderecos;
-    }
-
     public boolean add(Endereco a) {
         for(Endereco e : enderecos){
             if(e.getCep().equals(a.getCep())){

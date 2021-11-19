@@ -10,10 +10,6 @@ import java.util.stream.Collectors;
 public class Contatos{
     private static final List<Contato>contatos = new ArrayList<>();
 
-    public List<Contato> getContatos() {
-        return contatos;
-    }
-
     public boolean add(Contato a) {
         for(Contato c : contatos){
             if(c.getNumero().equals(a.getNumero())){

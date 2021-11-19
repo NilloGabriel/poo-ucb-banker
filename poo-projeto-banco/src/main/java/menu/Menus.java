@@ -29,8 +29,6 @@ public class Menus {
         System.out.printf("\t|------------|-----------------------------|\n");
         System.out.printf("\t|     2      |           CADASTRAR         |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
-        System.out.printf("\t|     3      |              ADM            |\n");
-        System.out.printf("\t|____________|_____________________________|\n");
 
     }
 

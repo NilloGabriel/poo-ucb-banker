@@ -5,6 +5,7 @@ import model.Conta;
 import model.Corrente;
 import model.Login;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,10 +13,6 @@ import java.util.stream.Collectors;
 
 public class Clientes {
     private static final List<Cliente>clientes = new ArrayList<>();
-
-    public static List<Cliente> getClientes() {
-        return clientes;
-    }
 
     public static Cliente search(String cpf){
         for(Cliente c : clientes) {
@@ -44,6 +41,19 @@ public class Clientes {
                 System.out.println(usuario.getUsuario());
                 System.out.println(usuario.getPassword());
                 return c;
+            }
+        }
+        return null;
+    }
+
+    public static Conta searchConta(String numero){
+        for(Cliente c : clientes) {
+            if(c.getPoupanca() != null && c.getPoupanca().getNumeroConta().equals(numero)) {
+                System.out.println("Conta encontrada");
+                return c.getPoupanca();
+            }else if(c.getCorrente() != null && c.getCorrente().getNumeroConta().equals(numero)) {
+                System.out.println("Conta encontrada");
+                return c.getCorrente();
             }
         }
         return null;

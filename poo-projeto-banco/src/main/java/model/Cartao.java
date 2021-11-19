@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Random;
 
 public class Cartao {
@@ -20,7 +21,7 @@ public class Cartao {
         this.credito = credito;
         this.limiteTotal = limiteTotal;
         setNumero();
-        this.titular = titular;
+        this.titular = titular.toUpperCase();
         setValidade();
         setCvc();
         this.senha = senha;
