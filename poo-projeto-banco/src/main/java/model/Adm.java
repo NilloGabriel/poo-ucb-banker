@@ -2,7 +2,7 @@ package model;
 
 public class Adm extends Login {
     public Adm() {
-        setUsuario("adm");
-        setPassword("12345@");
+//        setUsuario("adm");
+//        setPassword("12345@");
     }
 }

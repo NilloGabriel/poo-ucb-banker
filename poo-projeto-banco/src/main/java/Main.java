@@ -23,24 +23,26 @@ public class Main {
             op = scannerInt.nextInt();
             switch (op){
                 case 1:
+//                    cliente = Clientes.search(login.loginUsuario());
+//                    System.out.println("DADOS DA CONTA\n");
+//                    System.out.println(cliente);
+//                    if(cliente != null){
+//                        try {
+//                            cliente.setLogStatus(true);
+//                            int tipoConta = verificarConta(cliente);//Tipo conta: 1- corrente, 2- poupanca, 3-as duas
+//                            do {
+//                                mainMenu(cliente, tipoConta);
+//                            } while (cliente.isLogStatus() != false);
+//                            Clientes.update(cliente, tipoConta);
+//                            System.out.println("saiu");
+//                        } catch (InputMismatchException e) {
+//                            System.out.println("\n Operação Inválida !!! \n");
+//                        }
+//                    }else{
+//                        System.out.println("\t\nUsuário não existe... Cadastre-se primeiro!\n");
+//                    }
                     cliente = Clientes.search(login.loginUsuario());
-                    System.out.println("DADOS DA CONTA\n");
                     System.out.println(cliente);
-                    if(cliente != null){
-                        try {
-                            cliente.setLogStatus(true);
-                            int tipoConta = verificarConta(cliente);//Tipo conta: 1- corrente, 2- poupanca, 3-as duas
-                            do {
-                                mainMenu(cliente, tipoConta);
-                            } while (cliente.isLogStatus() != false);
-                            Clientes.update(cliente, tipoConta);
-                            System.out.println("saiu");
-                        } catch (InputMismatchException e) {
-                            System.out.println("\n Operação Inválida !!! \n");
-                        }
-                    }else{
-                        System.out.println("\t\nUsuário não existe... Cadastre-se primeiro!\n");
-                    }
                     break;
                 case 2:
                     cadastroCliente();
@@ -80,9 +82,9 @@ public class Main {
                 switchmainMenuPoupanca(c, op);
                 break;
             case 10:
-                if (op == 0)
-                    c.setLogStatus(false);
-                else {
+                if (op != 0) {
+
+                //else {
                     Menus.menuTipos();
                     int op = scanner3.nextInt();
                     if (op == 1)
@@ -145,7 +147,7 @@ public class Main {
                 break;
             case 0:
                 System.out.println("\tUsuário deslogou !!!\n");
-                c.setLogStatus(false);
+                //c.setLogStatus(false);
                 break;
             default:
                 System.out.println("\tOpcao Invalida!!!");
@@ -198,7 +200,7 @@ public class Main {
                 break;
             case 0:
                 System.out.println("\tUsuário deslogou !!!\n");
-                c.setLogStatus(false);
+                //c.setLogStatus(false);
                 break;
             default:
                 System.out.println("\tOpcao Invalida!!!");

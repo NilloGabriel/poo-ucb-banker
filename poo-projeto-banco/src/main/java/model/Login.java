@@ -1,67 +1,26 @@
 package model;
 
-import java.util.Scanner;
+import view.LoginGUI;
+import java.util.HashMap;
 
 public class Login {
-    private static String usuario;
-    private String password;
-    private boolean logStatus;
+    HashMap<String,String> loginInfo = new HashMap<String,String>();
 
     public Login(String usuario, String password) {
-        this.logStatus = true;
-        setUsuario(usuario);
-        setPassword(password);
+        loginInfo.put(usuario, password);
     }
 
     public Login() {
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isLogStatus() {
-        return logStatus;
-    }
-
-    public void setLogStatus(boolean logStatus) {
-        this.logStatus = logStatus;
+    public HashMap getLoginInfo() {
+        return loginInfo;
     }
 
     public Login loginUsuario() {
-        Scanner scanner = new Scanner(System.in);
-        Login login = new Login();
-        String scannerUsuario;
-        String scannerSenha;
-        System.out.println("\tFAÇA O SEU LOGIN:");
-        System.out.printf("\t ___________________________________________\n");
-        System.out.printf("\t|                  USUARIO                  |\n");
-        System.out.printf("\t ___________________________________________\n");
-        scannerUsuario = scanner.nextLine();
-        login.setUsuario(scannerUsuario);
-        System.out.printf("\t ___________________________________________\n");
-        System.out.printf("\t|                   SENHA                   |\n");
-        System.out.printf("\t ___________________________________________\n");
-        scannerSenha = scanner.nextLine();
-        login.setPassword(scannerSenha);
-        System.out.println(login);
-        return login;
-    }
+        Login returno = new Login();
+        LoginGUI loginPage = new LoginGUI(getLoginInfo());
 
-    @Override
-    public String toString() {
-        return "Usuario: " + this.getUsuario() + "password: " + this.getPassword();
+        return returno;
     }
 }

@@ -39,10 +39,12 @@ public class Clientes {
     }
 
     public static Cliente search(Login usuario){
-        for(Cliente c : clientes) {;
-            if(c.getPassword().equals(usuario.getPassword()) && c.getUsuario().equals(usuario.getUsuario())) {
-                System.out.println(usuario.getUsuario());
-                System.out.println(usuario.getPassword());
+        for(Cliente c : clientes) {
+            if(c.getLoginInfo().isEmpty()) {
+                System.out.println("Não há usuários!");
+                return null;
+            } else {
+                System.out.println(usuario.getLoginInfo());
                 return c;
             }
         }
