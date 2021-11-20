@@ -14,7 +14,7 @@ public class Menus {
         System.out.printf("\t| |                                       | |\n");
         System.out.printf("\t| |            GABRIEL D'NILLO            | |\n");
         System.out.printf("\t| |            MATEUS  COLARES            | |\n");
-        System.out.printf("\t| |                                       | |\n");
+        System.out.printf("\t| |              JOAO MARCELO             | |\n");
         System.out.printf("\t| |                                       | |\n");
         System.out.printf("\t| |_______________________________________| |\n");
         System.out.printf("\t|___________________________________________|\n");
@@ -29,6 +29,9 @@ public class Menus {
         System.out.printf("\t|------------|-----------------------------|\n");
         System.out.printf("\t|     2      |           CADASTRAR         |\n");
         System.out.printf("\t|------------|-----------------------------|\n");
+        System.out.printf("\t|     0      |             SAIR            |\n");
+        System.out.printf("\t|------------|-----------------------------|\n");
+
 
     }
 

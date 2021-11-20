@@ -21,6 +21,10 @@ public class Main {
             Menus.menuLogin();
             op = scannerInt.nextInt();
             switch (op){
+                case 0:
+                    System.out.println("Finalizando Sistema!\n");
+                    System.exit(0);
+                    break;
                 case 1:
                     cliente = Clientes.search(login.loginUsuario());
                     System.out.println("DADOS DA CONTA\n");
