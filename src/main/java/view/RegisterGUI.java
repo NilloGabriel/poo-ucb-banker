@@ -413,7 +413,7 @@ public class RegisterGUI extends javax.swing.JFrame {
             cliente.setRg(rgField.getText());
             endereco = new Endereco();
             endereco.setCep(cepField.getText());
-            endereco.setEstado(estadosComboBox.getActionCommand());
+            endereco.setEstado(estadosComboBox.getActionCommand());//ainda não descobri como pegar dados de comboBox
             endereco.setCidade(cityField.getText());
             endereco.setEndereco(adressField.getText());
             contato = new Contato();
