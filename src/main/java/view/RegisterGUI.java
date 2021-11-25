@@ -1,5 +1,11 @@
 package view;
 
+import dao.GenericDAO;
+import javax.swing.JOptionPane;
+import model.Cliente;
+import model.Contato;
+import model.Endereco;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,9 +18,10 @@ package view;
  */
 public class RegisterGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegisterGUI
-     */
+    Cliente cliente;
+    Endereco endereco;
+    Contato contato;
+    
     public RegisterGUI() {
         initComponents();
     }
@@ -33,13 +40,13 @@ public class RegisterGUI extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         exitLabel = new javax.swing.JLabel();
         registerPanel = new javax.swing.JPanel();
-        userField = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
         separatorPass = new javax.swing.JSeparator();
         separatorUser = new javax.swing.JSeparator();
         openAccountBankButton = new javax.swing.JButton();
         passwordLabel = new javax.swing.JLabel();
-        userLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
         separatorName = new javax.swing.JSeparator();
@@ -49,9 +56,6 @@ public class RegisterGUI extends javax.swing.JFrame {
         rgLabel = new javax.swing.JLabel();
         rgField = new javax.swing.JTextField();
         separatorRg = new javax.swing.JSeparator();
-        emailField = new javax.swing.JTextField();
-        emailLabel = new javax.swing.JLabel();
-        separatorEmail = new javax.swing.JSeparator();
         ufLabel = new javax.swing.JLabel();
         cepField = new javax.swing.JTextField();
         separatorCep = new javax.swing.JSeparator();
@@ -94,22 +98,22 @@ public class RegisterGUI extends javax.swing.JFrame {
         registerPanel.setBackground(new java.awt.Color(186, 79, 74));
         registerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userField.setBackground(new java.awt.Color(186, 79, 74));
-        userField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        userField.setForeground(new java.awt.Color(187, 187, 187));
-        userField.setText("Usuario");
-        userField.setBorder(null);
-        userField.addFocusListener(new java.awt.event.FocusAdapter() {
+        emailField.setBackground(new java.awt.Color(186, 79, 74));
+        emailField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        emailField.setForeground(new java.awt.Color(187, 187, 187));
+        emailField.setText("Usuario");
+        emailField.setBorder(null);
+        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                userFieldFocusGained(evt);
+                emailFieldFocusGained(evt);
             }
         });
-        userField.addActionListener(new java.awt.event.ActionListener() {
+        emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userFieldActionPerformed(evt);
+                emailFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(userField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 200, 30));
+        registerPanel.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 200, 30));
 
         passwordField.setBackground(new java.awt.Color(186, 79, 74));
         passwordField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -147,15 +151,15 @@ public class RegisterGUI extends javax.swing.JFrame {
                 openAccountBankButtonMouseClicked(evt);
             }
         });
-        registerPanel.add(openAccountBankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 630, 90, 30));
+        registerPanel.add(openAccountBankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, 90, 30));
 
         passwordLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        passwordLabel.setText("Senha:");
-        registerPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        passwordLabel.setText("Senha da conta:");
+        registerPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, 50));
 
-        userLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        userLabel.setText("Usuario:");
-        registerPanel.add(userLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        emailLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        emailLabel.setText("Email:");
+        registerPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         nameLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         nameLabel.setText("Nome:");
@@ -225,34 +229,9 @@ public class RegisterGUI extends javax.swing.JFrame {
         separatorRg.setForeground(new java.awt.Color(204, 204, 204));
         registerPanel.add(separatorRg, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 200, 10));
 
-        emailField.setBackground(new java.awt.Color(186, 79, 74));
-        emailField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        emailField.setForeground(new java.awt.Color(187, 187, 187));
-        emailField.setText("Email");
-        emailField.setBorder(null);
-        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                emailFieldFocusGained(evt);
-            }
-        });
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
-            }
-        });
-        registerPanel.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 200, 30));
-
-        emailLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        emailLabel.setText("Email:");
-        registerPanel.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
-
-        separatorEmail.setBackground(new java.awt.Color(204, 204, 204));
-        separatorEmail.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 200, 10));
-
         ufLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         ufLabel.setText("UF:");
-        registerPanel.add(ufLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
+        registerPanel.add(ufLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
 
         cepField.setBackground(new java.awt.Color(186, 79, 74));
         cepField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -269,24 +248,29 @@ public class RegisterGUI extends javax.swing.JFrame {
                 cepFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(cepField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 200, 30));
+        registerPanel.add(cepField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 200, 30));
 
         separatorCep.setBackground(new java.awt.Color(204, 204, 204));
         separatorCep.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 200, 10));
+        registerPanel.add(separatorCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 200, 10));
 
         estadosComboBox.setBackground(new java.awt.Color(186, 79, 74));
         estadosComboBox.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         estadosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" }));
-        registerPanel.add(estadosComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 200, 30));
+        estadosComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadosComboBoxActionPerformed(evt);
+            }
+        });
+        registerPanel.add(estadosComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 200, 30));
 
         cepLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         cepLabel.setText("CEP:");
-        registerPanel.add(cepLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
+        registerPanel.add(cepLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
 
         cityLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         cityLabel.setText("Cidade:");
-        registerPanel.add(cityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, -1, -1));
+        registerPanel.add(cityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
 
         cityField.setBackground(new java.awt.Color(186, 79, 74));
         cityField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -303,15 +287,15 @@ public class RegisterGUI extends javax.swing.JFrame {
                 cityFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(cityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 200, 30));
+        registerPanel.add(cityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 200, 30));
 
         separatorCity.setBackground(new java.awt.Color(204, 204, 204));
         separatorCity.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 200, 10));
+        registerPanel.add(separatorCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 200, 10));
 
         adressLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         adressLabel.setText("Endereco:");
-        registerPanel.add(adressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, -1, -1));
+        registerPanel.add(adressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, -1, -1));
 
         adressField.setBackground(new java.awt.Color(186, 79, 74));
         adressField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -328,15 +312,15 @@ public class RegisterGUI extends javax.swing.JFrame {
                 adressFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(adressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 200, 30));
+        registerPanel.add(adressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 200, 30));
 
         separatorAdress.setBackground(new java.awt.Color(204, 204, 204));
         separatorAdress.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorAdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 200, 10));
+        registerPanel.add(separatorAdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 200, 10));
 
         telLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         telLabel.setText("Telefone:");
-        registerPanel.add(telLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 540, -1, -1));
+        registerPanel.add(telLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, -1, -1));
 
         telField.setBackground(new java.awt.Color(186, 79, 74));
         telField.setBorder(null);
@@ -346,20 +330,25 @@ public class RegisterGUI extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        registerPanel.add(telField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 200, 30));
+        registerPanel.add(telField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 200, 30));
 
         separatorTel.setBackground(new java.awt.Color(204, 204, 204));
         separatorTel.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, 200, 10));
+        registerPanel.add(separatorTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 200, 10));
 
         operadoraLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         operadoraLabel.setText("Operadora:");
-        registerPanel.add(operadoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 590, -1, -1));
+        registerPanel.add(operadoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
 
         operadoraComboBox.setBackground(new java.awt.Color(186, 79, 74));
         operadoraComboBox.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         operadoraComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vivo", "Claro", "Oi", "Tim", "Nextel" }));
-        registerPanel.add(operadoraComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 200, 30));
+        operadoraComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operadoraComboBoxActionPerformed(evt);
+            }
+        });
+        registerPanel.add(operadoraComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 200, 30));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -398,13 +387,13 @@ public class RegisterGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitLabelMouseClicked
 
-    private void userFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFieldFocusGained
-        userField.setText("");
-    }//GEN-LAST:event_userFieldFocusGained
+    private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
+        emailField.setText("");
+    }//GEN-LAST:event_emailFieldFocusGained
 
-    private void userFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userFieldActionPerformed
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userFieldActionPerformed
+    }//GEN-LAST:event_emailFieldActionPerformed
 
     private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
         passwordField.setText("");
@@ -415,12 +404,30 @@ public class RegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void openAccountBankButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openAccountBankButtonMouseClicked
-        OpenAccountBankGUI oab = new OpenAccountBankGUI();
-        oab.setVisible(true);
-        oab.pack();
-        oab.setLocationRelativeTo(null);
-        oab.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        try{
+           cliente = new Cliente();
+            cliente.setEmailLogin(emailField.getText());
+            cliente.setSenhaLogin(passwordField.getText());
+            cliente.setNome(nameField.getText());
+            cliente.setCpf(cpfField.getText());
+            cliente.setRg(rgField.getText());
+            endereco = new Endereco();
+            endereco.setCep(cepField.getText());
+            endereco.setEstado(estadosComboBox.getActionCommand());
+            endereco.setCidade(cityField.getText());
+            endereco.setEndereco(adressField.getText());
+            contato = new Contato();
+            contato.setNumero(telField.getText());
+            contato.setOperadora(operadoraComboBox.getActionCommand());
+            OpenAccountBankGUI oab = new OpenAccountBankGUI(cliente, endereco, contato); 
+            oab.setVisible(true);
+            oab.pack();
+            oab.setLocationRelativeTo(null);
+            oab.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro na inserção dos dados");
+        }
     }//GEN-LAST:event_openAccountBankButtonMouseClicked
 
     private void nameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldFocusGained
@@ -438,14 +445,6 @@ public class RegisterGUI extends javax.swing.JFrame {
     private void rgFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rgFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rgFieldActionPerformed
-
-    private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
-        emailField.setText("");
-    }//GEN-LAST:event_emailFieldFocusGained
-
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
 
     private void cepFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cepFieldFocusGained
         cepField.setText("");
@@ -470,6 +469,14 @@ public class RegisterGUI extends javax.swing.JFrame {
     private void adressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adressFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_adressFieldActionPerformed
+
+    private void estadosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadosComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estadosComboBoxActionPerformed
+
+    private void operadoraComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operadoraComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_operadoraComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -534,7 +541,6 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator separatorCep;
     private javax.swing.JSeparator separatorCity;
     private javax.swing.JSeparator separatorCpf;
-    private javax.swing.JSeparator separatorEmail;
     private javax.swing.JSeparator separatorName;
     private javax.swing.JSeparator separatorPass;
     private javax.swing.JSeparator separatorRg;
@@ -545,7 +551,5 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel ufLabel;
-    private javax.swing.JTextField userField;
-    private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
 }
