@@ -147,6 +147,14 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_registerCardButtonActionPerformed
 
+    public String getTypeField() {
+        return typeComboBox.getSelectedItem().toString();
+    }
+    
+    public float getMonthField() {
+        return Float.parseFloat(gainMonthField.getText());
+    }
+    
     /**
      * @param args the command line arguments
      */
