@@ -6,10 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.hibernate.Session;
 
-/**
- * Classe responsável por gerenciar o banco de dados
- * @param <T>
- */
 public class GenericDAO<T extends EntidadeBase> {
 
     private static EntityManager entityManager; //hibernate
@@ -22,12 +18,7 @@ public class GenericDAO<T extends EntidadeBase> {
     public Session getSession() {
         return entityManager.unwrap(Session.class);
     }
-    /**
-     * Método responsável por Salvar
-     *
-     * @param obj
-     * @return 
-     */
+    
     public boolean saveOrUpdate(T obj) {
         try {
             entityManager = ConnectionFactory.getEntityManager();
@@ -47,24 +38,11 @@ public class GenericDAO<T extends EntidadeBase> {
         }
     }
 
-    /**
-     * Método responsável por retornar um item por ID
-     *
-     * @param clazz
-     * @param id
-     * @return 
-     */
+    
     public T findById(Class<T> clazz, Integer id) {
         return entityManager.find(clazz, id);
     }
 
-    /**
-     * Método responsável por excluir
-     *
-     * @param clazz
-     * @param id
-     * @return 
-     */
     public boolean remove(Class<T> clazz, Integer id) {
         try {
             entityManager = ConnectionFactory.getEntityManager();
@@ -81,12 +59,6 @@ public class GenericDAO<T extends EntidadeBase> {
         }
     }
 
-    /**
-     * Método responsável por listar os item da entidade
-     *
-     * @param entidade
-     * @return 
-     */
     public List<T> list(Class<T> entidade) {
         entityManager = ConnectionFactory.getEntityManager();
         List<T> lista = null;
@@ -107,5 +79,4 @@ public class GenericDAO<T extends EntidadeBase> {
 
         return lista;
     }
-
 }
