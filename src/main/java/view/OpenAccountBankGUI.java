@@ -5,6 +5,11 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import model.Cliente;
+import model.Contato;
+import model.Endereco;
+
 /**
  *
  * @author Xatuba Pox
@@ -13,9 +18,17 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form OpenAccountBankGUI
+     * @param cliente
+     * @param endereco
+     * @param contato
      */
-    public OpenAccountBankGUI() {
+    public OpenAccountBankGUI(Cliente cliente,Endereco endereco,Contato contato) {
         initComponents();
+        typeComboBox.setSelectedIndex(-1);
+    }
+
+    private OpenAccountBankGUI() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -40,7 +53,6 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(450, 300));
 
         titlePanel.setBackground(new java.awt.Color(74, 31, 61));
         titlePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -80,7 +92,7 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         gainMonthField.setBackground(new java.awt.Color(186, 79, 74));
         gainMonthField.setBorder(null);
         gainMonthField.setForeground(new java.awt.Color(187, 187, 187));
-        gainMonthField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        gainMonthField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         openAccountPanel.add(gainMonthField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 200, 30));
 
         separatorGainMonth.setBackground(new java.awt.Color(204, 204, 204));
@@ -96,6 +108,11 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         registerCardButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registerCardButtonMouseClicked(evt);
+            }
+        });
+        registerCardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerCardButtonActionPerformed(evt);
             }
         });
         openAccountPanel.add(registerCardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 110, 30));
@@ -130,6 +147,14 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         rc.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_registerCardButtonMouseClicked
+
+    private void registerCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCardButtonActionPerformed
+        if(typeComboBox.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Tipo de conta inválida!");
+        } else if(gainMonthField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ganho mensal inválido!");
+        }
+    }//GEN-LAST:event_registerCardButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,4 +203,5 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> typeComboBox;
     private javax.swing.JLabel typeLabel;
     // End of variables declaration//GEN-END:variables
+
 }
