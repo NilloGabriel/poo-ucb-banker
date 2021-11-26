@@ -6,6 +6,7 @@ package model;
 
 import dao.EntidadeBase;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -61,10 +62,10 @@ public class Cliente implements Serializable, EntidadeBase {
     @Basic(optional = false)
     @Column(name = "nascimento")
     @Temporal(TemporalType.DATE)
-    private Date nascimento;
+    private LocalDate nascimento;
     @Basic(optional = false)
     @Column(name = "comprovanteResidencia")
-    private short comprovanteResidencia;
+    private boolean comprovanteResidencia;
     @Basic(optional = false)
     @Column(name = "rg")
     private String rg;
@@ -76,7 +77,7 @@ public class Cliente implements Serializable, EntidadeBase {
     private String senhaLogin;
     @Basic(optional = false)
     @Column(name = "logStatus_login")
-    private short logStatuslogin;
+    private boolean logStatuslogin;
     @JoinColumn(name = "corrente_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Corrente correnteId;
@@ -95,7 +96,7 @@ public class Cliente implements Serializable, EntidadeBase {
         this.id = id;
     }
 
-    public Cliente(Integer id, String cpf, String nome, Date nascimento, short comprovanteResidencia, String rg, String emailLogin, String senhaLogin, short logStatuslogin) {
+    public Cliente(Integer id, String cpf, String nome, LocalDate nascimento, boolean comprovanteResidencia, String rg, String emailLogin, String senhaLogin, boolean logStatuslogin) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
@@ -107,6 +108,7 @@ public class Cliente implements Serializable, EntidadeBase {
         this.logStatuslogin = logStatuslogin;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
@@ -131,19 +133,19 @@ public class Cliente implements Serializable, EntidadeBase {
         this.nome = nome;
     }
 
-    public Date getNascimento() {
+    public LocalDate getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
 
-    public short getComprovanteResidencia() {
+    public boolean getComprovanteResidencia() {
         return comprovanteResidencia;
     }
 
-    public void setComprovanteResidencia(short comprovanteResidencia) {
+    public void setComprovanteResidencia(boolean comprovanteResidencia) {
         this.comprovanteResidencia = comprovanteResidencia;
     }
 
@@ -171,11 +173,11 @@ public class Cliente implements Serializable, EntidadeBase {
         this.senhaLogin = senhaLogin;
     }
 
-    public short getLogStatuslogin() {
+    public boolean getLogStatuslogin() {
         return logStatuslogin;
     }
 
-    public void setLogStatuslogin(short logStatuslogin) {
+    public void setLogStatuslogin(boolean logStatuslogin) {
         this.logStatuslogin = logStatuslogin;
     }
 

@@ -78,6 +78,7 @@ public class Endereco implements Serializable, EntidadeBase {
         this.estado = estado;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
