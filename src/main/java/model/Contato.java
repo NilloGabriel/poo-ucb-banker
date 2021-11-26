@@ -62,6 +62,7 @@ public class Contato implements Serializable, EntidadeBase {
         this.operadora = operadora;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
