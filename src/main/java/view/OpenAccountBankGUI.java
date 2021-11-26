@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Contato;
 import model.Endereco;
@@ -23,6 +24,7 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
      */
     public OpenAccountBankGUI(Cliente cliente,Endereco endereco,Contato contato) {
         initComponents();
+        typeComboBox.setSelectedIndex(-1);
     }
 
     private OpenAccountBankGUI() {
@@ -90,7 +92,7 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         gainMonthField.setBackground(new java.awt.Color(186, 79, 74));
         gainMonthField.setBorder(null);
         gainMonthField.setForeground(new java.awt.Color(187, 187, 187));
-        gainMonthField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        gainMonthField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         openAccountPanel.add(gainMonthField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 200, 30));
 
         separatorGainMonth.setBackground(new java.awt.Color(204, 204, 204));
@@ -147,7 +149,11 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_registerCardButtonMouseClicked
 
     private void registerCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCardButtonActionPerformed
-        // TODO add your handling code here:
+        if(typeComboBox.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Tipo de conta inválida!");
+        } else if(gainMonthField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ganho mensal inválido!");
+        }
     }//GEN-LAST:event_registerCardButtonActionPerformed
 
     /**
