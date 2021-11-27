@@ -6,7 +6,6 @@ package model;
 
 import dao.EntidadeBase;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -57,34 +56,30 @@ public class Cartao implements Serializable, EntidadeBase {
     @Basic(optional = false)
     @Column(name = "numero")
     private String numero;
-    @Basic(optional = false)
     @Column(name = "debito")
-    private boolean debito;
-    @Basic(optional = false)
+    private Boolean debito;
     @Column(name = "credito")
-    private boolean credito;
-    @Basic(optional = false)
+    private Boolean credito;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "limiteTotal")
-    private float limiteTotal;
-    @Basic(optional = false)
+    private Float limiteTotal;
     @Column(name = "limiteUsado")
-    private float limiteUsado;
+    private Float limiteUsado;
     @Basic(optional = false)
     @Column(name = "titular")
     private String titular;
     @Basic(optional = false)
     @Column(name = "validade")
     @Temporal(TemporalType.DATE)
-    private LocalDate validade;
+    private Date validade;
     @Basic(optional = false)
     @Column(name = "cvc")
     private short cvc;
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
-    @Basic(optional = false)
     @Column(name = "situacao")
-    private boolean situacao;
+    private Boolean situacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartaoId")
     private List<Corrente> correnteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartaoId")
@@ -97,18 +92,13 @@ public class Cartao implements Serializable, EntidadeBase {
         this.id = id;
     }
 
-    public Cartao(Integer id, String numero, boolean debito, boolean credito, float limiteTotal, float limiteUsado, String titular, LocalDate validade, short cvc, String senha, boolean situacao) {
+    public Cartao(Integer id, String numero, String titular, Date validade, short cvc, String senha) {
         this.id = id;
         this.numero = numero;
-        this.debito = debito;
-        this.credito = credito;
-        this.limiteTotal = limiteTotal;
-        this.limiteUsado = limiteUsado;
         this.titular = titular;
         this.validade = validade;
         this.cvc = cvc;
         this.senha = senha;
-        this.situacao = situacao;
     }
 
     @Override
@@ -128,35 +118,35 @@ public class Cartao implements Serializable, EntidadeBase {
         this.numero = numero;
     }
 
-    public boolean getDebito() {
+    public Boolean getDebito() {
         return debito;
     }
 
-    public void setDebito(boolean debito) {
+    public void setDebito(Boolean debito) {
         this.debito = debito;
     }
 
-    public boolean getCredito() {
+    public Boolean getCredito() {
         return credito;
     }
 
-    public void setCredito(boolean credito) {
+    public void setCredito(Boolean credito) {
         this.credito = credito;
     }
 
-    public float getLimiteTotal() {
+    public Float getLimiteTotal() {
         return limiteTotal;
     }
 
-    public void setLimiteTotal(float limiteTotal) {
+    public void setLimiteTotal(Float limiteTotal) {
         this.limiteTotal = limiteTotal;
     }
 
-    public float getLimiteUsado() {
+    public Float getLimiteUsado() {
         return limiteUsado;
     }
 
-    public void setLimiteUsado(long limiteUsado) {
+    public void setLimiteUsado(Float limiteUsado) {
         this.limiteUsado = limiteUsado;
     }
 
@@ -168,11 +158,11 @@ public class Cartao implements Serializable, EntidadeBase {
         this.titular = titular;
     }
 
-    public LocalDate getValidade() {
+    public Date getValidade() {
         return validade;
     }
 
-    public void setValidade(LocalDate validade) {
+    public void setValidade(Date validade) {
         this.validade = validade;
     }
 
@@ -192,11 +182,11 @@ public class Cartao implements Serializable, EntidadeBase {
         this.senha = senha;
     }
 
-    public boolean getSituacao() {
+    public Boolean getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(boolean situacao) {
+    public void setSituacao(Boolean situacao) {
         this.situacao = situacao;
     }
 
@@ -243,43 +233,6 @@ public class Cartao implements Serializable, EntidadeBase {
         return "model.Cartao[ id=" + id + " ]";
     }
     
-    public boolean verificarCartao(){
-        LocalDate hoje = LocalDate.now();
-        return hoje != this.validade;
-    }
-    
-    public boolean verificarSenha(String senha){
-        return this.senha.equals(senha);
-    }
-    
-    public boolean utilizarCreditoOuDebito(int op, float valor) {//se for op=1 debito se op=2 credito
-        this.situacao = verificarCartao();
-        if(this.situacao == true){
-            switch (op) {
-                case 1:
-                    return true; //valor sera cobrado e checado na conta
-                case 2:
-                    if (valor + this.limiteUsado <= this.limiteTotal) {
-                        this.limiteUsado += valor;
-                        return true;
-                    }
-                    System.out.println("Limite esgotado");
-                    return false;
-            }
-        }
-        return false;
-    }
-    public void renovarCartao() {
-        this.situacao = verificarCartao();
-        if(this.situacao == false)
-            calcularValidade();
-    }
-
-    private LocalDate calcularValidade(){
-        LocalDate hoje = LocalDate.now();
-        return hoje.plusYears(4);
-    }
-
     private String gerarNumeroCartao(){
         String number = "";
         int num;
@@ -304,4 +257,5 @@ public class Cartao implements Serializable, EntidadeBase {
         }while(cvc < 100);
         return cvc;
     }
+    
 }

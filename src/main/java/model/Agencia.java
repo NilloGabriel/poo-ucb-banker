@@ -64,6 +64,14 @@ public class Agencia implements Serializable, EntidadeBase {
         this.id = id;
     }
 
+    public Agencia(String numero, int numeroBanco, Endereco enderecoId) {
+        this.numero = numero;
+        this.numeroBanco = numeroBanco;
+        this.enderecoId = enderecoId;
+    }
+    
+    
+
     public Agencia(Integer id, String numero, int numeroBanco) {
         this.id = id;
         this.numero = numero;
