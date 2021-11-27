@@ -5,20 +5,50 @@
  */
 package view;
 
+import dao.GenericDAO;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.Cartao;
+import model.Cliente;
+import model.Contato;
+import model.Corrente;
+import model.Endereco;
+import model.Poupanca;
 
 /**
  *
  * @author Xatuba Pox
  */
 public class RegisterCardGUI extends javax.swing.JFrame {
+    
+    Cliente cliente;
+    Endereco endereco;
+    Contato contato;
+    Corrente corrente;
+    Poupanca poupanca;
+    Cartao cartao;
+    RegisterGUI fields;
+    OpenAccountBankGUI opFields;
+    
+    private final GenericDAO<Cliente> clienteDAO;
+    private final GenericDAO<Endereco> enderecoDAO;
+    private final GenericDAO<Contato> contatoDAO;
+    private final GenericDAO<Corrente> correnteDAO;
+    private final GenericDAO<Poupanca> poupancaDAO;
+    private final GenericDAO<Cartao> cartaoDAO;
 
     /**
      * Creates new form RegisterCardGUI
      */
     public RegisterCardGUI() {
         initComponents();
-    }
+        clienteDAO = new GenericDAO<>();
+        enderecoDAO = new GenericDAO<>();
+        contatoDAO = new GenericDAO<>();
+        correnteDAO = new GenericDAO<>();
+        poupancaDAO = new GenericDAO<>();
+        cartaoDAO = new GenericDAO<>();    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,6 +160,40 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         if(passField.getPassword().length == 0) {
             JOptionPane.showMessageDialog(null, "Senha inválida!");
         }
+        
+        fields = new RegisterGUI();
+        opFields = new OpenAccountBankGUI();
+        
+        cliente = new Cliente();
+        cliente.setEmailLogin(fields.getEmailField());
+        cliente.setSenhaLogin(fields.getPasswordField());
+        cliente.setNome(fields.getNameField());
+        cliente.setCpf(fields.getCpfField());
+        cliente.setRg(fields.getRgField());
+        
+        endereco = new Endereco();
+        endereco.setCep(fields.getCepField());
+        endereco.setEstado(fields.getEstadoField());
+        endereco.setCidade(fields.getCidadeField());
+        endereco.setEndereco(fields.getEnderecoField());
+        cliente.setEnderecoList((List<Endereco>) endereco);
+        
+        contato = new Contato();
+        contato.setNumero(fields.getTelField());
+        contato.setOperadora(fields.getOperadoraField());
+        cliente.setContatoList((List<Contato>) contato);
+        
+        corrente = new Corrente();
+        corrente.setGanhoMensal(opFields.getMonthField());
+        
+        poupanca = new Poupanca();
+        poupanca.setGanhoMensal(opFields.getMonthField());
+        
+        cartao.setSenha(Arrays.toString(passField.getPassword()));
+        
+        contatoDAO.saveOrUpdate(contato);
+        enderecoDAO.saveOrUpdate(endereco);
+        clienteDAO.saveOrUpdate(cliente);
     }//GEN-LAST:event_registerCardButtonActionPerformed
 
     /**
