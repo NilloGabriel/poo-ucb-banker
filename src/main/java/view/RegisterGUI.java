@@ -1,8 +1,8 @@
 package view;
 
-import java.util.Arrays;
-import java.util.List;
+import dao.GenericDAO;
 import javax.swing.JOptionPane;
+import model.Cliente;
 import model.Contato;
 import model.Endereco;
 
@@ -17,11 +17,16 @@ import model.Endereco;
  * @author Xatuba Pox
  */
 public class RegisterGUI extends javax.swing.JFrame {
-    
+
+    Cliente cliente;
+    Endereco endereco;
+    Contato contato;
+    private final GenericDAO<Endereco> enderecoDao;
     public RegisterGUI() {
         initComponents();
         estadosComboBox.setSelectedIndex(-1);
         operadoraComboBox.setSelectedIndex(-1);
+        enderecoDao = new GenericDAO<>();
     }
 
     /**
@@ -357,12 +362,37 @@ public class RegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void openAccountBankButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openAccountBankButtonMouseClicked
-        OpenAccountBankGUI oab = new OpenAccountBankGUI(); 
-        oab.setVisible(true);
-        oab.pack();
-        oab.setLocationRelativeTo(null);
-        oab.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        try{
+            cliente = new Cliente();
+            cliente.setEmailLogin(emailField.getText());
+            cliente.setSenhaLogin(passwordField.getText());
+            cliente.setNome(nameField.getText());
+            cliente.setCpf(cpfField.getText().replaceAll("-", "").replaceAll(".", ""));//CPF ESTÁ SALVANDO VAZIO NO BANCO
+            cliente.setLogStatuslogin(false);
+            //NECESSARIO CRIAR UMA CAMPO PARA DATA DE NASCIMENTO, ACABEI SALVANDO COM A DATA DE HOJE NA ULTIMA TELA
+            //APENAS PARA TESTAR A CONEXAO COM O BANCO
+            cliente.setRg(rgField.getText());
+            endereco = new Endereco();
+            endereco.setCep(cepField.getText());
+            endereco.setEstado(estadosComboBox.getSelectedItem().toString());
+            endereco.setCidade(cityField.getText());
+            endereco.setEndereco(adressField.getText());
+            contato = new Contato();
+            contato.setNumero(telField.getText());
+            contato.setOperadora(operadoraComboBox.getSelectedItem().toString());
+            boolean resposta = enderecoDao.saveOrUpdate(endereco);
+            if(resposta){
+                JOptionPane.showMessageDialog(null, "Cadastrado");
+            }
+            OpenAccountBankGUI oab = new OpenAccountBankGUI(cliente, endereco, contato); 
+            oab.setVisible(true);
+            oab.pack();
+            oab.setLocationRelativeTo(null);
+            oab.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro na inserção dos dados");
+        }
     }//GEN-LAST:event_openAccountBankButtonMouseClicked
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -416,53 +446,9 @@ public class RegisterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Telefone inválido!");
         } else if(operadoraComboBox.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Operadora inválida!");
-        } 
+        }
     }//GEN-LAST:event_openAccountBankButtonActionPerformed
 
-    public String getEmailField() {
-        return emailField.getText().trim();
-    }
-    
-    public String getPasswordField() {
-        return Arrays.toString(passwordField.getPassword());
-    }
-    
-    public String getNameField() {
-        return nameField.getText().trim();
-    }
-    
-    public String getCpfField() {
-        return cpfField.getText().trim();
-    }
-    
-    public String getRgField() {
-        return rgField.getText().trim();
-    }
-    
-    public String getCepField() {
-        return cepField.getText().trim();
-    }
-    
-    public String getEstadoField() {
-        return estadosComboBox.getSelectedItem().toString();
-    }
-    
-    public String getCidadeField() {
-        return cityField.getText().trim();
-    }
-    
-    public String getEnderecoField() {
-        return adressField.getText().trim();
-    }
-    
-    public String getTelField() {
-        return telField.getText().trim();
-    }
-    
-    public String getOperadoraField() {
-        return operadoraComboBox.getSelectedItem().toString();
-    }
-    
     /**
      * @param args the command line arguments
      */

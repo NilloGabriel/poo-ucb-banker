@@ -5,22 +5,46 @@
  */
 package view;
 
+import dao.GenericDAO;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import model.Agencia;
+import model.Cliente;
+import model.Contato;
+import model.Corrente;
+import model.Endereco;
+import model.Poupanca;
 
 /**
  *
  * @author Xatuba Pox
  */
 public class OpenAccountBankGUI extends javax.swing.JFrame {
-
+    Cliente cliente;
+    Endereco endereco;
+    Contato contato;
+    Corrente corrente;
+    Poupanca poupanca;
+    Agencia agencia;
+    private final GenericDAO<Agencia> agenciaDao;
     /**
      * Creates new form OpenAccountBankGUI
+     * @param cliente
+     * @param endereco
+     * @param contato
      */
-    public OpenAccountBankGUI() {
+    public OpenAccountBankGUI(Cliente cliente,Endereco endereco,Contato contato) {
         initComponents();
         typeComboBox.setSelectedIndex(-1);
+        this.cliente = cliente;
+        this.endereco = endereco;
+        this.contato = contato;
+        agenciaDao = new GenericDAO<>();
     }
 
+    private OpenAccountBankGUI() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,6 +108,11 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         gainMonthField.setBorder(null);
         gainMonthField.setForeground(new java.awt.Color(187, 187, 187));
         gainMonthField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        gainMonthField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gainMonthFieldActionPerformed(evt);
+            }
+        });
         openAccountPanel.add(gainMonthField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 200, 30));
 
         separatorGainMonth.setBackground(new java.awt.Color(204, 204, 204));
@@ -131,7 +160,34 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitLabelMouseClicked
 
     private void registerCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerCardButtonMouseClicked
-        RegisterCardGUI rc = new RegisterCardGUI();
+        agencia = new Agencia("003", 174, endereco);//COLOCAR CAMPOS PARA O ENDERECO E DADOS DA AGENCIA NA TELA
+        boolean resposta = agenciaDao.saveOrUpdate(agencia);
+        long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+        cliente.setNascimento(date);
+        if(resposta){
+           JOptionPane.showMessageDialog(null, "Agencia Cadastrada"); 
+        }
+        if(typeComboBox.getSelectedItem().toString().equalsIgnoreCase("corrente")){
+            corrente = new Corrente();
+            corrente.setAgenciaId(agencia);
+            corrente.setGanhoMensal(12.89f);//NAO CONSEGUI FAZER A INSERCAO COM OS DADOS DA TELA
+                                            //POIS DEU ERRO DE FORMATACAO
+            corrente.setNumero(corrente.gerarNumerodaConta());
+            corrente.setDataCriacao(date);
+            corrente.setSaldo(0.00f);
+            corrente.setStatus(true);
+        }else{
+            poupanca = new Poupanca();
+            poupanca.setAgenciaId(agencia);
+            poupanca.setGanhoMensal(Float.valueOf(gainMonthField.getText()));
+            poupanca.setGanhoMensal(12.89f);
+            poupanca.setNumero(poupanca.gerarNumerodaConta());
+            poupanca.setDataCriacao(date);
+            poupanca.setSaldo(0.00f);
+            poupanca.setStatus(true);
+        }
+        RegisterCardGUI rc = new RegisterCardGUI(cliente, corrente, poupanca, endereco, contato);
         rc.setVisible(true);
         rc.pack();
         rc.setLocationRelativeTo(null);
@@ -145,16 +201,13 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         } else if(gainMonthField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ganho mensal inválido!");
         }
+        
     }//GEN-LAST:event_registerCardButtonActionPerformed
 
-    public String getTypeField() {
-        return typeComboBox.getSelectedItem().toString();
-    }
-    
-    public float getMonthField() {
-        return Float.parseFloat(gainMonthField.getText());
-    }
-    
+    private void gainMonthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gainMonthFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gainMonthFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
