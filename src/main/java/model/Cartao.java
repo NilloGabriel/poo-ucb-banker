@@ -6,6 +6,7 @@ package model;
 
 import dao.EntidadeBase;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -233,7 +234,7 @@ public class Cartao implements Serializable, EntidadeBase {
         return "model.Cartao[ id=" + id + " ]";
     }
     
-    private String gerarNumeroCartao(){
+    public String gerarNumeroCartao(){
         String number = "";
         int num;
 
@@ -245,17 +246,24 @@ public class Cartao implements Serializable, EntidadeBase {
         return number;
     }
 
-    private String gerarNumeroFormatado() {
+    public String gerarNumeroFormatado() {
         return this.numero = gerarNumeroCartao() + " " + gerarNumeroCartao() + " " + gerarNumeroCartao() + " " + gerarNumeroCartao();
     }
 
-    private int gerarCvc(){
-        int cvc;
+    public int gerarCvc(){
+        int cvc1;
         Random random = new Random();
         do {
-            cvc = random.nextInt(999);
-        }while(cvc < 100);
-        return cvc;
+            cvc1 = random.nextInt(999);
+        }while(cvc1 < 100);
+        return cvc1;
+    }
+    
+    public static Date somaData(Date data) {
+        Calendar calendar = Calendar.getInstance(); 
+        calendar.setTime(data); 
+        calendar.add( Calendar.YEAR,4); 
+        return calendar.getTime(); 
     }
     
 }
