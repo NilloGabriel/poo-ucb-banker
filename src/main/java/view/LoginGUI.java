@@ -5,12 +5,16 @@
  */
 package view;
 
+import dao.ClienteDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Xatuba Pox
  */
 public class LoginGUI extends javax.swing.JFrame {
-
+    private ClienteDAO cdao = new ClienteDAO();
+    
     /**
      * Creates new form LoginGUI
      */
@@ -101,13 +105,7 @@ public class LoginGUI extends javax.swing.JFrame {
         userField.setBackground(new java.awt.Color(186, 79, 74));
         userField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         userField.setForeground(new java.awt.Color(187, 187, 187));
-        userField.setText("Usuario");
         userField.setBorder(null);
-        userField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                userFieldFocusGained(evt);
-            }
-        });
         userField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userFieldActionPerformed(evt);
@@ -118,13 +116,7 @@ public class LoginGUI extends javax.swing.JFrame {
         passwordField.setBackground(new java.awt.Color(186, 79, 74));
         passwordField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         passwordField.setForeground(new java.awt.Color(187, 187, 187));
-        passwordField.setText("Senha");
         passwordField.setBorder(null);
-        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                passwordFieldFocusGained(evt);
-            }
-        });
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
@@ -156,6 +148,11 @@ public class LoginGUI extends javax.swing.JFrame {
         loginButton.setText("Entrar");
         loginButton.setBorder(null);
         loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
         loginPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 210, 90, 30));
 
         registerButton.setBackground(new java.awt.Color(186, 79, 74));
@@ -176,7 +173,7 @@ public class LoginGUI extends javax.swing.JFrame {
         loginPanel.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         userLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        userLabel.setText("Usuario:");
+        userLabel.setText("Email:");
         loginPanel.add(userLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -219,14 +216,6 @@ public class LoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userFieldActionPerformed
 
-    private void userFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFieldFocusGained
-        userField.setText("");
-    }//GEN-LAST:event_userFieldFocusGained
-
-    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
-        passwordField.setText("");
-    }//GEN-LAST:event_passwordFieldFocusGained
-
     private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitLabelMouseClicked
@@ -239,6 +228,23 @@ public class LoginGUI extends javax.swing.JFrame {
         reg.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_registerButtonMouseClicked
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        if(userField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Email ou senha não podem ser vazios!");
+            userField.setText("");
+            passwordField.setText("");
+        } else {
+            boolean valor = cdao.login(userField.getText(), passwordField.getText());
+            if(valor == true) {
+                JOptionPane.showMessageDialog(null, "Deu Bom!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Email ou senha inválidos!");
+                userField.setText("");
+                passwordField.setText("");
+            }
+        } 
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
