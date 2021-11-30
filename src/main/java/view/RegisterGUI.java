@@ -400,9 +400,6 @@ public class RegisterGUI extends javax.swing.JFrame {
             contato.setNumero(telField.getText().trim().replace("(", "").replace(")", "").replace("-", ""));
             contato.setOperadora(operadoraComboBox.getSelectedItem().toString());
             boolean resposta = enderecoDao.saveOrUpdate(endereco);
-//            contatoDao.saveOrUpdate(contato);
-//            endereco.setClienteId(cliente);
-//            contato.setClienteId(cliente);
             if(resposta){
                 JOptionPane.showMessageDialog(null, "Cadastrado");
             }

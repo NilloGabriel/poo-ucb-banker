@@ -234,9 +234,10 @@ public class RegisterCardGUI extends javax.swing.JFrame {
                 cliente.setPoupancaId(poupanca);
                 cliente.setComprovanteResidencia(false);
                 clienteDao.saveOrUpdate(cliente);
-                //Falta a inserir o endereco e o contato
-//                endereco.setClienteId(cliente);
-                //contato.setClienteId(cliente);
+                endereco.setClienteId(cliente);
+                contato.setClienteId(cliente);
+                enderecoDao.saveOrUpdate(endereco);
+                contatoDao.saveOrUpdate(contato);
             }
         }
         
