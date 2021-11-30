@@ -230,13 +230,13 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_registerButtonMouseClicked
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        if(userField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+        if(userField.getText().equals("") || passwordField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Email ou senha não podem ser vazios!");
             userField.setText("");
             passwordField.setText("");
         } else {
-            boolean valor = cdao.login(userField.getText(), passwordField.getText());
-            if(valor == true) {
+            boolean found = cdao.login(userField.getText(), passwordField.getText());
+            if(found == true) {
                 JOptionPane.showMessageDialog(null, "Deu Bom!");
             } else {
                 JOptionPane.showMessageDialog(null, "Email ou senha inválidos!");

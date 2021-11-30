@@ -7,7 +7,7 @@ package dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.EntityTransaction;
 import model.Cliente;
 
 /**
@@ -15,32 +15,28 @@ import model.Cliente;
  * @author Xatuba Pox
  */
 public class ClienteDAO {
-    private Cliente cle = new Cliente();
-    private static EntityManager clienteManager; //hibernate
-    
-    public ClienteDAO() {
-        clienteManager = ConnectionFactory.getEntityManager();    
-    }
+    private static EntityManager clienteManager;
     
     public boolean login(String email, String senha) {
-        boolean found;
+        boolean found = false;
         
         try {
             clienteManager = ConnectionFactory.getEntityManager();
-            EntityManager em = clienteManager;  
-            Query query;
-            query = em.createQuery("SELECT c.emailLogin, c.senhaLogin FROM Cliente c WHERE c.emailLogin = :email AND c.senhaLogin = :senha");
-            query.setParameter("emailLogin", email);
-            query.setParameter("senhaLogin", senha);
-            List lista = query.getResultList();
+            EntityTransaction transaction = clienteManager.getTransaction();
             
-            if(!lista.isEmpty()) {
-                found = true;
-            } else {
-                found = false;
+            transaction.begin();
+            String q = "FROM Cliente c WHERE c.emailLogin = '"+ email +"'";
+            List<Cliente> clientes = clienteManager.createQuery(q).getResultList(); 
+            
+            for(Cliente tempCli : clientes) {
+                if(tempCli.getSenhaLogin().equals(senha)) {
+                    found = true;
+                    break;
+                }
             }
-        } catch (Exception e) {
-            found = false;
+            transaction.commit();
+        } finally {
+            clienteManager.close();
         }
         
         return found;
