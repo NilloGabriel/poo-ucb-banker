@@ -237,7 +237,13 @@ public class LoginGUI extends javax.swing.JFrame {
         } else {
             boolean found = cdao.login(userField.getText(), passwordField.getText());
             if(found == true) {
-                JOptionPane.showMessageDialog(null, "Deu Bom!");
+                JOptionPane.showMessageDialog(null, "Usuário: " + userField.getText() + " logado com sucesso !");
+                ShowAccountDataGUI sad = new ShowAccountDataGUI();
+                sad.setVisible(true);
+                sad.pack();
+                sad.setLocationRelativeTo(null);
+                sad.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Email ou senha inválidos!");
                 userField.setText("");
