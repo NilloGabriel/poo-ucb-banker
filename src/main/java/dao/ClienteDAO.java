@@ -17,8 +17,8 @@ import model.Cliente;
 public class ClienteDAO {
     private static EntityManager clienteManager;
     
-    public boolean login(String email, String senha) {
-        boolean found = false;
+    public Cliente login(String email, String senha) {
+        Cliente found = null;
         
         try {
             clienteManager = ConnectionFactory.getEntityManager();
@@ -30,7 +30,7 @@ public class ClienteDAO {
             
             for(Cliente tempCli : clientes) {
                 if(tempCli.getSenhaLogin().equals(senha)) {
-                    found = true;
+                    found = tempCli;
                     break;
                 }
             }
