@@ -239,7 +239,7 @@ public class LoginGUI extends javax.swing.JFrame {
             Cliente found = cdao.login(userField.getText(), passwordField.getText());
             if(found != null) {
                 JOptionPane.showMessageDialog(null, "Usuário: " + userField.getText() + " logado com sucesso !");
-                ShowAccountDataGUI sad = new ShowAccountDataGUI();
+                ShowAccountDataGUI sad = new ShowAccountDataGUI(found);
                 sad.setVisible(true);
                 sad.pack();
                 sad.setLocationRelativeTo(null);
