@@ -142,7 +142,7 @@ public class WithdrawGUI extends javax.swing.JFrame {
         if(withdrawValueField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Valor inválido!");
         } else {
-            float valor = Float.parseFloat(withdrawValueField.getText());
+            float valor = Float.parseFloat(withdrawValueField.getValue().toString());
             
             if(cliente.getPoupancaId() != null) {
                 if(valor <= 0) {

@@ -5,6 +5,7 @@
  */
 package view;
 
+import dao.GenericDAO;
 import javax.swing.JOptionPane;
 import model.Cliente;
 
@@ -18,10 +19,11 @@ public class TransferGUI extends javax.swing.JFrame {
      * Creates new form TransferGUI
      */
     Cliente cliente;
-    
+    private final GenericDAO<Cliente> clienteDao;
     public TransferGUI(Cliente cliente) {
         initComponents();
         this.cliente = cliente;
+        clienteDao = new GenericDAO<>();
     }
 
     private TransferGUI() {
@@ -156,10 +158,50 @@ public class TransferGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitLabelMouseClicked
 
     private void transferButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferButtonActionPerformed
-        if(transferValueField.getText().isEmpty()) {
+        if(transferValueField.getText().isEmpty() || transferField2.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Valor inválido!");
-        } else if(transferField2.getText().equals("")) {
+        } else {
+            float valor = Float.parseFloat(transferValueField.getValue().toString());
+            if(cliente.getPoupancaId() != null) {
+                if(valor <= 0) {
+                    JOptionPane.showMessageDialog(null, "Não pode ser efetuados transferencias com valor igual ou inferior a 0.");
+                } else {
+                    float saldoP = cliente.getPoupancaId().getSaldo();
+                    
+                    if (valor <= saldoP){
+                        saldoP = saldoP - valor;
+
+                        cliente.getPoupancaId().setSaldo(saldoP);
+                        clienteDao.saveOrUpdate(cliente);
+                        JOptionPane.showMessageDialog(null, "Transferencia de R$" + valor +" para a conta de numero:" + transferField2.getText() + " efetuado com sucesso!"); 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+                    }
+                }
+            } else {
+                if(valor <= 0) {
+                    JOptionPane.showMessageDialog(null, "Não pode ser efetuados transferencia com valor igual ou inferior a 0.");
+                } else {
+                    float saldoC = cliente.getCorrenteId().getSaldo();
+                    
+                    if (valor <= saldoC) {
+                        saldoC = saldoC - valor;
+
+                        cliente.getCorrenteId().setSaldo(saldoC);
+                        clienteDao.saveOrUpdate(cliente);
+                        JOptionPane.showMessageDialog(null, "Transferencia de R$" + valor +" para a conta de numero:" + transferField2.getText() + " efetuado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+                    }
+                }
+            }
             
+            ShowDetailsGUI opt = new ShowDetailsGUI(cliente);
+            opt.setVisible(true);
+            opt.pack();
+            opt.setLocationRelativeTo(null);
+            opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            this.dispose();
         }
     }//GEN-LAST:event_transferButtonActionPerformed
 
