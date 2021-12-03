@@ -7,6 +7,7 @@ package view;
 
 import dao.ClienteDAO;
 import javax.swing.JOptionPane;
+import model.Cliente;
 
 /**
  *
@@ -235,10 +236,10 @@ public class LoginGUI extends javax.swing.JFrame {
             userField.setText("");
             passwordField.setText("");
         } else {
-            boolean found = cdao.login(userField.getText(), passwordField.getText());
-            if(found == true) {
+            Cliente found = cdao.login(userField.getText(), passwordField.getText());
+            if(found != null) {
                 JOptionPane.showMessageDialog(null, "Usuário: " + userField.getText() + " logado com sucesso !");
-                ShowAccountDataGUI sad = new ShowAccountDataGUI();
+                ShowDataGUI sad = new ShowDataGUI(found);
                 sad.setVisible(true);
                 sad.pack();
                 sad.setLocationRelativeTo(null);

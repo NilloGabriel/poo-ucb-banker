@@ -4,17 +4,30 @@
  */
 package view;
 
+import model.Cliente;
+
 /**
  *
  * @author João
  */
 public class ShowDataGUI extends javax.swing.JFrame {
-
+    Cliente cliente;
     /**
      * Creates new form ShowDataGUI
      */
-    public ShowDataGUI() {
+    public ShowDataGUI(Cliente cliente) {
         initComponents();
+        this.cliente = cliente;
+        jTextAreaName.setEditable(false);
+        jTextAreaCPF.setEditable(false);
+        jTextAreaRG.setEditable(false);
+        jTextAreaName.setText(cliente.getNome());
+        jTextAreaCPF.setText(cliente.getCpf());
+        jTextAreaRG.setText(cliente.getRg());
+    }
+    
+    public ShowDataGUI() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
@@ -34,20 +47,14 @@ public class ShowDataGUI extends javax.swing.JFrame {
         passwordLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
-        cpfLabel = new javax.swing.JLabel();
-        rgLabel = new javax.swing.JLabel();
         next = new javax.swing.JButton();
         Logout = new javax.swing.JButton();
-        jScrollPaneAdress = new javax.swing.JScrollPane();
-        jTextAreaAdress = new javax.swing.JTextArea();
         jScrollPaneCPF = new javax.swing.JScrollPane();
         jTextAreaCPF = new javax.swing.JTextArea();
         jScrollPaneName = new javax.swing.JScrollPane();
         jTextAreaName = new javax.swing.JTextArea();
         jScrollPaneRG = new javax.swing.JScrollPane();
         jTextAreaRG = new javax.swing.JTextArea();
-        jScrollPaneContact = new javax.swing.JScrollPane();
-        jTextAreaContact = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,14 +93,6 @@ public class ShowDataGUI extends javax.swing.JFrame {
         nameLabel.setText("RG:");
         registerPanel.add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
-        cpfLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        cpfLabel.setText("Contato:");
-        registerPanel.add(cpfLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
-
-        rgLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        rgLabel.setText("Endereço:");
-        registerPanel.add(rgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
-
         next.setBackground(new java.awt.Color(186, 79, 74));
         next.setForeground(new java.awt.Color(187, 187, 187));
         next.setText("Next");
@@ -103,7 +102,7 @@ public class ShowDataGUI extends javax.swing.JFrame {
                 nextActionPerformed(evt);
             }
         });
-        registerPanel.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 70, 30));
+        registerPanel.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 70, 30));
 
         Logout.setBackground(new java.awt.Color(186, 79, 74));
         Logout.setForeground(new java.awt.Color(187, 187, 187));
@@ -114,20 +113,7 @@ public class ShowDataGUI extends javax.swing.JFrame {
                 LogoutActionPerformed(evt);
             }
         });
-        registerPanel.add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 70, 30));
-
-        jScrollPaneAdress.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPaneAdress.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPaneAdress.setWheelScrollingEnabled(false);
-
-        jTextAreaAdress.setBackground(new java.awt.Color(186, 79, 74));
-        jTextAreaAdress.setColumns(20);
-        jTextAreaAdress.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jTextAreaAdress.setRows(5);
-        jTextAreaAdress.setToolTipText("");
-        jScrollPaneAdress.setViewportView(jTextAreaAdress);
-
-        registerPanel.add(jScrollPaneAdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 220, 30));
+        registerPanel.add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 70, 30));
 
         jScrollPaneCPF.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneCPF.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -170,19 +156,6 @@ public class ShowDataGUI extends javax.swing.JFrame {
 
         registerPanel.add(jScrollPaneRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 220, 30));
 
-        jScrollPaneContact.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPaneContact.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPaneContact.setWheelScrollingEnabled(false);
-
-        jTextAreaContact.setBackground(new java.awt.Color(186, 79, 74));
-        jTextAreaContact.setColumns(20);
-        jTextAreaContact.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextAreaContact.setRows(5);
-        jTextAreaContact.setToolTipText("");
-        jScrollPaneContact.setViewportView(jTextAreaContact);
-
-        registerPanel.add(jScrollPaneContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 220, 30));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -194,9 +167,9 @@ public class ShowDataGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(registerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(registerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,7 +180,9 @@ public class ShowDataGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,7 +190,7 @@ public class ShowDataGUI extends javax.swing.JFrame {
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
 
-        ShowAccountDataGUI opt = new ShowAccountDataGUI();
+        ShowAccountDataGUI opt = new ShowAccountDataGUI(cliente);
         opt.setVisible(true);
         opt.pack();
         opt.setLocationRelativeTo(null);
@@ -274,25 +249,19 @@ public class ShowDataGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Logout;
-    private javax.swing.JLabel cpfLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel exitLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPaneAdress;
     private javax.swing.JScrollPane jScrollPaneCPF;
-    private javax.swing.JScrollPane jScrollPaneContact;
     private javax.swing.JScrollPane jScrollPaneName;
     private javax.swing.JScrollPane jScrollPaneRG;
-    private javax.swing.JTextArea jTextAreaAdress;
     private javax.swing.JTextArea jTextAreaCPF;
-    private javax.swing.JTextArea jTextAreaContact;
     private javax.swing.JTextArea jTextAreaName;
     private javax.swing.JTextArea jTextAreaRG;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton next;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPanel registerPanel;
-    private javax.swing.JLabel rgLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
     // End of variables declaration//GEN-END:variables

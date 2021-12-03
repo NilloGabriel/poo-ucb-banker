@@ -4,17 +4,27 @@
  */
 package view;
 
+import model.Cliente;
+
 /**
  *
  * @author João
  */
 public class ShowDetailsGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ShowDetailsGUI
-     */
-    public ShowDetailsGUI() {
+    Cliente cliente;
+    public ShowDetailsGUI(Cliente cliente) {
         initComponents();
+        jTextField2.setEditable(false);
+        this.cliente = cliente;
+        if(cliente.getPoupancaId() != null)
+            jTextField2.setText("R$" + String.valueOf(cliente.getPoupancaId().getSaldo()));
+        else
+            jTextField2.setText("R$" + String.valueOf(cliente.getCorrenteId().getSaldo()));
+    }
+    
+    public ShowDetailsGUI() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
@@ -36,8 +46,10 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
         detailPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPaneMoney = new javax.swing.JScrollPane();
-        jTextAreaMoney = new javax.swing.JTextArea();
+        detailPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -95,18 +107,40 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(186, 79, 74));
         jLabel3.setText("Disponivel:");
 
-        jScrollPaneMoney.setBorder(null);
-        jScrollPaneMoney.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPaneMoney.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(186, 79, 74));
+        jLabel4.setText("Saldo");
 
-        jTextAreaMoney.setBackground(new java.awt.Color(240, 240, 240));
-        jTextAreaMoney.setColumns(20);
-        jTextAreaMoney.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        jTextAreaMoney.setForeground(new java.awt.Color(186, 79, 74));
-        jTextAreaMoney.setRows(5);
-        jTextAreaMoney.setText("R$123,00");
-        jTextAreaMoney.setBorder(null);
-        jScrollPaneMoney.setViewportView(jTextAreaMoney);
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(186, 79, 74));
+        jLabel5.setText("Disponivel:");
+
+        jTextField2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(186, 79, 74));
+
+        javax.swing.GroupLayout detailPanel1Layout = new javax.swing.GroupLayout(detailPanel1);
+        detailPanel1.setLayout(detailPanel1Layout);
+        detailPanel1Layout.setHorizontalGroup(
+            detailPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(detailPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(detailPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        detailPanel1Layout.setVerticalGroup(
+            detailPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(detailPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel4)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
+        );
 
         javax.swing.GroupLayout detailPanelLayout = new javax.swing.GroupLayout(detailPanel);
         detailPanel.setLayout(detailPanelLayout);
@@ -115,13 +149,14 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
             .addGroup(detailPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneMoney, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(detailPanelLayout.createSequentialGroup()
-                        .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(0, 178, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addContainerGap(188, Short.MAX_VALUE))
+            .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(detailPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(detailPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         detailPanelLayout.setVerticalGroup(
             detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,9 +165,12 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPaneMoney, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(184, Short.MAX_VALUE))
+            .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(detailPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(detailPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         registerPanel.add(detailPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 310, 260));
@@ -184,7 +222,7 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
 
     private void PreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousActionPerformed
         // TODO add your handling code here:
-        ShowAccountDataGUI opt = new ShowAccountDataGUI();
+        ShowAccountDataGUI opt = new ShowAccountDataGUI(cliente);
         opt.setVisible(true);
         opt.pack();
         opt.setLocationRelativeTo(null);
@@ -231,13 +269,15 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
     private javax.swing.JButton Logout;
     private javax.swing.JButton Previous;
     private javax.swing.JPanel detailPanel;
+    private javax.swing.JPanel detailPanel1;
     private javax.swing.JLabel exitLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPaneMoney;
-    private javax.swing.JTextArea jTextAreaMoney;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel registerPanel;
     private javax.swing.JPanel titlePanel;
     // End of variables declaration//GEN-END:variables
