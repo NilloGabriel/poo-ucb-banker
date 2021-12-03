@@ -41,7 +41,7 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
         exitLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         registerPanel = new javax.swing.JPanel();
-        Logout = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
         Previous = new javax.swing.JButton();
         detailPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -50,6 +50,9 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        withdrawButton = new javax.swing.JButton();
+        transferButton = new javax.swing.JButton();
+        depositButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -76,16 +79,16 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
         registerPanel.setBackground(new java.awt.Color(186, 79, 74));
         registerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Logout.setBackground(new java.awt.Color(186, 79, 74));
-        Logout.setForeground(new java.awt.Color(187, 187, 187));
-        Logout.setText("Logout");
-        Logout.setBorder(null);
-        Logout.addActionListener(new java.awt.event.ActionListener() {
+        logoutButton.setBackground(new java.awt.Color(186, 79, 74));
+        logoutButton.setForeground(new java.awt.Color(187, 187, 187));
+        logoutButton.setText("Logout");
+        logoutButton.setBorder(null);
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
+                logoutButtonActionPerformed(evt);
             }
         });
-        registerPanel.add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 70, 30));
+        registerPanel.add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 70, 30));
 
         Previous.setBackground(new java.awt.Color(186, 79, 74));
         Previous.setForeground(new java.awt.Color(187, 187, 187));
@@ -97,7 +100,7 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
                 PreviousActionPerformed(evt);
             }
         });
-        registerPanel.add(Previous, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 70, 30));
+        registerPanel.add(Previous, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 70, 30));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(186, 79, 74));
@@ -175,6 +178,39 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
 
         registerPanel.add(detailPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 310, 260));
 
+        withdrawButton.setBackground(new java.awt.Color(186, 79, 74));
+        withdrawButton.setForeground(new java.awt.Color(187, 187, 187));
+        withdrawButton.setText("Saque");
+        withdrawButton.setBorder(null);
+        withdrawButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                withdrawButtonActionPerformed(evt);
+            }
+        });
+        registerPanel.add(withdrawButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 70, 30));
+
+        transferButton.setBackground(new java.awt.Color(186, 79, 74));
+        transferButton.setForeground(new java.awt.Color(187, 187, 187));
+        transferButton.setText("Transferencia");
+        transferButton.setBorder(null);
+        transferButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferButtonActionPerformed(evt);
+            }
+        });
+        registerPanel.add(transferButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 90, 30));
+
+        depositButton.setBackground(new java.awt.Color(186, 79, 74));
+        depositButton.setForeground(new java.awt.Color(187, 187, 187));
+        depositButton.setText("Deposito");
+        depositButton.setBorder(null);
+        depositButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depositButtonActionPerformed(evt);
+            }
+        });
+        registerPanel.add(depositButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 70, 30));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -211,14 +247,14 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitLabelMouseClicked
 
-    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         LoginGUI opt = new LoginGUI();
         opt.setVisible(true);
         opt.pack();
         opt.setLocationRelativeTo(null);
         opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_LogoutActionPerformed
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void PreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousActionPerformed
         // TODO add your handling code here:
@@ -229,6 +265,33 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
         opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_PreviousActionPerformed
+
+    private void withdrawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawButtonActionPerformed
+        WithdrawGUI opt = new WithdrawGUI(cliente);
+        opt.setVisible(true);
+        opt.pack();
+        opt.setLocationRelativeTo(null);
+        opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_withdrawButtonActionPerformed
+
+    private void transferButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferButtonActionPerformed
+        TransferGUI opt = new TransferGUI(cliente);
+        opt.setVisible(true);
+        opt.pack();
+        opt.setLocationRelativeTo(null);
+        opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_transferButtonActionPerformed
+
+    private void depositButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositButtonActionPerformed
+        DepositGUI opt = new DepositGUI(cliente);
+        opt.setVisible(true);
+        opt.pack();
+        opt.setLocationRelativeTo(null);
+        opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_depositButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,8 +329,8 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Logout;
     private javax.swing.JButton Previous;
+    private javax.swing.JButton depositButton;
     private javax.swing.JPanel detailPanel;
     private javax.swing.JPanel detailPanel1;
     private javax.swing.JLabel exitLabel;
@@ -278,7 +341,10 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JPanel registerPanel;
     private javax.swing.JPanel titlePanel;
+    private javax.swing.JButton transferButton;
+    private javax.swing.JButton withdrawButton;
     // End of variables declaration//GEN-END:variables
 }
