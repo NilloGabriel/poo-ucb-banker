@@ -222,7 +222,7 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
 
     private void PreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousActionPerformed
         // TODO add your handling code here:
-        ShowAccountDataGUI opt = new ShowAccountDataGUI();
+        ShowAccountDataGUI opt = new ShowAccountDataGUI(cliente);
         opt.setVisible(true);
         opt.pack();
         opt.setLocationRelativeTo(null);
