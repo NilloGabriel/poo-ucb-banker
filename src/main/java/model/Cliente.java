@@ -6,7 +6,6 @@ package model;
 
 import dao.EntidadeBase;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -62,10 +61,9 @@ public class Cliente implements Serializable, EntidadeBase {
     @Basic(optional = false)
     @Column(name = "nascimento")
     @Temporal(TemporalType.DATE)
-    private LocalDate nascimento;
-    @Basic(optional = false)
+    private Date nascimento;
     @Column(name = "comprovanteResidencia")
-    private boolean comprovanteResidencia;
+    private Boolean comprovanteResidencia;
     @Basic(optional = false)
     @Column(name = "rg")
     private String rg;
@@ -75,14 +73,13 @@ public class Cliente implements Serializable, EntidadeBase {
     @Basic(optional = false)
     @Column(name = "senha_login")
     private String senhaLogin;
-    @Basic(optional = false)
     @Column(name = "logStatus_login")
-    private boolean logStatuslogin;
+    private Boolean logStatuslogin;
     @JoinColumn(name = "corrente_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Corrente correnteId;
     @JoinColumn(name = "poupanca_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Poupanca poupancaId;
     @OneToMany(mappedBy = "clienteId")
     private List<Endereco> enderecoList;
@@ -96,16 +93,14 @@ public class Cliente implements Serializable, EntidadeBase {
         this.id = id;
     }
 
-    public Cliente(Integer id, String cpf, String nome, LocalDate nascimento, boolean comprovanteResidencia, String rg, String emailLogin, String senhaLogin, boolean logStatuslogin) {
+    public Cliente(Integer id, String cpf, String nome, Date nascimento, String rg, String emailLogin, String senhaLogin) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.nascimento = nascimento;
-        this.comprovanteResidencia = comprovanteResidencia;
         this.rg = rg;
         this.emailLogin = emailLogin;
         this.senhaLogin = senhaLogin;
-        this.logStatuslogin = logStatuslogin;
     }
 
     @Override
@@ -133,19 +128,19 @@ public class Cliente implements Serializable, EntidadeBase {
         this.nome = nome;
     }
 
-    public LocalDate getNascimento() {
+    public Date getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(LocalDate nascimento) {
+    public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
 
-    public boolean getComprovanteResidencia() {
+    public Boolean getComprovanteResidencia() {
         return comprovanteResidencia;
     }
 
-    public void setComprovanteResidencia(boolean comprovanteResidencia) {
+    public void setComprovanteResidencia(Boolean comprovanteResidencia) {
         this.comprovanteResidencia = comprovanteResidencia;
     }
 
@@ -173,11 +168,11 @@ public class Cliente implements Serializable, EntidadeBase {
         this.senhaLogin = senhaLogin;
     }
 
-    public boolean getLogStatuslogin() {
+    public Boolean getLogStatuslogin() {
         return logStatuslogin;
     }
 
-    public void setLogStatuslogin(boolean logStatuslogin) {
+    public void setLogStatuslogin(Boolean logStatuslogin) {
         this.logStatuslogin = logStatuslogin;
     }
 

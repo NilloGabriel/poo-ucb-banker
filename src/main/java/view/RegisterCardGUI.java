@@ -6,6 +6,12 @@
 package view;
 
 import javax.swing.JOptionPane;
+import model.Cartao;
+import model.Cliente;
+import model.Contato;
+import model.Corrente;
+import model.Endereco;
+import model.Poupanca;
 
 /**
  *
@@ -13,12 +19,34 @@ import javax.swing.JOptionPane;
  */
 public class RegisterCardGUI extends javax.swing.JFrame {
 
+    Cliente cliente;
+    Endereco endereco;
+    Contato contato;
+    Corrente corrente;
+    Poupanca poupanca;
+    Cartao cartao;
     /**
      * Creates new form RegisterCardGUI
+     * @param cliente
+     * @param corrente
+     * @param poupanca
+     * @param endereco
+     * @param contato
      */
-    public RegisterCardGUI() {
+    public RegisterCardGUI(Cliente cliente, Corrente corrente, Poupanca poupanca, Endereco endereco, Contato contato) {
         initComponents();
+        this.cliente = cliente;
+        this.contato = contato;
+        this.endereco = endereco;
+        this.corrente = corrente;
+        this.poupanca = poupanca;
     }
+
+    public RegisterCardGUI() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,6 +65,8 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         passField = new javax.swing.JPasswordField();
         separatorPass = new javax.swing.JSeparator();
         registerCardButton = new javax.swing.JButton();
+        passLabel1 = new javax.swing.JLabel();
+        typeComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,8 +94,8 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         registerCardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         passLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        passLabel.setText("Senha do cartão:");
-        registerCardPanel.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        passLabel.setText("Tipo de cartão:");
+        registerCardPanel.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
         passField.setBackground(new java.awt.Color(186, 79, 74));
         passField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -95,6 +125,18 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         });
         registerCardPanel.add(registerCardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 110, 30));
 
+        passLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        passLabel1.setText("Senha do cartão:");
+        registerCardPanel.add(passLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+
+        typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Débito", "Credito", "Os dois", "Item 4" }));
+        typeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeComboBoxActionPerformed(evt);
+            }
+        });
+        registerCardPanel.add(typeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,8 +148,9 @@ public class RegisterCardGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(registerCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(registerCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -118,6 +161,7 @@ public class RegisterCardGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitLabelMouseClicked
 
     private void registerCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerCardButtonMouseClicked
+        cartao = new Cartao();
         LoginGUI log = new LoginGUI();
         log.setVisible(true);
         log.pack();
@@ -131,6 +175,10 @@ public class RegisterCardGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Senha inválida!");
         }
     }//GEN-LAST:event_registerCardButtonActionPerformed
+
+    private void typeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_typeComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,10 +219,12 @@ public class RegisterCardGUI extends javax.swing.JFrame {
     private javax.swing.JLabel exitLabel;
     private javax.swing.JPasswordField passField;
     private javax.swing.JLabel passLabel;
+    private javax.swing.JLabel passLabel1;
     private javax.swing.JButton registerCardButton;
     private javax.swing.JPanel registerCardPanel;
     private javax.swing.JSeparator separatorPass;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
+    private javax.swing.JComboBox<String> typeComboBox;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,11 +21,12 @@ public class RegisterGUI extends javax.swing.JFrame {
     Cliente cliente;
     Endereco endereco;
     Contato contato;
-    
+    private final GenericDAO<Endereco> enderecoDao;
     public RegisterGUI() {
         initComponents();
         estadosComboBox.setSelectedIndex(-1);
         operadoraComboBox.setSelectedIndex(-1);
+        enderecoDao = new GenericDAO<>();
     }
 
     /**
@@ -362,7 +363,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
     private void openAccountBankButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openAccountBankButtonMouseClicked
         try{
-           cliente = new Cliente();
+            cliente = new Cliente();
             cliente.setEmailLogin(emailField.getText());
             cliente.setSenhaLogin(passwordField.getText());
             cliente.setNome(nameField.getText());
@@ -370,12 +371,16 @@ public class RegisterGUI extends javax.swing.JFrame {
             cliente.setRg(rgField.getText());
             endereco = new Endereco();
             endereco.setCep(cepField.getText());
-            endereco.setEstado(estadosComboBox.getActionCommand());//ainda não descobri como pegar dados de comboBox
+            endereco.setEstado(estadosComboBox.getSelectedItem().toString());//ainda não descobri como pegar dados de comboBox
             endereco.setCidade(cityField.getText());
             endereco.setEndereco(adressField.getText());
             contato = new Contato();
             contato.setNumero(telField.getText());
-            contato.setOperadora(operadoraComboBox.getActionCommand());
+            contato.setOperadora(operadoraComboBox.getSelectedItem().toString());
+            boolean resposta = enderecoDao.saveOrUpdate(endereco);
+            if(resposta){
+                JOptionPane.showMessageDialog(null, "Cadastrado");
+            }
             OpenAccountBankGUI oab = new OpenAccountBankGUI(cliente, endereco, contato); 
             oab.setVisible(true);
             oab.pack();
