@@ -143,7 +143,7 @@ public class DepositGUI extends javax.swing.JFrame {
         if(depositValueField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Valor inválido!");
         } else {
-            float valor = Float.parseFloat(depositValueField.getText());
+            float valor = Float.parseFloat(depositValueField.getValue().toString());
             float saldo;
             
             if(cliente.getPoupancaId() != null) {
