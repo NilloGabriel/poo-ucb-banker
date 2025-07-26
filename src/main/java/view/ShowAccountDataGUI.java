@@ -226,7 +226,7 @@ public class ShowAccountDataGUI extends javax.swing.JFrame {
 
     private void PreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousActionPerformed
 
-        ShowDataGUI opt = new ShowDataGUI();
+        ShowDataGUI opt = new ShowDataGUI(cliente);
         opt.setVisible(true);
         opt.pack();
         opt.setLocationRelativeTo(null);
