@@ -6,6 +6,7 @@
 package view;
 
 import javax.swing.JOptionPane;
+import dao.GenericDAO;
 import model.Cliente;
 
 /**
@@ -18,10 +19,12 @@ public class WithdrawGUI extends javax.swing.JFrame {
      * Creates new form WithdrawGUI
      */
     Cliente cliente;
+    private final GenericDAO<Cliente> clienteDao;
     
     public WithdrawGUI(Cliente cliente) {
         initComponents();
         this.cliente = cliente;
+        clienteDao = new GenericDAO<>();
     }
 
     private WithdrawGUI() {
@@ -138,6 +141,49 @@ public class WithdrawGUI extends javax.swing.JFrame {
     private void withdrawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawButtonActionPerformed
         if(withdrawValueField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Valor inválido!");
+        } else {
+            float valor = Float.parseFloat(withdrawValueField.getText());
+            
+            if(cliente.getPoupancaId() != null) {
+                if(valor <= 0) {
+                    JOptionPane.showMessageDialog(null, "Não pode ser efetuados saques com valor igual ou inferior a 0.");
+                } else {
+                    float saldoP = cliente.getPoupancaId().getSaldo();
+                    
+                    if (valor <= saldoP){
+                        saldoP = saldoP - valor;
+
+                        cliente.getPoupancaId().setSaldo(saldoP);
+                        clienteDao.saveOrUpdate(cliente);
+                        JOptionPane.showMessageDialog(null, "Saque de R$" + valor + " efetuado com sucesso!"); 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+                    }
+                }
+            } else {
+                if(valor <= 0) {
+                    JOptionPane.showMessageDialog(null, "Não pode ser efetuados saques com valor igual ou inferior a 0.");
+                } else {
+                    float saldoC = cliente.getCorrenteId().getSaldo();
+                    
+                    if (valor <= saldoC) {
+                        saldoC = saldoC - valor;
+
+                        cliente.getCorrenteId().setSaldo(saldoC);
+                        clienteDao.saveOrUpdate(cliente);
+                        JOptionPane.showMessageDialog(null, "Saque de R$" + valor + " efetuado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+                    }
+                }
+            }
+            
+            ShowDetailsGUI opt = new ShowDetailsGUI(cliente);
+            opt.setVisible(true);
+            opt.pack();
+            opt.setLocationRelativeTo(null);
+            opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            this.dispose();
         }
     }//GEN-LAST:event_withdrawButtonActionPerformed
 

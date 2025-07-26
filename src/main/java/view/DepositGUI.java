@@ -6,6 +6,7 @@
 package view;
 
 import javax.swing.JOptionPane;
+import dao.GenericDAO;
 import model.Cliente;
 
 /**
@@ -18,10 +19,13 @@ public class DepositGUI extends javax.swing.JFrame {
      * Creates new form DepositGUI
      */
     Cliente cliente;
+ 
+    private final GenericDAO<Cliente> clienteDao;
     
     public DepositGUI(Cliente cliente) {
         initComponents();
         this.cliente = cliente;
+        clienteDao = new GenericDAO<>();
     }
 
     private DepositGUI() {
@@ -138,14 +142,41 @@ public class DepositGUI extends javax.swing.JFrame {
     private void depositButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositButtonActionPerformed
         if(depositValueField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Valor inválido!");
-        } 
-        
-//        if(cliente.getPoupancaId() != null){
-//            saldo = saldo + depositValue;
-//            JOptionPane.showMessageDialog(null, "Deposito de R$ " + depositValue + " efetuado com sucesso!");
-//        } else {
-//            
-//        }          
+        } else {
+            float valor = Float.parseFloat(depositValueField.getText());
+            float saldo;
+            
+            if(cliente.getPoupancaId() != null) {
+                if(valor <= 0) {
+                    JOptionPane.showMessageDialog(null, "Não pode ser efetuados depósitos com valor igual ou inferior a 0.");
+                } else {
+                    saldo = cliente.getPoupancaId().getSaldo();
+                    saldo = saldo + valor;
+
+                    cliente.getPoupancaId().setSaldo(saldo);
+                    clienteDao.saveOrUpdate(cliente);
+                    JOptionPane.showMessageDialog(null, "Deposito de R$" + valor + " efetuado com sucesso!");                                       
+                }
+            } else {
+                if(valor <= 0) {
+                    JOptionPane.showMessageDialog(null, "Não pode ser efetuados depósitos com valor igual ou inferior a 0.");
+                } else {
+                    saldo = cliente.getCorrenteId().getSaldo();
+                    saldo = saldo + valor;
+                    
+                    cliente.getCorrenteId().setSaldo(saldo);
+                    clienteDao.saveOrUpdate(cliente);
+                    JOptionPane.showMessageDialog(null, "Deposito de R$" + valor + " efetuado com sucesso!");
+                }
+            }
+            
+            ShowDetailsGUI opt = new ShowDetailsGUI(cliente);
+            opt.setVisible(true);
+            opt.pack();
+            opt.setLocationRelativeTo(null);
+            opt.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            this.dispose();
+        }
     }//GEN-LAST:event_depositButtonActionPerformed
 
     private void depositValueFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositValueFieldActionPerformed
