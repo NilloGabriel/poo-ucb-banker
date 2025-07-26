@@ -173,7 +173,7 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
             corrente.setGanhoMensal(Float.valueOf(gainMonthField.getValue().toString()));
             corrente.setNumero(corrente.gerarNumerodaConta());
             corrente.setDataCriacao(date);
-            corrente.setSaldo(0.00f);
+            corrente.setSaldo(45.90f);
             corrente.setStatus(true);
         }else{
             poupanca = new Poupanca();
@@ -181,7 +181,7 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
             poupanca.setGanhoMensal(Float.valueOf(gainMonthField.getValue().toString()));
             poupanca.setNumero(poupanca.gerarNumerodaConta());
             poupanca.setDataCriacao(date);
-            poupanca.setSaldo(0.00f);
+            poupanca.setSaldo(69.75f);
             poupanca.setStatus(true);
         }
         RegisterCardGUI rc = new RegisterCardGUI(cliente, corrente, poupanca, endereco, contato);
