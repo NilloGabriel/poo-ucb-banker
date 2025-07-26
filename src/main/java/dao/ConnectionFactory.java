@@ -5,6 +5,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * Classe responsável pela configuração do banco de dados
+ *
+ */
 public class ConnectionFactory {
 
     //Objetos
@@ -19,6 +23,10 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * Método responsável pela inicializaçaõ do banco de dados
+ 
+     */
     private static void init() throws IOException {
 
         try {
