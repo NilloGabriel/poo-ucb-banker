@@ -1,6 +1,7 @@
 package view;
 
 import dao.GenericDAO;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Contato;
@@ -22,11 +23,13 @@ public class RegisterGUI extends javax.swing.JFrame {
     Endereco endereco;
     Contato contato;
     private final GenericDAO<Endereco> enderecoDao;
+    private final GenericDAO<Contato> contatoDao;
     public RegisterGUI() {
         initComponents();
         estadosComboBox.setSelectedIndex(-1);
         operadoraComboBox.setSelectedIndex(-1);
         enderecoDao = new GenericDAO<>();
+        contatoDao = new GenericDAO<>();
     }
 
     /**
@@ -75,6 +78,9 @@ public class RegisterGUI extends javax.swing.JFrame {
         separatorTel = new javax.swing.JSeparator();
         operadoraLabel = new javax.swing.JLabel();
         operadoraComboBox = new javax.swing.JComboBox<>();
+        nascLabel = new javax.swing.JLabel();
+        nascField = new javax.swing.JFormattedTextField();
+        separatorNasc = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -147,7 +153,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                 openAccountBankButtonActionPerformed(evt);
             }
         });
-        registerPanel.add(openAccountBankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, 90, 30));
+        registerPanel.add(openAccountBankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 620, 90, 30));
 
         passwordLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         passwordLabel.setText("Senha da conta:");
@@ -196,7 +202,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         rgLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         rgLabel.setText("RG:");
-        registerPanel.add(rgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+        registerPanel.add(rgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, -1, -1));
 
         rgField.setBackground(new java.awt.Color(186, 79, 74));
         rgField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -207,15 +213,15 @@ public class RegisterGUI extends javax.swing.JFrame {
                 rgFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(rgField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 200, 30));
+        registerPanel.add(rgField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 200, 30));
 
         separatorRg.setBackground(new java.awt.Color(204, 204, 204));
         separatorRg.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorRg, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 200, 10));
+        registerPanel.add(separatorRg, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 200, 10));
 
         ufLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         ufLabel.setText("UF:");
-        registerPanel.add(ufLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
+        registerPanel.add(ufLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, -1));
 
         cepField.setBackground(new java.awt.Color(186, 79, 74));
         cepField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -226,11 +232,11 @@ public class RegisterGUI extends javax.swing.JFrame {
                 cepFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(cepField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 200, 30));
+        registerPanel.add(cepField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 200, 30));
 
         separatorCep.setBackground(new java.awt.Color(204, 204, 204));
         separatorCep.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 200, 10));
+        registerPanel.add(separatorCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 200, 10));
 
         estadosComboBox.setBackground(new java.awt.Color(186, 79, 74));
         estadosComboBox.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -240,15 +246,15 @@ public class RegisterGUI extends javax.swing.JFrame {
                 estadosComboBoxActionPerformed(evt);
             }
         });
-        registerPanel.add(estadosComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 200, 30));
+        registerPanel.add(estadosComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 200, 30));
 
         cepLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         cepLabel.setText("CEP:");
-        registerPanel.add(cepLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
+        registerPanel.add(cepLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
 
         cityLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         cityLabel.setText("Cidade:");
-        registerPanel.add(cityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
+        registerPanel.add(cityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, -1, -1));
 
         cityField.setBackground(new java.awt.Color(186, 79, 74));
         cityField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -259,15 +265,15 @@ public class RegisterGUI extends javax.swing.JFrame {
                 cityFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(cityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 200, 30));
+        registerPanel.add(cityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 200, 30));
 
         separatorCity.setBackground(new java.awt.Color(204, 204, 204));
         separatorCity.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 200, 10));
+        registerPanel.add(separatorCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 200, 10));
 
         adressLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         adressLabel.setText("Endereco:");
-        registerPanel.add(adressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, -1, -1));
+        registerPanel.add(adressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, -1, -1));
 
         adressField.setBackground(new java.awt.Color(186, 79, 74));
         adressField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -278,15 +284,15 @@ public class RegisterGUI extends javax.swing.JFrame {
                 adressFieldActionPerformed(evt);
             }
         });
-        registerPanel.add(adressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 200, 30));
+        registerPanel.add(adressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 200, 30));
 
         separatorAdress.setBackground(new java.awt.Color(204, 204, 204));
         separatorAdress.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorAdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 200, 10));
+        registerPanel.add(separatorAdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 200, 10));
 
         telLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         telLabel.setText("Telefone:");
-        registerPanel.add(telLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, -1, -1));
+        registerPanel.add(telLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 530, -1, -1));
 
         telField.setBackground(new java.awt.Color(186, 79, 74));
         telField.setBorder(null);
@@ -296,15 +302,15 @@ public class RegisterGUI extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        registerPanel.add(telField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 200, 30));
+        registerPanel.add(telField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 520, 200, 30));
 
         separatorTel.setBackground(new java.awt.Color(204, 204, 204));
         separatorTel.setForeground(new java.awt.Color(204, 204, 204));
-        registerPanel.add(separatorTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 200, 10));
+        registerPanel.add(separatorTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 200, 10));
 
         operadoraLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         operadoraLabel.setText("Operadora:");
-        registerPanel.add(operadoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
+        registerPanel.add(operadoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 580, -1, -1));
 
         operadoraComboBox.setBackground(new java.awt.Color(186, 79, 74));
         operadoraComboBox.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -314,7 +320,21 @@ public class RegisterGUI extends javax.swing.JFrame {
                 operadoraComboBoxActionPerformed(evt);
             }
         });
-        registerPanel.add(operadoraComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 200, 30));
+        registerPanel.add(operadoraComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 570, 200, 30));
+
+        nascLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        nascLabel.setText("Data de nascimento:");
+        registerPanel.add(nascLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+
+        nascField.setBackground(new java.awt.Color(186, 79, 74));
+        nascField.setBorder(null);
+        nascField.setForeground(new java.awt.Color(187, 187, 187));
+        nascField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        registerPanel.add(nascField, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 200, 30));
+
+        separatorNasc.setBackground(new java.awt.Color(204, 204, 204));
+        separatorNasc.setForeground(new java.awt.Color(204, 204, 204));
+        registerPanel.add(separatorNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 200, 10));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -367,10 +387,9 @@ public class RegisterGUI extends javax.swing.JFrame {
             cliente.setEmailLogin(emailField.getText());
             cliente.setSenhaLogin(passwordField.getText());
             cliente.setNome(nameField.getText());
-            cliente.setCpf(cpfField.getText().replaceAll("-", "").replaceAll(".", ""));//CPF ESTÁ SALVANDO VAZIO NO BANCO
+            cliente.setCpf(cpfField.getText().replace(".", "").replace("-", "").replace(".", ""));
             cliente.setLogStatuslogin(false);
-            //NECESSARIO CRIAR UMA CAMPO PARA DATA DE NASCIMENTO, ACABEI SALVANDO COM A DATA DE HOJE NA ULTIMA TELA
-            //APENAS PARA TESTAR A CONEXAO COM O BANCO
+            cliente.setNascimento((Date) nascField.getValue());
             cliente.setRg(rgField.getText());
             endereco = new Endereco();
             endereco.setCep(cepField.getText());
@@ -378,9 +397,12 @@ public class RegisterGUI extends javax.swing.JFrame {
             endereco.setCidade(cityField.getText());
             endereco.setEndereco(adressField.getText());
             contato = new Contato();
-            contato.setNumero(telField.getText());
+            contato.setNumero(telField.getText().trim().replace("(", "").replace(")", "").replace("-", ""));
             contato.setOperadora(operadoraComboBox.getSelectedItem().toString());
             boolean resposta = enderecoDao.saveOrUpdate(endereco);
+//            contatoDao.saveOrUpdate(contato);
+//            endereco.setClienteId(cliente);
+//            contato.setClienteId(cliente);
             if(resposta){
                 JOptionPane.showMessageDialog(null, "Cadastrado");
             }
@@ -426,16 +448,18 @@ public class RegisterGUI extends javax.swing.JFrame {
     private void openAccountBankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountBankButtonActionPerformed
         if(emailField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Email inválido!");
-        } else if(passwordField.getPassword().length == 0) {
-            JOptionPane.showMessageDialog(null, "Senha inválida!");
+        } else if(passwordField.getPassword().length > 8 || passwordField.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "Senha inválida... Aceita até 8 caracteres!");
         } else if(nameField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Nome inválido!");
         } else if(cpfField.getText().trim().length() < 14) {
             JOptionPane.showMessageDialog(null, "CPF inválido!");
-        } else if(rgField.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "RG inválido!");
-        } else if(cepField.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "CEP inválido!");
+        } else if(nascField.getText().trim().length() < 6) {
+            JOptionPane.showMessageDialog(null, "Data inválida... Formato: ##/##/####!");
+        } else if(rgField.getText().equals("") || rgField.getText().length() > 9) {
+            JOptionPane.showMessageDialog(null, "RG inválido... Aceita até 9 caracteres!!");
+        } else if(cepField.getText().equals("") || cepField.getText().length() > 10) {
+            JOptionPane.showMessageDialog(null, "CEP inválido... Aceita até 10 caracteres!");
         } else if(estadosComboBox.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Estado inválido!");
         } else if(cityField.getText().equals("")) {
@@ -500,6 +524,8 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JFormattedTextField nascField;
+    private javax.swing.JLabel nascLabel;
     private javax.swing.JButton openAccountBankButton;
     private javax.swing.JComboBox<String> operadoraComboBox;
     private javax.swing.JLabel operadoraLabel;
@@ -513,6 +539,7 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator separatorCity;
     private javax.swing.JSeparator separatorCpf;
     private javax.swing.JSeparator separatorName;
+    private javax.swing.JSeparator separatorNasc;
     private javax.swing.JSeparator separatorPass;
     private javax.swing.JSeparator separatorRg;
     private javax.swing.JSeparator separatorTel;

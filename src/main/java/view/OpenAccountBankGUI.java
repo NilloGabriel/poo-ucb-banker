@@ -164,15 +164,13 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         boolean resposta = agenciaDao.saveOrUpdate(agencia);
         long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
-        cliente.setNascimento(date);
         if(resposta){
            JOptionPane.showMessageDialog(null, "Agencia Cadastrada"); 
         }
         if(typeComboBox.getSelectedItem().toString().equalsIgnoreCase("corrente")){
             corrente = new Corrente();
             corrente.setAgenciaId(agencia);
-            corrente.setGanhoMensal(12.89f);//NAO CONSEGUI FAZER A INSERCAO COM OS DADOS DA TELA
-                                            //POIS DEU ERRO DE FORMATACAO
+            corrente.setGanhoMensal(Float.valueOf(gainMonthField.getValue().toString()));
             corrente.setNumero(corrente.gerarNumerodaConta());
             corrente.setDataCriacao(date);
             corrente.setSaldo(0.00f);
@@ -180,8 +178,7 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         }else{
             poupanca = new Poupanca();
             poupanca.setAgenciaId(agencia);
-            poupanca.setGanhoMensal(Float.valueOf(gainMonthField.getText()));
-            poupanca.setGanhoMensal(12.89f);
+            poupanca.setGanhoMensal(Float.valueOf(gainMonthField.getValue().toString()));
             poupanca.setNumero(poupanca.gerarNumerodaConta());
             poupanca.setDataCriacao(date);
             poupanca.setSaldo(0.00f);
