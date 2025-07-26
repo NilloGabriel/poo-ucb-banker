@@ -367,11 +367,14 @@ public class RegisterGUI extends javax.swing.JFrame {
             cliente.setEmailLogin(emailField.getText());
             cliente.setSenhaLogin(passwordField.getText());
             cliente.setNome(nameField.getText());
-            cliente.setCpf(cpfField.getText());
+            cliente.setCpf(cpfField.getText().replaceAll("-", "").replaceAll(".", ""));//CPF ESTÁ SALVANDO VAZIO NO BANCO
+            cliente.setLogStatuslogin(false);
+            //NECESSARIO CRIAR UMA CAMPO PARA DATA DE NASCIMENTO, ACABEI SALVANDO COM A DATA DE HOJE NA ULTIMA TELA
+            //APENAS PARA TESTAR A CONEXAO COM O BANCO
             cliente.setRg(rgField.getText());
             endereco = new Endereco();
             endereco.setCep(cepField.getText());
-            endereco.setEstado(estadosComboBox.getSelectedItem().toString());//ainda não descobri como pegar dados de comboBox
+            endereco.setEstado(estadosComboBox.getSelectedItem().toString());
             endereco.setCidade(cityField.getText());
             endereco.setEndereco(adressField.getText());
             contato = new Contato();

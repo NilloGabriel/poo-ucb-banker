@@ -160,18 +160,20 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitLabelMouseClicked
 
     private void registerCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerCardButtonMouseClicked
-        agencia = new Agencia("003", 174, endereco);
+        agencia = new Agencia("003", 174, endereco);//COLOCAR CAMPOS PARA O ENDERECO E DADOS DA AGENCIA NA TELA
         boolean resposta = agenciaDao.saveOrUpdate(agencia);
+        long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);
+        cliente.setNascimento(date);
         if(resposta){
            JOptionPane.showMessageDialog(null, "Agencia Cadastrada"); 
         }
         if(typeComboBox.getSelectedItem().toString().equalsIgnoreCase("corrente")){
             corrente = new Corrente();
             corrente.setAgenciaId(agencia);
-            corrente.setGanhoMensal(Float.valueOf(gainMonthField.getText()));
+            corrente.setGanhoMensal(12.89f);//NAO CONSEGUI FAZER A INSERCAO COM OS DADOS DA TELA
+                                            //POIS DEU ERRO DE FORMATACAO
             corrente.setNumero(corrente.gerarNumerodaConta());
-            long miliseconds = System.currentTimeMillis();
-            Date date = new Date(miliseconds);
             corrente.setDataCriacao(date);
             corrente.setSaldo(0.00f);
             corrente.setStatus(true);
@@ -179,9 +181,8 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
             poupanca = new Poupanca();
             poupanca.setAgenciaId(agencia);
             poupanca.setGanhoMensal(Float.valueOf(gainMonthField.getText()));
-            poupanca.setNumero(corrente.gerarNumerodaConta());
-            long miliseconds = System.currentTimeMillis();
-            Date date = new Date(miliseconds);
+            poupanca.setGanhoMensal(12.89f);
+            poupanca.setNumero(poupanca.gerarNumerodaConta());
             poupanca.setDataCriacao(date);
             poupanca.setSaldo(0.00f);
             poupanca.setStatus(true);

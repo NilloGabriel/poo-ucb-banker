@@ -4,6 +4,7 @@
  */
 package model;
 
+import dao.EntidadeBase;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Poupanca.findByDataCriacao", query = "SELECT p FROM Poupanca p WHERE p.dataCriacao = :dataCriacao"),
     @NamedQuery(name = "Poupanca.findBySaldo", query = "SELECT p FROM Poupanca p WHERE p.saldo = :saldo"),
     @NamedQuery(name = "Poupanca.findByGanhoMensal", query = "SELECT p FROM Poupanca p WHERE p.ganhoMensal = :ganhoMensal")})
-public class Poupanca implements Serializable {
+public class Poupanca implements Serializable, EntidadeBase {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -83,6 +84,7 @@ public class Poupanca implements Serializable {
         this.dataCriacao = dataCriacao;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
