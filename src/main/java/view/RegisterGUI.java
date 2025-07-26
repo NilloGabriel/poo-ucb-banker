@@ -1,8 +1,10 @@
 package view;
 
+import dao.GenericDAO;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.Cliente;
 import model.Contato;
 import model.Endereco;
 
@@ -18,10 +20,21 @@ import model.Endereco;
  */
 public class RegisterGUI extends javax.swing.JFrame {
     
+    Cliente cliente;
+    Endereco endereco;
+    Contato contato;
+    
+    private final GenericDAO<Cliente> clienteDAO;
+    private final GenericDAO<Endereco> enderecoDAO;
+    private final GenericDAO<Contato> contatoDAO;
+    
     public RegisterGUI() {
         initComponents();
         estadosComboBox.setSelectedIndex(-1);
         operadoraComboBox.setSelectedIndex(-1);
+        clienteDAO = new GenericDAO<>();
+        enderecoDAO = new GenericDAO<>();
+        contatoDAO = new GenericDAO<>();
     }
 
     /**
@@ -416,53 +429,32 @@ public class RegisterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Telefone inválido!");
         } else if(operadoraComboBox.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Operadora inválida!");
-        } 
+        } else {
+            cliente = new Cliente();
+            cliente.setEmailLogin(emailField.getText().trim());
+            cliente.setSenhaLogin(Arrays.toString(passwordField.getPassword()));
+            cliente.setNome(nameField.getText().trim());
+            cliente.setCpf(cpfField.getText().trim());
+            cliente.setRg(rgField.getText().trim());
+        
+            endereco = new Endereco();
+            endereco.setCep(cepField.getText().trim());
+            endereco.setEstado(estadosComboBox.getSelectedItem().toString());
+            endereco.setCidade(cityField.getText().trim());
+            endereco.setEndereco(adressField.getText().trim());
+            cliente.setEnderecoList((List<Endereco>) endereco);
+        
+            contato = new Contato();
+            contato.setNumero(telField.getText().trim());
+            contato.setOperadora(operadoraComboBox.getSelectedItem().toString());
+            cliente.setContatoList((List<Contato>) contato);
+        
+            contatoDAO.saveOrUpdate(contato);
+            enderecoDAO.saveOrUpdate(endereco);
+            clienteDAO.saveOrUpdate(cliente);
+        }
     }//GEN-LAST:event_openAccountBankButtonActionPerformed
 
-    public String getEmailField() {
-        return emailField.getText().trim();
-    }
-    
-    public String getPasswordField() {
-        return Arrays.toString(passwordField.getPassword());
-    }
-    
-    public String getNameField() {
-        return nameField.getText().trim();
-    }
-    
-    public String getCpfField() {
-        return cpfField.getText().trim();
-    }
-    
-    public String getRgField() {
-        return rgField.getText().trim();
-    }
-    
-    public String getCepField() {
-        return cepField.getText().trim();
-    }
-    
-    public String getEstadoField() {
-        return estadosComboBox.getSelectedItem().toString();
-    }
-    
-    public String getCidadeField() {
-        return cityField.getText().trim();
-    }
-    
-    public String getEnderecoField() {
-        return adressField.getText().trim();
-    }
-    
-    public String getTelField() {
-        return telField.getText().trim();
-    }
-    
-    public String getOperadoraField() {
-        return operadoraComboBox.getSelectedItem().toString();
-    }
-    
     /**
      * @param args the command line arguments
      */
