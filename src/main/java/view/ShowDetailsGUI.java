@@ -15,6 +15,7 @@ public class ShowDetailsGUI extends javax.swing.JFrame {
     Cliente cliente;
     public ShowDetailsGUI(Cliente cliente) {
         initComponents();
+        jTextField2.setEditable(false);
         this.cliente = cliente;
         if(cliente.getPoupancaId() != null)
             jTextField2.setText("R$" + String.valueOf(cliente.getPoupancaId().getSaldo()));

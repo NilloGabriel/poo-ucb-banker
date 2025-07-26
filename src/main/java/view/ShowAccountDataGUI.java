@@ -22,6 +22,10 @@ public class ShowAccountDataGUI extends javax.swing.JFrame {
      */
     public ShowAccountDataGUI(Cliente cliente) {
         initComponents();
+        txNumeroBanco.setEditable(false);
+        txNumeroConta.setEditable(false);
+        txData.setEditable(false);
+        txGnaho.setEditable(false);
         this.cliente = cliente;
         if(cliente.getPoupancaId() != null){
             txNumeroBanco.setText(Integer.toString(cliente.getPoupancaId().getAgenciaId().getNumeroBanco()));
