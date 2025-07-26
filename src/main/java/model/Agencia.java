@@ -70,6 +70,7 @@ public class Agencia implements Serializable, EntidadeBase {
         this.numeroBanco = numeroBanco;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }

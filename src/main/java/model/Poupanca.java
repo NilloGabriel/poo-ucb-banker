@@ -6,8 +6,10 @@ package model;
 
 import dao.EntidadeBase;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,7 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Poupanca.findByDataCriacao", query = "SELECT p FROM Poupanca p WHERE p.dataCriacao = :dataCriacao"),
     @NamedQuery(name = "Poupanca.findBySaldo", query = "SELECT p FROM Poupanca p WHERE p.saldo = :saldo"),
     @NamedQuery(name = "Poupanca.findByGanhoMensal", query = "SELECT p FROM Poupanca p WHERE p.ganhoMensal = :ganhoMensal")})
-public class Poupanca implements Serializable, EntidadeBase {
+public class Poupanca implements Serializable, EntidadeBase, ContaMetodos {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,17 +56,17 @@ public class Poupanca implements Serializable, EntidadeBase {
     private String numero;
     @Basic(optional = false)
     @Column(name = "status")
-    private short status;
+    private boolean status;
     @Basic(optional = false)
     @Column(name = "dataCriacao")
     @Temporal(TemporalType.DATE)
-    private Date dataCriacao;
+    private LocalDate dataCriacao;
     @Basic(optional = false)
     @Column(name = "saldo")
-    private long saldo;
+    private float saldo;
     @Basic(optional = false)
     @Column(name = "ganhoMensal")
-    private long ganhoMensal;
+    private float ganhoMensal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poupancaId")
     private List<Cliente> clienteList;
     @JoinColumn(name = "agencia_id", referencedColumnName = "id")
@@ -81,7 +83,7 @@ public class Poupanca implements Serializable, EntidadeBase {
         this.id = id;
     }
 
-    public Poupanca(Integer id, String numero, short status, Date dataCriacao, long saldo, long ganhoMensal) {
+    public Poupanca(Integer id, String numero, boolean status, LocalDate dataCriacao, float saldo, float ganhoMensal) {
         this.id = id;
         this.numero = numero;
         this.status = status;
@@ -90,6 +92,7 @@ public class Poupanca implements Serializable, EntidadeBase {
         this.ganhoMensal = ganhoMensal;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
@@ -106,35 +109,35 @@ public class Poupanca implements Serializable, EntidadeBase {
         this.numero = numero;
     }
 
-    public short getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(short status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
-    public Date getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
+    public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
-    public long getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(long saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 
-    public long getGanhoMensal() {
+    public float getGanhoMensal() {
         return ganhoMensal;
     }
 
-    public void setGanhoMensal(long ganhoMensal) {
+    public void setGanhoMensal(float ganhoMensal) {
         this.ganhoMensal = ganhoMensal;
     }
 
@@ -186,6 +189,94 @@ public class Poupanca implements Serializable, EntidadeBase {
     @Override
     public String toString() {
         return "model.Poupanca[ id=" + id + " ]";
+    }
+
+    @Override
+    public void sacar(float valor) {
+        if(valor <= 0) {
+            System.out.println("\t\nNão pode ser efetuados saques com valor igual ou inferior a 0.\n");
+            return;
+        }
+        if(valor <= this.saldo) {
+            this.saldo = this.saldo - valor;
+            System.out.println("\tSaque de R$" + valor + " efetuado com sucesso!" + "\n\tSaldo atual: R$" + getSaldo() + '\n');
+        } else {
+            System.out.println("\t\nSaldo insuficiente");
+        }
+    } 
+
+    @Override
+    public void depositar(float valor) {
+        if(valor <= 0) {
+            System.out.println("\t\nNão pode ser efetuados depósitos com valor igual ou inferior a 0.\n");
+            return;
+        }
+
+        this.saldo = this.saldo + valor;
+        System.out.println("\t\nDeposito de R$" + valor + " efetuado com sucesso!" + "\t\nSaldo atual: R$" + getSaldo() + '\n');
+    }
+
+    @Override
+    public void transferir(float valor, String destino) {
+        if(valor <= 0) {
+            System.out.println("\t\nNão pode ser efetuadas transferências com valor igual ou inferior a 0.\n");
+            return;
+        }
+
+        if(valor <= getSaldo()) {
+            this.sacar(valor);
+            System.out.println("\t\nTransferência realizada com sucesso!" + "\t\nSaldo atual: R$:" + getSaldo() + '\n');
+        } else {
+            System.out.println("\t\nSaldo insuficiente.");
+        }
+    }
+
+    @Override
+    public int randomNumber(int n) {
+        int randNum = (int) (Math.random() * n);
+        return randNum;
+    }
+
+    @Override
+    public String gerarNumerodaConta() {
+        int n = 9;
+
+        int num[] = new int[9];
+
+        for (int i = 0; i < 9; i++) {
+            num[i] = randomNumber(n);
+        }
+
+        return this.numero = "" + num[0] + num[1] + num[2] + num[3] + num[4] + num[5] + num[6] + num[7] + '-' + num[8];
+    }
+
+    @Override
+    public void fazerCompra() { //Hadaptar para as telas
+        Scanner scanner = new Scanner(System.in);
+        float valor;
+        int operacao;
+//        cartao.verificarCartao();
+//        System.out.println("Qual o valor da compra que ira ser realizada?");
+//        valor = scanner.nextFloat();
+//        System.out.println("Digite a operação de compra");
+//        System.out.println("1 - Debito");
+//        System.out.println("2 - Credito");
+//        operacao = scanner.nextInt();
+//        boolean situacao = cartao.utilizarCreditoOuDebito(operacao, valor);
+//        if(situacao){
+//            if(operacao == 1){
+//                if(valor <= saldo)
+//                    saldo -= valor;
+//                else {
+//                    System.out.println("Não foi possivel realizar a compra com o saldo atual");
+//                    return;
+//                }
+//            }
+//            System.out.println("Compra Realizada");
+//            return;
+//        }else {
+//            System.out.println("Não foi possivel realizar a compra");
+//        }
     }
     
 }

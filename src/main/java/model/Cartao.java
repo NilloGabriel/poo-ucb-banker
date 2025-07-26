@@ -6,8 +6,10 @@ package model;
 
 import dao.EntidadeBase;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -57,23 +59,23 @@ public class Cartao implements Serializable, EntidadeBase {
     private String numero;
     @Basic(optional = false)
     @Column(name = "debito")
-    private short debito;
+    private boolean debito;
     @Basic(optional = false)
     @Column(name = "credito")
-    private short credito;
+    private boolean credito;
     @Basic(optional = false)
     @Column(name = "limiteTotal")
-    private long limiteTotal;
+    private float limiteTotal;
     @Basic(optional = false)
     @Column(name = "limiteUsado")
-    private long limiteUsado;
+    private float limiteUsado;
     @Basic(optional = false)
     @Column(name = "titular")
     private String titular;
     @Basic(optional = false)
     @Column(name = "validade")
     @Temporal(TemporalType.DATE)
-    private Date validade;
+    private LocalDate validade;
     @Basic(optional = false)
     @Column(name = "cvc")
     private short cvc;
@@ -82,7 +84,7 @@ public class Cartao implements Serializable, EntidadeBase {
     private String senha;
     @Basic(optional = false)
     @Column(name = "situacao")
-    private short situacao;
+    private boolean situacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartaoId")
     private List<Corrente> correnteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartaoId")
@@ -95,7 +97,7 @@ public class Cartao implements Serializable, EntidadeBase {
         this.id = id;
     }
 
-    public Cartao(Integer id, String numero, short debito, short credito, long limiteTotal, long limiteUsado, String titular, Date validade, short cvc, String senha, short situacao) {
+    public Cartao(Integer id, String numero, boolean debito, boolean credito, float limiteTotal, float limiteUsado, String titular, LocalDate validade, short cvc, String senha, boolean situacao) {
         this.id = id;
         this.numero = numero;
         this.debito = debito;
@@ -109,6 +111,7 @@ public class Cartao implements Serializable, EntidadeBase {
         this.situacao = situacao;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
@@ -125,31 +128,31 @@ public class Cartao implements Serializable, EntidadeBase {
         this.numero = numero;
     }
 
-    public short getDebito() {
+    public boolean getDebito() {
         return debito;
     }
 
-    public void setDebito(short debito) {
+    public void setDebito(boolean debito) {
         this.debito = debito;
     }
 
-    public short getCredito() {
+    public boolean getCredito() {
         return credito;
     }
 
-    public void setCredito(short credito) {
+    public void setCredito(boolean credito) {
         this.credito = credito;
     }
 
-    public long getLimiteTotal() {
+    public float getLimiteTotal() {
         return limiteTotal;
     }
 
-    public void setLimiteTotal(long limiteTotal) {
+    public void setLimiteTotal(float limiteTotal) {
         this.limiteTotal = limiteTotal;
     }
 
-    public long getLimiteUsado() {
+    public float getLimiteUsado() {
         return limiteUsado;
     }
 
@@ -165,11 +168,11 @@ public class Cartao implements Serializable, EntidadeBase {
         this.titular = titular;
     }
 
-    public Date getValidade() {
+    public LocalDate getValidade() {
         return validade;
     }
 
-    public void setValidade(Date validade) {
+    public void setValidade(LocalDate validade) {
         this.validade = validade;
     }
 
@@ -189,11 +192,11 @@ public class Cartao implements Serializable, EntidadeBase {
         this.senha = senha;
     }
 
-    public short getSituacao() {
+    public boolean getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(short situacao) {
+    public void setSituacao(boolean situacao) {
         this.situacao = situacao;
     }
 
@@ -240,4 +243,65 @@ public class Cartao implements Serializable, EntidadeBase {
         return "model.Cartao[ id=" + id + " ]";
     }
     
+    public boolean verificarCartao(){
+        LocalDate hoje = LocalDate.now();
+        return hoje != this.validade;
+    }
+    
+    public boolean verificarSenha(String senha){
+        return this.senha.equals(senha);
+    }
+    
+    public boolean utilizarCreditoOuDebito(int op, float valor) {//se for op=1 debito se op=2 credito
+        this.situacao = verificarCartao();
+        if(this.situacao == true){
+            switch (op) {
+                case 1:
+                    return true; //valor sera cobrado e checado na conta
+                case 2:
+                    if (valor + this.limiteUsado <= this.limiteTotal) {
+                        this.limiteUsado += valor;
+                        return true;
+                    }
+                    System.out.println("Limite esgotado");
+                    return false;
+            }
+        }
+        return false;
+    }
+    public void renovarCartao() {
+        this.situacao = verificarCartao();
+        if(this.situacao == false)
+            calcularValidade();
+    }
+
+    private LocalDate calcularValidade(){
+        LocalDate hoje = LocalDate.now();
+        return hoje.plusYears(4);
+    }
+
+    private String gerarNumeroCartao(){
+        String number = "";
+        int num;
+
+        for(int i = 0; i < 4; i++) {
+            num = (int) (Math.random() * 10);
+            number += num;
+        }
+
+        return number;
+    }
+
+    private String gerarNumeroFormatado() {
+        return this.numero = gerarNumeroCartao() + " " + gerarNumeroCartao() + " " + gerarNumeroCartao() + " " + gerarNumeroCartao();
+    }
+
+    private int gerarCvc(){
+        int cvc;
+        Random random = new Random();
+        do {
+            cvc = random.nextInt(999);
+        }while(cvc < 100);
+        return cvc;
+    }
 }
