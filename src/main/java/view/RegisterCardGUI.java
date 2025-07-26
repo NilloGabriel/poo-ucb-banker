@@ -176,7 +176,7 @@ public class RegisterCardGUI extends javax.swing.JFrame {
             cartao.setCredito(true);
             cartao.setDebito(false);
             cartao.setCvc((short) cartao.gerarCvc());
-            cartao.setNumero(cartao.gerarNumeroCartao());
+            cartao.setNumero(cartao.gerarNumeroFormatado());
             if(poupanca == null)
                 cartao.setLimiteTotal(corrente.getGanhoMensal());
             else
@@ -192,7 +192,7 @@ public class RegisterCardGUI extends javax.swing.JFrame {
             cartao.setCredito(false);
             cartao.setDebito(true);
             cartao.setCvc((short) cartao.gerarCvc());
-            cartao.setNumero(cartao.gerarNumeroCartao());
+            cartao.setNumero(cartao.gerarNumeroFormatado());
             cartao.setLimiteTotal(0.00f);
             cartao.setLimiteUsado(0.00f);
             cartao.setTitular(cliente.getNome());
@@ -205,7 +205,7 @@ public class RegisterCardGUI extends javax.swing.JFrame {
             cartao.setCredito(true);
             cartao.setDebito(true);
             cartao.setCvc((short) cartao.gerarCvc());
-            cartao.setNumero(cartao.gerarNumeroCartao());
+            cartao.setNumero(cartao.gerarNumeroFormatado());
             if(poupanca == null)
                 cartao.setLimiteTotal(corrente.getGanhoMensal());
             else
@@ -233,12 +233,10 @@ public class RegisterCardGUI extends javax.swing.JFrame {
                 cliente.setCorrenteId(corrente);
                 cliente.setPoupancaId(poupanca);
                 cliente.setComprovanteResidencia(false);
-                resposta = clienteDao.saveOrUpdate(cliente);
-                if(resposta)
-                    JOptionPane.showMessageDialog(null, "Cliente cadastrado");
-                endereco.setClienteId(cliente);
-                contato.setClienteId(cliente);
+                clienteDao.saveOrUpdate(cliente);
                 //Falta a inserir o endereco e o contato
+//                endereco.setClienteId(cliente);
+                //contato.setClienteId(cliente);
             }
         }
         
