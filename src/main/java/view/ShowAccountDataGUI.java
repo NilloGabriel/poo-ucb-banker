@@ -79,6 +79,7 @@ public class ShowAccountDataGUI extends javax.swing.JFrame {
         txData = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         titlePanel.setBackground(new java.awt.Color(74, 31, 61));
         titlePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
