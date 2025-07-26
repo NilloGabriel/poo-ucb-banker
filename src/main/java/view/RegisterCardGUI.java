@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Xatuba Pox
@@ -68,18 +70,7 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         passField.setBackground(new java.awt.Color(186, 79, 74));
         passField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         passField.setForeground(new java.awt.Color(187, 187, 187));
-        passField.setText("Senha");
         passField.setBorder(null);
-        passField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                passFieldFocusGained(evt);
-            }
-        });
-        passField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passFieldActionPerformed(evt);
-            }
-        });
         registerCardPanel.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 200, 30));
 
         separatorPass.setBackground(new java.awt.Color(204, 204, 204));
@@ -95,6 +86,11 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         registerCardButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registerCardButtonMouseClicked(evt);
+            }
+        });
+        registerCardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerCardButtonActionPerformed(evt);
             }
         });
         registerCardPanel.add(registerCardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 110, 30));
@@ -121,14 +117,6 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitLabelMouseClicked
 
-    private void passFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFieldFocusGained
-        passField.setText("");
-    }//GEN-LAST:event_passFieldFocusGained
-
-    private void passFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passFieldActionPerformed
-
     private void registerCardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerCardButtonMouseClicked
         LoginGUI log = new LoginGUI();
         log.setVisible(true);
@@ -137,6 +125,12 @@ public class RegisterCardGUI extends javax.swing.JFrame {
         log.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_registerCardButtonMouseClicked
+
+    private void registerCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCardButtonActionPerformed
+        if(passField.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "Senha inválida!");
+        }
+    }//GEN-LAST:event_registerCardButtonActionPerformed
 
     /**
      * @param args the command line arguments

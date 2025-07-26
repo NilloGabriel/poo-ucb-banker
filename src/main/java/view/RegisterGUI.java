@@ -24,6 +24,8 @@ public class RegisterGUI extends javax.swing.JFrame {
     
     public RegisterGUI() {
         initComponents();
+        estadosComboBox.setSelectedIndex(-1);
+        operadoraComboBox.setSelectedIndex(-1);
     }
 
     /**
@@ -101,13 +103,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         emailField.setBackground(new java.awt.Color(186, 79, 74));
         emailField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         emailField.setForeground(new java.awt.Color(187, 187, 187));
-        emailField.setText("Usuario");
         emailField.setBorder(null);
-        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                emailFieldFocusGained(evt);
-            }
-        });
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailFieldActionPerformed(evt);
@@ -118,13 +114,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         passwordField.setBackground(new java.awt.Color(186, 79, 74));
         passwordField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         passwordField.setForeground(new java.awt.Color(187, 187, 187));
-        passwordField.setText("Senha");
         passwordField.setBorder(null);
-        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                passwordFieldFocusGained(evt);
-            }
-        });
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
@@ -151,6 +141,11 @@ public class RegisterGUI extends javax.swing.JFrame {
                 openAccountBankButtonMouseClicked(evt);
             }
         });
+        openAccountBankButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openAccountBankButtonActionPerformed(evt);
+            }
+        });
         registerPanel.add(openAccountBankButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, 90, 30));
 
         passwordLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -168,13 +163,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         nameField.setBackground(new java.awt.Color(186, 79, 74));
         nameField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nameField.setForeground(new java.awt.Color(187, 187, 187));
-        nameField.setText("Nome");
         nameField.setBorder(null);
-        nameField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                nameFieldFocusGained(evt);
-            }
-        });
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameFieldActionPerformed(evt);
@@ -211,13 +200,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         rgField.setBackground(new java.awt.Color(186, 79, 74));
         rgField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         rgField.setForeground(new java.awt.Color(187, 187, 187));
-        rgField.setText("RG");
         rgField.setBorder(null);
-        rgField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                rgFieldFocusGained(evt);
-            }
-        });
         rgField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rgFieldActionPerformed(evt);
@@ -236,13 +219,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         cepField.setBackground(new java.awt.Color(186, 79, 74));
         cepField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cepField.setForeground(new java.awt.Color(187, 187, 187));
-        cepField.setText("CEP");
         cepField.setBorder(null);
-        cepField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                cepFieldFocusGained(evt);
-            }
-        });
         cepField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cepFieldActionPerformed(evt);
@@ -275,13 +252,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         cityField.setBackground(new java.awt.Color(186, 79, 74));
         cityField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cityField.setForeground(new java.awt.Color(187, 187, 187));
-        cityField.setText("Cidade");
         cityField.setBorder(null);
-        cityField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                cityFieldFocusGained(evt);
-            }
-        });
         cityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cityFieldActionPerformed(evt);
@@ -300,13 +271,7 @@ public class RegisterGUI extends javax.swing.JFrame {
         adressField.setBackground(new java.awt.Color(186, 79, 74));
         adressField.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         adressField.setForeground(new java.awt.Color(187, 187, 187));
-        adressField.setText("Endereco");
         adressField.setBorder(null);
-        adressField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                adressFieldFocusGained(evt);
-            }
-        });
         adressField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adressFieldActionPerformed(evt);
@@ -387,17 +352,9 @@ public class RegisterGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitLabelMouseClicked
 
-    private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
-        emailField.setText("");
-    }//GEN-LAST:event_emailFieldFocusGained
-
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldActionPerformed
-
-    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
-        passwordField.setText("");
-    }//GEN-LAST:event_passwordFieldFocusGained
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
@@ -430,41 +387,21 @@ public class RegisterGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_openAccountBankButtonMouseClicked
 
-    private void nameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldFocusGained
-        nameField.setText("");
-    }//GEN-LAST:event_nameFieldFocusGained
-
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
-
-    private void rgFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rgFieldFocusGained
-        rgField.setText("");
-    }//GEN-LAST:event_rgFieldFocusGained
 
     private void rgFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rgFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rgFieldActionPerformed
 
-    private void cepFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cepFieldFocusGained
-        cepField.setText("");
-    }//GEN-LAST:event_cepFieldFocusGained
-
     private void cepFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cepFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cepFieldActionPerformed
 
-    private void cityFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cityFieldFocusGained
-        cityField.setText("");
-    }//GEN-LAST:event_cityFieldFocusGained
-
     private void cityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cityFieldActionPerformed
-
-    private void adressFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adressFieldFocusGained
-        adressField.setText("");
-    }//GEN-LAST:event_adressFieldFocusGained
 
     private void adressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adressFieldActionPerformed
         // TODO add your handling code here:
@@ -477,6 +414,32 @@ public class RegisterGUI extends javax.swing.JFrame {
     private void operadoraComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operadoraComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_operadoraComboBoxActionPerformed
+
+    private void openAccountBankButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAccountBankButtonActionPerformed
+        if(emailField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Email inválido!");
+        } else if(passwordField.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "Senha inválida!");
+        } else if(nameField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Nome inválido!");
+        } else if(cpfField.getText().trim().length() < 14) {
+            JOptionPane.showMessageDialog(null, "CPF inválido!");
+        } else if(rgField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "RG inválido!");
+        } else if(cepField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "CEP inválido!");
+        } else if(estadosComboBox.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Estado inválido!");
+        } else if(cityField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Cidade inválida!");
+        } else if(adressField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Endereço inválido!");
+        } else if(telField.getText().trim().length() < 13) {
+            JOptionPane.showMessageDialog(null, "Telefone inválido!");
+        } else if(operadoraComboBox.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Operadora inválida!");
+        }
+    }//GEN-LAST:event_openAccountBankButtonActionPerformed
 
     /**
      * @param args the command line arguments
