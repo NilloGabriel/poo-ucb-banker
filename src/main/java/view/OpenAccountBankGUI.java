@@ -6,9 +6,6 @@
 package view;
 
 import javax.swing.JOptionPane;
-import model.Cliente;
-import model.Contato;
-import model.Endereco;
 
 /**
  *
@@ -18,18 +15,12 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form OpenAccountBankGUI
-     * @param cliente
-     * @param endereco
-     * @param contato
      */
-    public OpenAccountBankGUI(Cliente cliente,Endereco endereco,Contato contato) {
+    public OpenAccountBankGUI() {
         initComponents();
         typeComboBox.setSelectedIndex(-1);
     }
 
-    private OpenAccountBankGUI() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

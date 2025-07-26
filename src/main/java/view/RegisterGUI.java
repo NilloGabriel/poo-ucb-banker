@@ -1,6 +1,8 @@
 package view;
 
 import dao.GenericDAO;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import model.Contato;
@@ -17,15 +19,22 @@ import model.Endereco;
  * @author Xatuba Pox
  */
 public class RegisterGUI extends javax.swing.JFrame {
-
+    
     Cliente cliente;
     Endereco endereco;
     Contato contato;
+    
+    private final GenericDAO<Cliente> clienteDAO;
+    private final GenericDAO<Endereco> enderecoDAO;
+    private final GenericDAO<Contato> contatoDAO;
     
     public RegisterGUI() {
         initComponents();
         estadosComboBox.setSelectedIndex(-1);
         operadoraComboBox.setSelectedIndex(-1);
+        clienteDAO = new GenericDAO<>();
+        enderecoDAO = new GenericDAO<>();
+        contatoDAO = new GenericDAO<>();
     }
 
     /**
@@ -361,30 +370,12 @@ public class RegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void openAccountBankButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openAccountBankButtonMouseClicked
-        try{
-           cliente = new Cliente();
-            cliente.setEmailLogin(emailField.getText());
-            cliente.setSenhaLogin(passwordField.getText());
-            cliente.setNome(nameField.getText());
-            cliente.setCpf(cpfField.getText());
-            cliente.setRg(rgField.getText());
-            endereco = new Endereco();
-            endereco.setCep(cepField.getText());
-            endereco.setEstado(estadosComboBox.getActionCommand());//ainda não descobri como pegar dados de comboBox
-            endereco.setCidade(cityField.getText());
-            endereco.setEndereco(adressField.getText());
-            contato = new Contato();
-            contato.setNumero(telField.getText());
-            contato.setOperadora(operadoraComboBox.getActionCommand());
-            OpenAccountBankGUI oab = new OpenAccountBankGUI(cliente, endereco, contato); 
-            oab.setVisible(true);
-            oab.pack();
-            oab.setLocationRelativeTo(null);
-            oab.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        OpenAccountBankGUI oab = new OpenAccountBankGUI(); 
+        oab.setVisible(true);
+        oab.pack();
+        oab.setLocationRelativeTo(null);
+        oab.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro na inserção dos dados");
-        }
     }//GEN-LAST:event_openAccountBankButtonMouseClicked
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -438,6 +429,29 @@ public class RegisterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Telefone inválido!");
         } else if(operadoraComboBox.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Operadora inválida!");
+        } else {
+            cliente = new Cliente();
+            cliente.setEmailLogin(emailField.getText().trim());
+            cliente.setSenhaLogin(Arrays.toString(passwordField.getPassword()));
+            cliente.setNome(nameField.getText().trim());
+            cliente.setCpf(cpfField.getText().trim());
+            cliente.setRg(rgField.getText().trim());
+        
+            endereco = new Endereco();
+            endereco.setCep(cepField.getText().trim());
+            endereco.setEstado(estadosComboBox.getSelectedItem().toString());
+            endereco.setCidade(cityField.getText().trim());
+            endereco.setEndereco(adressField.getText().trim());
+            cliente.setEnderecoList((List<Endereco>) endereco);
+        
+            contato = new Contato();
+            contato.setNumero(telField.getText().trim());
+            contato.setOperadora(operadoraComboBox.getSelectedItem().toString());
+            cliente.setContatoList((List<Contato>) contato);
+        
+            contatoDAO.saveOrUpdate(contato);
+            enderecoDAO.saveOrUpdate(endereco);
+            clienteDAO.saveOrUpdate(cliente);
         }
     }//GEN-LAST:event_openAccountBankButtonActionPerformed
 
