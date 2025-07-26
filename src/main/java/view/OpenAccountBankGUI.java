@@ -5,6 +5,10 @@
  */
 package view;
 
+import model.Cliente;
+import model.Contato;
+import model.Endereco;
+
 /**
  *
  * @author Xatuba Pox
@@ -13,9 +17,16 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form OpenAccountBankGUI
+     * @param cliente
+     * @param endereco
+     * @param contato
      */
-    public OpenAccountBankGUI() {
+    public OpenAccountBankGUI(Cliente cliente,Endereco endereco,Contato contato) {
         initComponents();
+    }
+
+    private OpenAccountBankGUI() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -40,7 +51,6 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(450, 300));
 
         titlePanel.setBackground(new java.awt.Color(74, 31, 61));
         titlePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -98,6 +108,11 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
                 registerCardButtonMouseClicked(evt);
             }
         });
+        registerCardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerCardButtonActionPerformed(evt);
+            }
+        });
         openAccountPanel.add(registerCardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 110, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +145,10 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
         rc.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_registerCardButtonMouseClicked
+
+    private void registerCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCardButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registerCardButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,4 +197,5 @@ public class OpenAccountBankGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> typeComboBox;
     private javax.swing.JLabel typeLabel;
     // End of variables declaration//GEN-END:variables
+
 }
